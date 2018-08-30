@@ -1,0 +1,66 @@
+[
+  {
+    "Symbol": "KO",
+    "Name": "Coca-Cola Company (The)",
+    "LastSale": 45.93,
+    "MarketCap": 195336727990.71,
+    "Sector": "Consumer Non-Durables",
+    "Industry": "Beverages (Production/Distribution)"
+  },
+  {
+    "Symbol": "PEP",
+    "Name": "Pepsico, Inc.",
+    "LastSale": 112.24,
+    "MarketCap": 158743460312.4,
+    "Sector": "Consumer Non-Durables",
+    "Industry": "Beverages (Production/Distribution)"
+  },
+  {
+    "Symbol": "NKE",
+    "Name": "Nike, Inc.",
+    "LastSale": 82.64,
+    "MarketCap": 132269827020.32,
+    "Sector": "Consumer Non-Durables",
+    "Industry": "Shoe Manufacturing"
+  },
+  {
+    "Symbol": "PM",
+    "Name": "Philip Morris International Inc",
+    "LastSale": 82.43,
+    "MarketCap": 128137999233.35,
+    "Sector": "Consumer Non-Durables",
+    "Industry": "Farming/Seeds/Milling"
+  },
+  {
+    "Symbol": "SNE",
+    "Name": "Sony Corp Ord",
+    "LastSale": 54.62,
+    "MarketCap": 69270822827.7,
+    "Sector": "Consumer Non-Durables",
+    "Industry": "Consumer Electronics/Appliances"
+  },
+  {
+    "Symbol": "CL",
+    "Name": "Colgate-Palmolive Company",
+    "LastSale": 66.99,
+    "MarketCap": 58129815245.04,
+    "Sector": "Consumer Non-Durables",
+    "Industry": "Package Goods/Cosmetics"
+  },
+  {
+    "Symbol": "CCE",
+    "Name": "Coca-Cola European Partners plc",
+    "LastSale": 42.1,
+    "MarketCap": 20476748044.4,
+    "Sector": "Consumer Non-Durables",
+    "Industry": "Beverages (Production/Distribution)"
+  },
+  {
+    "Symbol": "HOG",
+    "Name": "Harley-Davidson, Inc.",
+    "LastSale": 42.84,
+    "MarketCap": 7135194051.72,
+    "Sector": "Consumer Non-Durables",
+    "Industry": "Motor Vehicles"
+  }
+]

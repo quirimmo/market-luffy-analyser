@@ -1,0 +1,74 @@
+[
+  {
+    "Symbol": "AMZN",
+    "Name": "Amazon.com, Inc.",
+    "LastSale": 1904.9,
+    "MarketCap": 929098190926.1,
+    "Sector": "Consumer Services",
+    "Industry": "Catalog/Specialty Distribution"
+  },
+  {
+    "Symbol": "DIS",
+    "Name": "Walt Disney Company (The)",
+    "LastSale": 111.94,
+    "MarketCap": 166481936196.24,
+    "Sector": "Consumer Services",
+    "Industry": "Television Services"
+  },
+  {
+    "Symbol": "NFLX",
+    "Name": "Netflix, Inc.",
+    "LastSale": 344.44,
+    "MarketCap": 149988983022.2,
+    "Sector": "Consumer Services",
+    "Industry": "Consumer Electronics/Video Chains"
+  },
+  {
+    "Symbol": "MCD",
+    "Name": "McDonald&#39;s Corporation",
+    "LastSale": 160.55,
+    "MarketCap": 124554755664.95,
+    "Sector": "Consumer Services",
+    "Industry": "Restaurants"
+  },
+  {
+    "Symbol": "FOX",
+    "Name": "Twenty-First Century Fox, Inc.",
+    "LastSale": 44.75,
+    "MarketCap": 82902693346.75,
+    "Sector": "Consumer Services",
+    "Industry": "Television Services"
+  },
+  {
+    "Symbol": "SBUX",
+    "Name": "Starbucks Corporation",
+    "LastSale": 52.82,
+    "MarketCap": 71259462000,
+    "Sector": "Consumer Services",
+    "Industry": "Restaurants"
+  },
+  {
+    "Symbol": "SPOT",
+    "Name": "Spotify Technology S.A.",
+    "LastSale": 191.03,
+    "MarketCap": 34342995733.69,
+    "Sector": "Consumer Services",
+    "Industry": "Broadcasting"
+  },
+  {
+    "Symbol": "FL",
+    "Name": "Foot Locker, Inc.",
+    "LastSale": 52.13,
+    "MarketCap": 6094468620.11,
+    "Sector": "Consumer Services",
+    "Industry": "Clothing/Shoe/Accessory Stores"
+  },
+  {
+    "Symbol": "MANU",
+    "Name": "Manchester United Ltd.",
+    "LastSale": 23.75,
+    "MarketCap": 3899625407.5,
+    "Sector": "Consumer Services",
+    "Industry": "Services-Misc. Amusement & Recreation"
+  }
+]

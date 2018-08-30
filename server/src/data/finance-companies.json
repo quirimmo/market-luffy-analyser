@@ -1,0 +1,58 @@
+[
+  {
+    "Symbol": "JPM",
+    "Name": "J P Morgan Chase & Co",
+    "LastSale": 114.97,
+    "MarketCap": 386400845781.79,
+    "Sector": "Finance",
+    "Industry": "Major Banks"
+  },
+  {
+    "Symbol": "BAC",
+    "Name": "Bank of America Corporation",
+    "LastSale": 30.98,
+    "MarketCap": 309361109871.72,
+    "Sector": "Finance",
+    "Industry": "Major Banks"
+  },
+  {
+    "Symbol": "WFC",
+    "Name": "Wells Fargo & Company",
+    "LastSale": 59.17,
+    "MarketCap": 284970835579.69,
+    "Sector": "Finance",
+    "Industry": "Major Banks"
+  },
+  {
+    "Symbol": "C",
+    "Name": "Citigroup Inc.",
+    "LastSale": 71.12,
+    "MarketCap": 178980976901.44,
+    "Sector": "Finance",
+    "Industry": "Major Banks"
+  },
+  {
+    "Symbol": "AXP",
+    "Name": "American Express Company",
+    "LastSale": 105.83,
+    "MarketCap": 91125371277.5,
+    "Sector": "Finance",
+    "Industry": "Finance: Consumer Services"
+  },
+  {
+    "Symbol": "GS",
+    "Name": "Goldman Sachs Group, Inc. (The)",
+    "LastSale": 239.34,
+    "MarketCap": 90364307130.84,
+    "Sector": "Finance",
+    "Industry": "Investment Bankers/Brokers/Service"
+  },
+  {
+    "Symbol": "MS",
+    "Name": "Morgan Stanley",
+    "LastSale": 48.6,
+    "MarketCap": 84796779857.4,
+    "Sector": "Finance",
+    "Industry": "Investment Bankers/Brokers/Service"
+  }
+]

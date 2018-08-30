@@ -1,0 +1,74 @@
+[
+  {
+    "Symbol": "BA",
+    "Name": "Boeing Company (The)",
+    "LastSale": 350.03,
+    "MarketCap": 201095145149.42,
+    "Sector": "Capital Goods",
+    "Industry": "Aerospace"
+  },
+  {
+    "Symbol": "TM",
+    "Name": "Toyota Motor Corp Ltd Ord",
+    "LastSale": 123.74,
+    "MarketCap": 180745601548.22,
+    "Sector": "Capital Goods",
+    "Industry": "Auto Manufacturing"
+  },
+  {
+    "Symbol": "UTX",
+    "Name": "United Technologies Corporation",
+    "LastSale": 133.24,
+    "MarketCap": 106604429293.4,
+    "Sector": "Capital Goods",
+    "Industry": "Aerospace"
+  },
+  {
+    "Symbol": "TSLA",
+    "Name": "Tesla, Inc.",
+    "LastSale": 321.64,
+    "MarketCap": 54869578836.16,
+    "Sector": "Capital Goods",
+    "Industry": "Auto Manufacturing"
+  },
+  {
+    "Symbol": "HMC",
+    "Name": "Honda Motor Company, Ltd.",
+    "LastSale": 30.48,
+    "MarketCap": 53653235675.28,
+    "Sector": "Capital Goods",
+    "Industry": "Auto Manufacturing"
+  },
+  {
+    "Symbol": "GM",
+    "Name": "General Motors Company",
+    "LastSale": 36.13,
+    "MarketCap": 50975394857.08,
+    "Sector": "Capital Goods",
+    "Industry": "Auto Manufacturing"
+  },
+  {
+    "Symbol": "F",
+    "Name": "Ford Motor Company",
+    "LastSale": 9.69,
+    "MarketCap": 38621690153.22,
+    "Sector": "Capital Goods",
+    "Industry": "Auto Manufacturing"
+  },
+  {
+    "Symbol": "FCAU",
+    "Name": "Fiat Chrysler Automobiles N.V.",
+    "LastSale": 16.45,
+    "MarketCap": 32234750978.5,
+    "Sector": "Capital Goods",
+    "Industry": "Auto Manufacturing"
+  },
+  {
+    "Symbol": "RACE",
+    "Name": "Ferrari N.V.",
+    "LastSale": 125.09,
+    "MarketCap": 30664432756.58,
+    "Sector": "Capital Goods",
+    "Industry": "Auto Manufacturing"
+  }
+]

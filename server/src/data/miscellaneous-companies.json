@@ -1,0 +1,74 @@
+[
+  {
+    "Symbol": "BABA",
+    "Name": "Alibaba Group Holding Limited",
+    "LastSale": 177.85,
+    "MarketCap": 457417722577.55,
+    "Sector": "Miscellaneous",
+    "Industry": "Business Services"
+  },
+  {
+    "Symbol": "V",
+    "Name": "Visa Inc.",
+    "LastSale": 141.14,
+    "MarketCap": 323590118544.14,
+    "Sector": "Miscellaneous",
+    "Industry": "Business Services"
+  },
+  {
+    "Symbol": "MA",
+    "Name": "Mastercard Incorporated",
+    "LastSale": 204.31,
+    "MarketCap": 226556110471,
+    "Sector": "Miscellaneous",
+    "Industry": "Business Services"
+  },
+  {
+    "Symbol": "ACN",
+    "Name": "Accenture plc",
+    "LastSale": 164.92,
+    "MarketCap": 105781805572.8,
+    "Sector": "Miscellaneous",
+    "Industry": "Business Services"
+  },
+  {
+    "Symbol": "PYPL",
+    "Name": "PayPal Holdings, Inc.",
+    "LastSale": 86.95,
+    "MarketCap": 102920324570.6,
+    "Sector": "Miscellaneous",
+    "Industry": "Business Services"
+  },
+  {
+    "Symbol": "BKNG",
+    "Name": "Booking Holdings Inc.",
+    "LastSale": 1917,
+    "MarketCap": 91003873842,
+    "Sector": "Miscellaneous",
+    "Industry": "Business Services"
+  },
+  {
+    "Symbol": "FIS",
+    "Name": "Fidelity National Information Services, Inc.",
+    "LastSale": 108.25,
+    "MarketCap": 35594837960.5,
+    "Sector": "Miscellaneous",
+    "Industry": "Business Services"
+  },
+  {
+    "Symbol": "EBAY",
+    "Name": "eBay Inc.",
+    "LastSale": 34.7,
+    "MarketCap": 34337371501.7,
+    "Sector": "Miscellaneous",
+    "Industry": "Business Services"
+  },
+  {
+    "Symbol": "GPRO",
+    "Name": "GoPro, Inc.",
+    "LastSale": 6.42,
+    "MarketCap": 955239189.42,
+    "Sector": "Miscellaneous",
+    "Industry": "Industrial Machinery/Components"
+  }
+]
