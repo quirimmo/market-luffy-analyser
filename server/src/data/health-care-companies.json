@@ -1,0 +1,18 @@
+[
+  {
+    "Symbol": "JNJ",
+    "Name": "Johnson & Johnson",
+    "LastSale": 134.61,
+    "MarketCap": 361125793371.21,
+    "Sector": "Health Care",
+    "Industry": "Major Pharmaceuticals"
+  },
+  {
+    "Symbol": "PFE",
+    "Name": "Pfizer, Inc.",
+    "LastSale": 42.07,
+    "MarketCap": 246618946791.21,
+    "Sector": "Health Care",
+    "Industry": "Major Pharmaceuticals"
+  }
+]

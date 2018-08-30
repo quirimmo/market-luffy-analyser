@@ -1,0 +1,282 @@
+[
+  {
+    "Symbol": "AAPL",
+    "Name": "Apple Inc.",
+    "LastSale": 215.05,
+    "MarketCap": 1038675586300,
+    "Sector": "Technology",
+    "Industry": "Computer Manufacturing"
+  },
+  {
+    "Symbol": "GOOG",
+    "Name": "Alphabet Inc.",
+    "LastSale": 1207.33,
+    "MarketCap": 839912645676.09,
+    "Sector": "Technology",
+    "Industry": "Computer Software: Programming, Data Processing"
+  },
+  {
+    "Symbol": "MSFT",
+    "Name": "Microsoft Corporation",
+    "LastSale": 107.06,
+    "MarketCap": 820959345850.96,
+    "Sector": "Technology",
+    "Industry": "Computer Software: Prepackaged Software"
+  },
+  {
+    "Symbol": "FB",
+    "Name": "Facebook, Inc.",
+    "LastSale": 173.64,
+    "MarketCap": 501336648816.96,
+    "Sector": "Technology",
+    "Industry": "Computer Software: Programming, Data Processing"
+  },
+  {
+    "Symbol": "INTC",
+    "Name": "Intel Corporation",
+    "LastSale": 47.05,
+    "MarketCap": 216947550000,
+    "Sector": "Technology",
+    "Industry": "Semiconductors"
+  },
+  {
+    "Symbol": "CSCO",
+    "Name": "Cisco Systems, Inc.",
+    "LastSale": 45.99,
+    "MarketCap": 216285565899.06,
+    "Sector": "Technology",
+    "Industry": "Computer Communications Equipment"
+  },
+  {
+    "Symbol": "ORCL",
+    "Name": "Oracle Corporation",
+    "LastSale": 48.8,
+    "MarketCap": 194280364000,
+    "Sector": "Technology",
+    "Industry": "Computer Software: Prepackaged Software"
+  },
+  {
+    "Symbol": "NVDA",
+    "Name": "NVIDIA Corporation",
+    "LastSale": 262.82,
+    "MarketCap": 159794560000,
+    "Sector": "Technology",
+    "Industry": "Semiconductors"
+  },
+  {
+    "Symbol": "IBM",
+    "Name": "International Business Machines Corporation",
+    "LastSale": 145.24,
+    "MarketCap": 132570451770.36,
+    "Sector": "Technology",
+    "Industry": "Computer Manufacturing"
+  },
+  {
+    "Symbol": "ADBE",
+    "Name": "Adobe Systems Incorporated",
+    "LastSale": 255.54,
+    "MarketCap": 125128395114.24,
+    "Sector": "Technology",
+    "Industry": "Computer Software: Prepackaged Software"
+  },
+  {
+    "Symbol": "TXN",
+    "Name": "Texas Instruments Incorporated",
+    "LastSale": 112.19,
+    "MarketCap": 109070565127.68,
+    "Sector": "Technology",
+    "Industry": "Semiconductors"
+  },
+  {
+    "Symbol": "CRM",
+    "Name": "Salesforce.com Inc",
+    "LastSale": 146.46,
+    "MarketCap": 108806610609.72,
+    "Sector": "Technology",
+    "Industry": "Computer Software: Prepackaged Software"
+  },
+  {
+    "Symbol": "QCOM",
+    "Name": "QUALCOMM Incorporated",
+    "LastSale": 66.84,
+    "MarketCap": 98196576678.6,
+    "Sector": "Technology",
+    "Industry": "Radio And Television Broadcasting And Communications Equipment"
+  },
+  {
+    "Symbol": "VMW",
+    "Name": "Vmware, Inc.",
+    "LastSale": 154.28,
+    "MarketCap": 62770632024.24,
+    "Sector": "Technology",
+    "Industry": "Computer Software: Prepackaged Software"
+  },
+  {
+    "Symbol": "MU",
+    "Name": "Micron Technology, Inc.",
+    "LastSale": 50.24,
+    "MarketCap": 58268885900.48,
+    "Sector": "Technology",
+    "Industry": "Semiconductors"
+  },
+  {
+    "Symbol": "ATVI",
+    "Name": "Activision Blizzard, Inc",
+    "LastSale": 71.43,
+    "MarketCap": 54458845369.41,
+    "Sector": "Technology",
+    "Industry": "Computer Software: Prepackaged Software"
+  },
+  {
+    "Symbol": "INFY",
+    "Name": "Infosys Limited",
+    "LastSale": 20.5,
+    "MarketCap": 44554715170,
+    "Sector": "Technology",
+    "Industry": "EDP Services"
+  },
+  {
+    "Symbol": "HPQ",
+    "Name": "HP Inc.",
+    "LastSale": 24.49,
+    "MarketCap": 39441454382.17,
+    "Sector": "Technology",
+    "Industry": "Computer Manufacturing"
+  },
+  {
+    "Symbol": "EA",
+    "Name": "Electronic Arts Inc.",
+    "LastSale": 127.62,
+    "MarketCap": 38900906341.2,
+    "Sector": "Technology",
+    "Industry": "Computer Software: Prepackaged Software"
+  },
+  {
+    "Symbol": "NOK",
+    "Name": "Nokia Corporation",
+    "LastSale": 5.41,
+    "MarketCap": 30228736571.94,
+    "Sector": "Technology",
+    "Industry": "Radio And Television Broadcasting And Communications Equipment"
+  },
+  {
+    "Symbol": "ADSK",
+    "Name": "Autodesk, Inc.",
+    "LastSale": 136.94,
+    "MarketCap": 30074528632.6,
+    "Sector": "Technology",
+    "Industry": "Computer Software: Prepackaged Software"
+  },
+  {
+    "Symbol": "TWTR",
+    "Name": "Twitter, Inc.",
+    "LastSale": 33.81,
+    "MarketCap": 25622770859.49,
+    "Sector": "Technology",
+    "Industry": "Computer Software: Programming, Data Processing"
+  },
+  {
+    "Symbol": "RHT",
+    "Name": "Red Hat, Inc.",
+    "LastSale": 140.14,
+    "MarketCap": 24857177084.74,
+    "Sector": "Technology",
+    "Industry": "Computer Software: Programming, Data Processing"
+  },
+  {
+    "Symbol": "AMD",
+    "Name": "Advanced Micro Devices, Inc.",
+    "LastSale": 20.9,
+    "MarketCap": 20374833348.1,
+    "Sector": "Technology",
+    "Industry": "Semiconductors"
+  },
+  {
+    "Symbol": "WDC",
+    "Name": "Western Digital Corporation",
+    "LastSale": 64.02,
+    "MarketCap": 19157476745.22,
+    "Sector": "Technology",
+    "Industry": "Electronic Components"
+  },
+  {
+    "Symbol": "OMC",
+    "Name": "Omnicom Group Inc.",
+    "LastSale": 69.09,
+    "MarketCap": 15501913850.22,
+    "Sector": "Technology",
+    "Industry": "Advertising"
+  },
+  {
+    "Symbol": "TTWO",
+    "Name": "Take-Two Interactive Software, Inc.",
+    "LastSale": 129.23,
+    "MarketCap": 14710020482.91,
+    "Sector": "Technology",
+    "Industry": "Computer Software: Prepackaged Software"
+  },
+  {
+    "Symbol": "GDDY",
+    "Name": "GoDaddy Inc.",
+    "LastSale": 75.2,
+    "MarketCap": 12957131982.4,
+    "Sector": "Technology",
+    "Industry": "EDP Services"
+  },
+  {
+    "Symbol": "SHOP",
+    "Name": "Shopify Inc.",
+    "LastSale": 137.63,
+    "MarketCap": 12899485982.9,
+    "Sector": "Technology",
+    "Industry": "Computer Software: Prepackaged Software"
+  },
+  {
+    "Symbol": "SYMC",
+    "Name": "Symantec Corporation",
+    "LastSale": 19.7,
+    "MarketCap": 12244311365.6,
+    "Sector": "Technology",
+    "Industry": "Computer Software: Prepackaged Software"
+  },
+  {
+    "Symbol": "DBX",
+    "Name": "Dropbox, Inc.",
+    "LastSale": 28.08,
+    "MarketCap": 11296765593.36,
+    "Sector": "Technology",
+    "Industry": "Computer Software: Prepackaged Software"
+  },
+  {
+    "Symbol": "TRIP",
+    "Name": "TripAdvisor, Inc.",
+    "LastSale": 53.55,
+    "MarketCap": 7365656897.55,
+    "Sector": "Technology",
+    "Industry": "Computer Software: Programming, Data Processing"
+  },
+  {
+    "Symbol": "XRX",
+    "Name": "Xerox Corporation",
+    "LastSale": 27.65,
+    "MarketCap": 7053562917.45,
+    "Sector": "Technology",
+    "Industry": "Computer peripheral equipment"
+  },
+  {
+    "Symbol": "ZEN",
+    "Name": "Zendesk, Inc.",
+    "LastSale": 63.4,
+    "MarketCap": 6717788554,
+    "Sector": "Technology",
+    "Industry": "EDP Services"
+  },
+  {
+    "Symbol": "ZNGA",
+    "Name": "Zynga Inc.",
+    "LastSale": 4.03,
+    "MarketCap": 3466531614.26,
+    "Sector": "Technology",
+    "Industry": "EDP Services"
+  }
+]

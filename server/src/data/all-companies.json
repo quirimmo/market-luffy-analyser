@@ -1,0 +1,698 @@
+[
+  {
+    "Symbol": "ACN",
+    "Name": "Accenture plc",
+    "LastSale": 164.92,
+    "MarketCap": 105781805572.8,
+    "Sector": "Miscellaneous",
+    "Industry": "Business Services"
+  },
+  {
+    "Symbol": "ATVI",
+    "Name": "Activision Blizzard, Inc",
+    "LastSale": 71.43,
+    "MarketCap": 54458845369.41,
+    "Sector": "Technology",
+    "Industry": "Computer Software: Prepackaged Software"
+  },
+  {
+    "Symbol": "ADBE",
+    "Name": "Adobe Systems Incorporated",
+    "LastSale": 255.54,
+    "MarketCap": 125128395114.24,
+    "Sector": "Technology",
+    "Industry": "Computer Software: Prepackaged Software"
+  },
+  {
+    "Symbol": "AMD",
+    "Name": "Advanced Micro Devices, Inc.",
+    "LastSale": 20.9,
+    "MarketCap": 20374833348.1,
+    "Sector": "Technology",
+    "Industry": "Semiconductors"
+  },
+  {
+    "Symbol": "BABA",
+    "Name": "Alibaba Group Holding Limited",
+    "LastSale": 177.85,
+    "MarketCap": 457417722577.55,
+    "Sector": "Miscellaneous",
+    "Industry": "Business Services"
+  },
+  {
+    "Symbol": "GOOG",
+    "Name": "Alphabet Inc.",
+    "LastSale": 1207.33,
+    "MarketCap": 839912645676.09,
+    "Sector": "Technology",
+    "Industry": "Computer Software: Programming, Data Processing"
+  },
+  {
+    "Symbol": "AMZN",
+    "Name": "Amazon.com, Inc.",
+    "LastSale": 1904.9,
+    "MarketCap": 929098190926.1,
+    "Sector": "Consumer Services",
+    "Industry": "Catalog/Specialty Distribution"
+  },
+  {
+    "Symbol": "AAL",
+    "Name": "American Airlines Group, Inc.",
+    "LastSale": 39.19,
+    "MarketCap": 18047356175.04,
+    "Sector": "Transportation",
+    "Industry": "Air Freight/Delivery Services"
+  },
+  {
+    "Symbol": "AXP",
+    "Name": "American Express Company",
+    "LastSale": 105.83,
+    "MarketCap": 91125371277.5,
+    "Sector": "Finance",
+    "Industry": "Finance: Consumer Services"
+  },
+  {
+    "Symbol": "AAPL",
+    "Name": "Apple Inc.",
+    "LastSale": 215.05,
+    "MarketCap": 1038675586300,
+    "Sector": "Technology",
+    "Industry": "Computer Manufacturing"
+  },
+  {
+    "Symbol": "ADSK",
+    "Name": "Autodesk, Inc.",
+    "LastSale": 136.94,
+    "MarketCap": 30074528632.6,
+    "Sector": "Technology",
+    "Industry": "Computer Software: Prepackaged Software"
+  },
+  {
+    "Symbol": "BAC",
+    "Name": "Bank of America Corporation",
+    "LastSale": 30.98,
+    "MarketCap": 309361109871.72,
+    "Sector": "Finance",
+    "Industry": "Major Banks"
+  },
+  {
+    "Symbol": "BA",
+    "Name": "Boeing Company (The)",
+    "LastSale": 350.03,
+    "MarketCap": 201095145149.42,
+    "Sector": "Capital Goods",
+    "Industry": "Aerospace"
+  },
+  {
+    "Symbol": "BKNG",
+    "Name": "Booking Holdings Inc.",
+    "LastSale": 1917,
+    "MarketCap": 91003873842,
+    "Sector": "Miscellaneous",
+    "Industry": "Business Services"
+  },
+  {
+    "Symbol": "CVX",
+    "Name": "Chevron Corporation",
+    "LastSale": 118.92,
+    "MarketCap": 227868213132,
+    "Sector": "Energy",
+    "Industry": "Integrated oil Companies"
+  },
+  {
+    "Symbol": "CSCO",
+    "Name": "Cisco Systems, Inc.",
+    "LastSale": 45.99,
+    "MarketCap": 216285565899.06,
+    "Sector": "Technology",
+    "Industry": "Computer Communications Equipment"
+  },
+  {
+    "Symbol": "C",
+    "Name": "Citigroup Inc.",
+    "LastSale": 71.12,
+    "MarketCap": 178980976901.44,
+    "Sector": "Finance",
+    "Industry": "Major Banks"
+  },
+  {
+    "Symbol": "KO",
+    "Name": "Coca-Cola Company (The)",
+    "LastSale": 45.93,
+    "MarketCap": 195336727990.71,
+    "Sector": "Consumer Non-Durables",
+    "Industry": "Beverages (Production/Distribution)"
+  },
+  {
+    "Symbol": "CCE",
+    "Name": "Coca-Cola European Partners plc",
+    "LastSale": 42.1,
+    "MarketCap": 20476748044.4,
+    "Sector": "Consumer Non-Durables",
+    "Industry": "Beverages (Production/Distribution)"
+  },
+  {
+    "Symbol": "CL",
+    "Name": "Colgate-Palmolive Company",
+    "LastSale": 66.99,
+    "MarketCap": 58129815245.04,
+    "Sector": "Consumer Non-Durables",
+    "Industry": "Package Goods/Cosmetics"
+  },
+  {
+    "Symbol": "DBX",
+    "Name": "Dropbox, Inc.",
+    "LastSale": 28.08,
+    "MarketCap": 11296765593.36,
+    "Sector": "Technology",
+    "Industry": "Computer Software: Prepackaged Software"
+  },
+  {
+    "Symbol": "EBAY",
+    "Name": "eBay Inc.",
+    "LastSale": 34.7,
+    "MarketCap": 34337371501.7,
+    "Sector": "Miscellaneous",
+    "Industry": "Business Services"
+  },
+  {
+    "Symbol": "EA",
+    "Name": "Electronic Arts Inc.",
+    "LastSale": 127.62,
+    "MarketCap": 38900906341.2,
+    "Sector": "Technology",
+    "Industry": "Computer Software: Prepackaged Software"
+  },
+  {
+    "Symbol": "XOM",
+    "Name": "Exxon Mobil Corporation",
+    "LastSale": 79.96,
+    "MarketCap": 338535475426.08,
+    "Sector": "Energy",
+    "Industry": "Integrated oil Companies"
+  },
+  {
+    "Symbol": "FB",
+    "Name": "Facebook, Inc.",
+    "LastSale": 173.64,
+    "MarketCap": 501336648816.96,
+    "Sector": "Technology",
+    "Industry": "Computer Software: Programming, Data Processing"
+  },
+  {
+    "Symbol": "RACE",
+    "Name": "Ferrari N.V.",
+    "LastSale": 125.09,
+    "MarketCap": 30664432756.58,
+    "Sector": "Capital Goods",
+    "Industry": "Auto Manufacturing"
+  },
+  {
+    "Symbol": "FCAU",
+    "Name": "Fiat Chrysler Automobiles N.V.",
+    "LastSale": 16.45,
+    "MarketCap": 32234750978.5,
+    "Sector": "Capital Goods",
+    "Industry": "Auto Manufacturing"
+  },
+  {
+    "Symbol": "FIS",
+    "Name": "Fidelity National Information Services, Inc.",
+    "LastSale": 108.25,
+    "MarketCap": 35594837960.5,
+    "Sector": "Miscellaneous",
+    "Industry": "Business Services"
+  },
+  {
+    "Symbol": "FL",
+    "Name": "Foot Locker, Inc.",
+    "LastSale": 52.13,
+    "MarketCap": 6094468620.11,
+    "Sector": "Consumer Services",
+    "Industry": "Clothing/Shoe/Accessory Stores"
+  },
+  {
+    "Symbol": "F",
+    "Name": "Ford Motor Company",
+    "LastSale": 9.69,
+    "MarketCap": 38621690153.22,
+    "Sector": "Capital Goods",
+    "Industry": "Auto Manufacturing"
+  },
+  {
+    "Symbol": "GE",
+    "Name": "General Electric Company",
+    "LastSale": 12.47,
+    "MarketCap": 108377780070,
+    "Sector": "Energy",
+    "Industry": "Consumer Electronics/Appliances"
+  },
+  {
+    "Symbol": "GM",
+    "Name": "General Motors Company",
+    "LastSale": 36.13,
+    "MarketCap": 50975394857.08,
+    "Sector": "Capital Goods",
+    "Industry": "Auto Manufacturing"
+  },
+  {
+    "Symbol": "GDDY",
+    "Name": "GoDaddy Inc.",
+    "LastSale": 75.2,
+    "MarketCap": 12957131982.4,
+    "Sector": "Technology",
+    "Industry": "EDP Services"
+  },
+  {
+    "Symbol": "GS",
+    "Name": "Goldman Sachs Group, Inc. (The)",
+    "LastSale": 239.34,
+    "MarketCap": 90364307130.84,
+    "Sector": "Finance",
+    "Industry": "Investment Bankers/Brokers/Service"
+  },
+  {
+    "Symbol": "GPRO",
+    "Name": "GoPro, Inc.",
+    "LastSale": 6.42,
+    "MarketCap": 955239189.42,
+    "Sector": "Miscellaneous",
+    "Industry": "Industrial Machinery/Components"
+  },
+  {
+    "Symbol": "HOG",
+    "Name": "Harley-Davidson, Inc.",
+    "LastSale": 42.84,
+    "MarketCap": 7135194051.72,
+    "Sector": "Consumer Non-Durables",
+    "Industry": "Motor Vehicles"
+  },
+  {
+    "Symbol": "HMC",
+    "Name": "Honda Motor Company, Ltd.",
+    "LastSale": 30.48,
+    "MarketCap": 53653235675.28,
+    "Sector": "Capital Goods",
+    "Industry": "Auto Manufacturing"
+  },
+  {
+    "Symbol": "HPQ",
+    "Name": "HP Inc.",
+    "LastSale": 24.49,
+    "MarketCap": 39441454382.17,
+    "Sector": "Technology",
+    "Industry": "Computer Manufacturing"
+  },
+  {
+    "Symbol": "INFY",
+    "Name": "Infosys Limited",
+    "LastSale": 20.5,
+    "MarketCap": 44554715170,
+    "Sector": "Technology",
+    "Industry": "EDP Services"
+  },
+  {
+    "Symbol": "INTC",
+    "Name": "Intel Corporation",
+    "LastSale": 47.05,
+    "MarketCap": 216947550000,
+    "Sector": "Technology",
+    "Industry": "Semiconductors"
+  },
+  {
+    "Symbol": "IBM",
+    "Name": "International Business Machines Corporation",
+    "LastSale": 145.24,
+    "MarketCap": 132570451770.36,
+    "Sector": "Technology",
+    "Industry": "Computer Manufacturing"
+  },
+  {
+    "Symbol": "JPM",
+    "Name": "J P Morgan Chase & Co",
+    "LastSale": 114.97,
+    "MarketCap": 386400845781.79,
+    "Sector": "Finance",
+    "Industry": "Major Banks"
+  },
+  {
+    "Symbol": "JNJ",
+    "Name": "Johnson & Johnson",
+    "LastSale": 134.61,
+    "MarketCap": 361125793371.21,
+    "Sector": "Health Care",
+    "Industry": "Major Pharmaceuticals"
+  },
+  {
+    "Symbol": "MANU",
+    "Name": "Manchester United Ltd.",
+    "LastSale": 23.75,
+    "MarketCap": 3899625407.5,
+    "Sector": "Consumer Services",
+    "Industry": "Services-Misc. Amusement & Recreation"
+  },
+  {
+    "Symbol": "MA",
+    "Name": "Mastercard Incorporated",
+    "LastSale": 204.31,
+    "MarketCap": 226556110471,
+    "Sector": "Miscellaneous",
+    "Industry": "Business Services"
+  },
+  {
+    "Symbol": "MCD",
+    "Name": "McDonald&#39;s Corporation",
+    "LastSale": 160.55,
+    "MarketCap": 124554755664.95,
+    "Sector": "Consumer Services",
+    "Industry": "Restaurants"
+  },
+  {
+    "Symbol": "MU",
+    "Name": "Micron Technology, Inc.",
+    "LastSale": 50.24,
+    "MarketCap": 58268885900.48,
+    "Sector": "Technology",
+    "Industry": "Semiconductors"
+  },
+  {
+    "Symbol": "MSFT",
+    "Name": "Microsoft Corporation",
+    "LastSale": 107.06,
+    "MarketCap": 820959345850.96,
+    "Sector": "Technology",
+    "Industry": "Computer Software: Prepackaged Software"
+  },
+  {
+    "Symbol": "MS",
+    "Name": "Morgan Stanley",
+    "LastSale": 48.6,
+    "MarketCap": 84796779857.4,
+    "Sector": "Finance",
+    "Industry": "Investment Bankers/Brokers/Service"
+  },
+  {
+    "Symbol": "NFLX",
+    "Name": "Netflix, Inc.",
+    "LastSale": 344.44,
+    "MarketCap": 149988983022.2,
+    "Sector": "Consumer Services",
+    "Industry": "Consumer Electronics/Video Chains"
+  },
+  {
+    "Symbol": "NKE",
+    "Name": "Nike, Inc.",
+    "LastSale": 82.64,
+    "MarketCap": 132269827020.32,
+    "Sector": "Consumer Non-Durables",
+    "Industry": "Shoe Manufacturing"
+  },
+  {
+    "Symbol": "NOK",
+    "Name": "Nokia Corporation",
+    "LastSale": 5.41,
+    "MarketCap": 30228736571.94,
+    "Sector": "Technology",
+    "Industry": "Radio And Television Broadcasting And Communications Equipment"
+  },
+  {
+    "Symbol": "NVDA",
+    "Name": "NVIDIA Corporation",
+    "LastSale": 262.82,
+    "MarketCap": 159794560000,
+    "Sector": "Technology",
+    "Industry": "Semiconductors"
+  },
+  {
+    "Symbol": "OMC",
+    "Name": "Omnicom Group Inc.",
+    "LastSale": 69.09,
+    "MarketCap": 15501913850.22,
+    "Sector": "Technology",
+    "Industry": "Advertising"
+  },
+  {
+    "Symbol": "ORCL",
+    "Name": "Oracle Corporation",
+    "LastSale": 48.8,
+    "MarketCap": 194280364000,
+    "Sector": "Technology",
+    "Industry": "Computer Software: Prepackaged Software"
+  },
+  {
+    "Symbol": "PYPL",
+    "Name": "PayPal Holdings, Inc.",
+    "LastSale": 86.95,
+    "MarketCap": 102920324570.6,
+    "Sector": "Miscellaneous",
+    "Industry": "Business Services"
+  },
+  {
+    "Symbol": "PEP",
+    "Name": "Pepsico, Inc.",
+    "LastSale": 112.24,
+    "MarketCap": 158743460312.4,
+    "Sector": "Consumer Non-Durables",
+    "Industry": "Beverages (Production/Distribution)"
+  },
+  {
+    "Symbol": "PFE",
+    "Name": "Pfizer, Inc.",
+    "LastSale": 42.07,
+    "MarketCap": 246618946791.21,
+    "Sector": "Health Care",
+    "Industry": "Major Pharmaceuticals"
+  },
+  {
+    "Symbol": "PM",
+    "Name": "Philip Morris International Inc",
+    "LastSale": 82.43,
+    "MarketCap": 128137999233.35,
+    "Sector": "Consumer Non-Durables",
+    "Industry": "Farming/Seeds/Milling"
+  },
+  {
+    "Symbol": "QCOM",
+    "Name": "QUALCOMM Incorporated",
+    "LastSale": 66.84,
+    "MarketCap": 98196576678.6,
+    "Sector": "Technology",
+    "Industry": "Radio And Television Broadcasting And Communications Equipment"
+  },
+  {
+    "Symbol": "RHT",
+    "Name": "Red Hat, Inc.",
+    "LastSale": 140.14,
+    "MarketCap": 24857177084.74,
+    "Sector": "Technology",
+    "Industry": "Computer Software: Programming, Data Processing"
+  },
+  {
+    "Symbol": "RYAAY",
+    "Name": "Ryanair Holdings plc",
+    "LastSale": 95.47,
+    "MarketCap": 9625836930.19,
+    "Sector": "Transportation",
+    "Industry": "Air Freight/Delivery Services"
+  },
+  {
+    "Symbol": "CRM",
+    "Name": "Salesforce.com Inc",
+    "LastSale": 146.46,
+    "MarketCap": 108806610609.72,
+    "Sector": "Technology",
+    "Industry": "Computer Software: Prepackaged Software"
+  },
+  {
+    "Symbol": "SHOP",
+    "Name": "Shopify Inc.",
+    "LastSale": 137.63,
+    "MarketCap": 12899485982.9,
+    "Sector": "Technology",
+    "Industry": "Computer Software: Prepackaged Software"
+  },
+  {
+    "Symbol": "SNE",
+    "Name": "Sony Corp Ord",
+    "LastSale": 54.62,
+    "MarketCap": 69270822827.7,
+    "Sector": "Consumer Non-Durables",
+    "Industry": "Consumer Electronics/Appliances"
+  },
+  {
+    "Symbol": "SPOT",
+    "Name": "Spotify Technology S.A.",
+    "LastSale": 191.03,
+    "MarketCap": 34342995733.69,
+    "Sector": "Consumer Services",
+    "Industry": "Broadcasting"
+  },
+  {
+    "Symbol": "SBUX",
+    "Name": "Starbucks Corporation",
+    "LastSale": 52.82,
+    "MarketCap": 71259462000,
+    "Sector": "Consumer Services",
+    "Industry": "Restaurants"
+  },
+  {
+    "Symbol": "SYMC",
+    "Name": "Symantec Corporation",
+    "LastSale": 19.7,
+    "MarketCap": 12244311365.6,
+    "Sector": "Technology",
+    "Industry": "Computer Software: Prepackaged Software"
+  },
+  {
+    "Symbol": "TTWO",
+    "Name": "Take-Two Interactive Software, Inc.",
+    "LastSale": 129.23,
+    "MarketCap": 14710020482.91,
+    "Sector": "Technology",
+    "Industry": "Computer Software: Prepackaged Software"
+  },
+  {
+    "Symbol": "TSLA",
+    "Name": "Tesla, Inc.",
+    "LastSale": 321.64,
+    "MarketCap": 54869578836.16,
+    "Sector": "Capital Goods",
+    "Industry": "Auto Manufacturing"
+  },
+  {
+    "Symbol": "TXN",
+    "Name": "Texas Instruments Incorporated",
+    "LastSale": 112.19,
+    "MarketCap": 109070565127.68,
+    "Sector": "Technology",
+    "Industry": "Semiconductors"
+  },
+  {
+    "Symbol": "TOT",
+    "Name": "Total S.A.",
+    "LastSale": 62.37,
+    "MarketCap": 162948907570.68,
+    "Sector": "Energy",
+    "Industry": "Oil & Gas Production"
+  },
+  {
+    "Symbol": "TM",
+    "Name": "Toyota Motor Corp Ltd Ord",
+    "LastSale": 123.74,
+    "MarketCap": 180745601548.22,
+    "Sector": "Capital Goods",
+    "Industry": "Auto Manufacturing"
+  },
+  {
+    "Symbol": "TRIP",
+    "Name": "TripAdvisor, Inc.",
+    "LastSale": 53.55,
+    "MarketCap": 7365656897.55,
+    "Sector": "Technology",
+    "Industry": "Computer Software: Programming, Data Processing"
+  },
+  {
+    "Symbol": "FOX",
+    "Name": "Twenty-First Century Fox, Inc.",
+    "LastSale": 44.75,
+    "MarketCap": 82902693346.75,
+    "Sector": "Consumer Services",
+    "Industry": "Television Services"
+  },
+  {
+    "Symbol": "TWTR",
+    "Name": "Twitter, Inc.",
+    "LastSale": 33.81,
+    "MarketCap": 25622770859.49,
+    "Sector": "Technology",
+    "Industry": "Computer Software: Programming, Data Processing"
+  },
+  {
+    "Symbol": "UPS",
+    "Name": "United Parcel Service, Inc.",
+    "LastSale": 121.87,
+    "MarketCap": 104850210904.53,
+    "Sector": "Transportation",
+    "Industry": "Trucking Freight/Courier Services"
+  },
+  {
+    "Symbol": "UTX",
+    "Name": "United Technologies Corporation",
+    "LastSale": 133.24,
+    "MarketCap": 106604429293.4,
+    "Sector": "Capital Goods",
+    "Industry": "Aerospace"
+  },
+  {
+    "Symbol": "VZ",
+    "Name": "Verizon Communications Inc.",
+    "LastSale": 54.14,
+    "MarketCap": 223702993708.84,
+    "Sector": "Public Utilities",
+    "Industry": "Telecommunications Equipment"
+  },
+  {
+    "Symbol": "V",
+    "Name": "Visa Inc.",
+    "LastSale": 141.14,
+    "MarketCap": 323590118544.14,
+    "Sector": "Miscellaneous",
+    "Industry": "Business Services"
+  },
+  {
+    "Symbol": "VMW",
+    "Name": "Vmware, Inc.",
+    "LastSale": 154.28,
+    "MarketCap": 62770632024.24,
+    "Sector": "Technology",
+    "Industry": "Computer Software: Prepackaged Software"
+  },
+  {
+    "Symbol": "DIS",
+    "Name": "Walt Disney Company (The)",
+    "LastSale": 111.94,
+    "MarketCap": 166481936196.24,
+    "Sector": "Consumer Services",
+    "Industry": "Television Services"
+  },
+  {
+    "Symbol": "WFC",
+    "Name": "Wells Fargo & Company",
+    "LastSale": 59.17,
+    "MarketCap": 284970835579.69,
+    "Sector": "Finance",
+    "Industry": "Major Banks"
+  },
+  {
+    "Symbol": "WDC",
+    "Name": "Western Digital Corporation",
+    "LastSale": 64.02,
+    "MarketCap": 19157476745.22,
+    "Sector": "Technology",
+    "Industry": "Electronic Components"
+  },
+  {
+    "Symbol": "XRX",
+    "Name": "Xerox Corporation",
+    "LastSale": 27.65,
+    "MarketCap": 7053562917.45,
+    "Sector": "Technology",
+    "Industry": "Computer peripheral equipment"
+  },
+  {
+    "Symbol": "ZEN",
+    "Name": "Zendesk, Inc.",
+    "LastSale": 63.4,
+    "MarketCap": 6717788554,
+    "Sector": "Technology",
+    "Industry": "EDP Services"
+  },
+  {
+    "Symbol": "ZNGA",
+    "Name": "Zynga Inc.",
+    "LastSale": 4.03,
+    "MarketCap": 3466531614.26,
+    "Sector": "Technology",
+    "Industry": "EDP Services"
+  }
+]

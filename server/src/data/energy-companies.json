@@ -1,0 +1,34 @@
+[
+  {
+    "Symbol": "XOM",
+    "Name": "Exxon Mobil Corporation",
+    "LastSale": 79.96,
+    "MarketCap": 338535475426.08,
+    "Sector": "Energy",
+    "Industry": "Integrated oil Companies"
+  },
+  {
+    "Symbol": "CVX",
+    "Name": "Chevron Corporation",
+    "LastSale": 118.92,
+    "MarketCap": 227868213132,
+    "Sector": "Energy",
+    "Industry": "Integrated oil Companies"
+  },
+  {
+    "Symbol": "TOT",
+    "Name": "Total S.A.",
+    "LastSale": 62.37,
+    "MarketCap": 162948907570.68,
+    "Sector": "Energy",
+    "Industry": "Oil & Gas Production"
+  },
+  {
+    "Symbol": "GE",
+    "Name": "General Electric Company",
+    "LastSale": 12.47,
+    "MarketCap": 108377780070,
+    "Sector": "Energy",
+    "Industry": "Consumer Electronics/Appliances"
+  }
+]
