@@ -5,19 +5,29 @@ import { Container } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import './../../../assets/styles/main.scss';
 
-class App extends React.Component<{}, any> {
-	constructor (props: {}) {
+export interface IAppGroupProps {
+	fetchCompanies: () => void;
+}
+
+class App extends React.Component<IAppGroupProps, any> {
+	constructor(props: IAppGroupProps) {
 		super(props);
+		this.onRetrieveAllData = this.onRetrieveAllData.bind(this);
 	}
 
-	public render () {
+	public render() {
 		return (
 			<BrowserRouter basename="/">
 				<Container className="main-app-wrapper">
-					<div>Dai cazzo</div>
+					<button onClick={this.onRetrieveAllData}>RETRIEVE ALL DATA</button>
 				</Container>
 			</BrowserRouter>
 		);
+	}
+
+	public onRetrieveAllData() {
+		this.props.fetchCompanies();
+		console.log('clicked!');
 	}
 }
 

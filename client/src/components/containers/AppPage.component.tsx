@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import App from './../presentationals/App.component';
 import { Dispatch } from 'redux';
+import { fetchCompanies } from './../../actions/companies.action';
 
 const mapStateToProps = (state: any, ownProps: any) => {
 	// const performancesResultsReader = new PerformancesResultsReader();
@@ -14,7 +15,11 @@ const mapStateToProps = (state: any, ownProps: any) => {
 	return {};
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<any>) => ({});
+const mapDispatchToProps: any = (dispatch: Dispatch<any>) => ({
+	fetchCompanies: () => {
+		dispatch(fetchCompanies());
+	}
+});
 
 const AppPage = connect(
 	mapStateToProps,
