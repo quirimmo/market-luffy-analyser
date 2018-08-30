@@ -89,6 +89,7 @@ class LuffyServerSocket extends ApplicationServerSocket {
       if (dailyTimeSerie.getPriceChangeByPeriod().length === 0) {
         console.log('This symbol request returned empty values', dailyTimeSerie.symbol);
       }
+      console.log('Sending data to the following socket', socketInstance.id);
       instance.sendLuffyMessage(socketInstance, {
         data: {
           symbol: dailyTimeSerie.symbol,
