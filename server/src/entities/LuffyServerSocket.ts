@@ -38,6 +38,7 @@ class LuffyServerSocket extends ApplicationServerSocket {
   }
 
   parseLuffyMessage(socketInstance: SocketIO.Socket, data: LuffySocketRequest): void {
+    console.log('Received luffy-message with data', data);
     if (!this.requestParser.isRequestActionValid(data)) {
       throw new Error('You must specify an action property for this kind of message');
     }

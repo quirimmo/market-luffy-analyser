@@ -6,7 +6,7 @@ const router: Router = Router();
 router.get('/:symbols?', onGetCompanies);
 
 export function onGetCompanies(req: Request, res: Response) {
-	const sectors: string[] = req.query.sectors || [];
+  const sectors: string[] = req.query.sectors || [];
   const symbols: string[] = req.params.symbols ? req.params.symbols.split(',') : [];
 
   const data: string = readFileSync(companiesFile).toString();
@@ -20,6 +20,8 @@ export function onGetCompanies(req: Request, res: Response) {
     companies = companies.filter(filterBySector.bind(null, uppercaseSectors));
   }
 
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   res.status(200).send(companies);
 }
 

@@ -1,2 +1,10 @@
+# SERVER GIT IGNORED
 server/node_modules
 server/dist
+server/npm-debug.log
+
+#CLIENT GIT IGNORED
+client/node_modules
+client/coverage
+client/build
+client/npm-debug.log

@@ -1,0 +1,26 @@
+{
+	"extends": ["tslint:recommended", "tslint-react", "tslint-eslint-rules", "tslint-clean-code", "tslint-config-prettier"],
+	"rules": {
+		"max-line-length": {
+			"options": [150]
+		},
+		"new-parens": true,
+		"no-arg": true,
+		"no-bitwise": true,
+		"no-conditional-assignment": true,
+		"no-consecutive-blank-lines": false,
+		"no-console": [false],
+		"ordered-imports": false,
+		"indent": [true, "tabs", 2],
+		"comma-dangle": ["error", "never"],
+		"no-use-before-define": ["error", { "functions": false, "classes": false }],
+		"space-before-function-paren": [false, "always"],
+		"no-mixed-spaces-and-tabs": ["error", "smart-tabs"],
+		"no-trailing-spaces": ["error", { "ignoreComments": true, "skipBlankLines": true }],
+		"arrow-parens": [true, "ban-single-arg-parens"],
+		"max-len": ["error", { "code": 200 }],
+		"no-unused-vars": ["error", { "vars": "local" }],
+		"no-var-requires": false,
+		"object-literal-sort-keys": false
+	}
+}
