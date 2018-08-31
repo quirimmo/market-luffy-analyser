@@ -1,23 +1,19 @@
 import { connect } from 'react-redux';
 import App from './../presentationals/App.component';
 import { Dispatch } from 'redux';
-import { fetchCompanies } from './../../actions/companies.action';
+import { fetchCompanies, fetchCompaniesAsync } from './../../actions/companies.action';
+import IStoreState from './../../models/StoreState';
+import Company from './../../models/Company';
 
-const mapStateToProps = (state: any, ownProps: any) => {
-	// const performancesResultsReader = new PerformancesResultsReader();
-	// performancesResultsReader.read();
-	// const statisticsResultsReader = new StatisticsResultsReader();
-	// statisticsResultsReader.read();
-
-	// state.scenarios = performancesResultsReader.getScenarios();
-	// state.steps = statisticsResultsReader.getSteps();
-	// state.totalDuration = performancesResultsReader.getTotalDuration();
-	return {};
+const mapStateToProps = (state: IStoreState, ownProps: any) => {
+	return {
+		companies: state.companies
+	};
 };
 
 const mapDispatchToProps: any = (dispatch: Dispatch<any>) => ({
 	fetchCompanies: () => {
-		dispatch(fetchCompanies());
+		dispatch(fetchCompaniesAsync());
 	}
 });
 

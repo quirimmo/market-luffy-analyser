@@ -4,9 +4,11 @@ import { Container } from 'reactstrap';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import './../../../assets/styles/main.scss';
+import Company from './../../models/Company';
 
 export interface IAppGroupProps {
 	fetchCompanies: () => void;
+	companies: Company[];
 }
 
 class App extends React.Component<IAppGroupProps, any> {
@@ -20,6 +22,10 @@ class App extends React.Component<IAppGroupProps, any> {
 			<BrowserRouter basename="/">
 				<Container className="main-app-wrapper">
 					<button onClick={this.onRetrieveAllData}>RETRIEVE ALL DATA</button>
+					<br />
+					{this.props.companies.map((company: Company, index: number) => (
+						<div key={index}>{company.symbol}</div>
+					))}
 				</Container>
 			</BrowserRouter>
 		);
@@ -27,7 +33,6 @@ class App extends React.Component<IAppGroupProps, any> {
 
 	public onRetrieveAllData() {
 		this.props.fetchCompanies();
-		console.log('clicked!');
 	}
 }
 
