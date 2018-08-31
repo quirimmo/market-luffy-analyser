@@ -1,4 +1,4 @@
-import { Request } from 'express';
+import { Request, Response } from 'express';
 import AlphaVantageProxy from '../entities/AlphaVantageProxy';
 import { Observable } from 'rxjs';
 import DailyTimeSeries from '../entities/DailyTimeSeries';
@@ -18,6 +18,12 @@ export function getRequestParameters(req: Request): RequestParameters {
     numberOfValues,
     symbols
   };
+}
+
+export function sendSuccessfulResponse(response: Response, data: any) {
+  response.header('Access-Control-Allow-Origin', '*');
+  response.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  response.status(200).send(data);
 }
 
 export function getPrices(symbols: string[], numberOfValues: number): Observable<any> {

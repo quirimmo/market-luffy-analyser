@@ -7,7 +7,7 @@ jest.mock('./../entities/AlphaVantageProxy', () =>
   }))
 );
 
-import { getRequestParameters, getPrices } from './utils.controller';
+import { getRequestParameters, getPrices, sendSuccessfulResponse } from './utils.controller';
 
 describe('utils.controller', () => {
   beforeEach(() => {
@@ -17,6 +17,7 @@ describe('utils.controller', () => {
   it('should define the exposed functions', () => {
     expect(typeof getRequestParameters).toEqual('function');
     expect(typeof getPrices).toEqual('function');
+    expect(typeof sendSuccessfulResponse).toEqual('function');
   });
 
   describe('getPrices', () => {
@@ -43,6 +44,30 @@ describe('utils.controller', () => {
         numberOfValues: 31,
         symbols: ['FB', 'GOOG']
       });
+    });
+  });
+
+  describe('sendSuccessfulResponse', () => {
+    const response = httpMocks.createResponse({});
+
+    it('should call twice the header method of the response with the right parameters', () => {
+      spyOn(response, 'header');
+      sendSuccessfulResponse(response, 'data');
+      expect(response.header).toHaveBeenCalledTimes(2);
+      expect(response.header).toHaveBeenNthCalledWith(1, 'Access-Control-Allow-Origin', '*');
+      expect(response.header).toHaveBeenNthCalledWith(2, 'Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    });
+
+    it('should call the status method of the response with the right parameter', () => {
+      spyOn(response, 'status').and.returnValue(response);
+      sendSuccessfulResponse(response, 'data');
+      expect(response.status).toHaveBeenCalledWith(200);
+    });
+
+    it('should call the send method of the response with the right parameter', () => {
+      spyOn(response, 'send');
+      sendSuccessfulResponse(response, 'data');
+      expect(response.send).toHaveBeenCalledWith('data');
     });
   });
 });

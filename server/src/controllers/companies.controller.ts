@@ -1,7 +1,8 @@
 import { Router, Request, Response } from 'express';
-import { readFileSync } from 'fs';
+import { Company } from '../entities/Company';
+import CompaniesProcessor from '../entities/CompaniesProcessor';
+import { sendSuccessfulResponse } from './utils.controller';
 
-const companiesFile: string = 'src/data/all-companies.json';
 const router: Router = Router();
 router.get('/:symbols?', onGetCompanies);
 
@@ -9,8 +10,7 @@ export function onGetCompanies(req: Request, res: Response) {
   const sectors: string[] = req.query.sectors || [];
   const symbols: string[] = req.params.symbols ? req.params.symbols.split(',') : [];
 
-  const data: string = readFileSync(companiesFile).toString();
-  let companies: any[] = JSON.parse(data);
+  let companies: Company[] = CompaniesProcessor.getAllCompanies();
 
   if (symbols.length) {
     const uppercaseSymbols: string[] = symbols.map((el: string) => el.toUpperCase());
@@ -20,17 +20,15 @@ export function onGetCompanies(req: Request, res: Response) {
     companies = companies.filter(filterBySector.bind(null, uppercaseSectors));
   }
 
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  res.status(200).send(companies);
+  sendSuccessfulResponse(res, companies);
 }
 
 export function filterBySymbol(symbols: string[], company: any): boolean {
-  return symbols.indexOf(company.Symbol.toUpperCase()) > -1;
+  return symbols.indexOf(company.symbol.toUpperCase()) > -1;
 }
 
 export function filterBySector(sectors: string[], company: any): boolean {
-  return sectors.indexOf(company.Sector) > -1;
+  return sectors.indexOf(company.sector) > -1;
 }
 
 export const CompaniesController: Router = router;
