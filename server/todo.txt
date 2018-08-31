@@ -1,6 +1,5 @@
 API KEY: X71A1MTU6F1C1B4G
-Refactor companies processor to see if we can refine the method process companies
-Refactor the set interval using rxjs and calling the next tick when you resolve the observable
-Move socket logic inside external classes
-Add unit tests to all the code and refactor the current ones
-implement logic of requests for sockets
+
+Refactor companies.controller tests in order to mock and test the CompaniesProcessor getAllCompanies method
+
+Refactor and add unit tests for utils.controller

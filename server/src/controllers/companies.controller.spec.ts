@@ -2,43 +2,44 @@ import * as httpMocks from 'node-mocks-http';
 import { EventEmitter } from 'events';
 
 const companyOne: any = {
-  Symbol: 'FB',
-  Name: 'Facebook',
-  Sector: 'Technology'
+  name: 'Facebook',
+  sector: 'Technology',
+  symbol: 'FB'
 };
 const companyTwo: any = {
-  Symbol: 'BLA',
-  Name: 'Bla bla bla corporated',
-  Sector: 'Consumer Services'
+  name: 'Bla bla bla corporated',
+  sector: 'Consumer Services',
+  symbol: 'BLA'
 };
 const companies: any[] = [companyOne, companyTwo];
 
-jest.mock('fs', () => {
-  return {
-    readFileSync: jest.fn((file: string) => {
-      return `[
-				{
-					"Symbol": "FB",
-					"Name": "Facebook",
-					"Sector": "Technology"
-				},
-				{
-					"Symbol": "BLA",
-					"Name": "Bla bla bla corporated",
-					"Sector": "Consumer Services"
-				}
-			]`;
-    })
-  };
-});
-import { readFileSync } from 'fs';
+const mockSendSuccessfulResponse = jest.fn();
+jest.mock('./utils.controller', () => ({
+  sendSuccessfulResponse: mockSendSuccessfulResponse
+}));
+
+const mockGetAllCompanies = jest.fn(() => [
+  {
+    symbol: 'FB',
+    name: 'Facebook',
+    sector: 'Technology'
+  },
+  {
+    symbol: 'BLA',
+    name: 'Bla bla bla corporated',
+    sector: 'Consumer Services'
+  }
+]);
+jest.mock('../entities/CompaniesProcessor', () => ({
+  getAllCompanies: mockGetAllCompanies
+}));
 
 import { CompaniesController, onGetCompanies, filterBySymbol, filterBySector, getSector } from './companies.controller';
 
 describe('CompaniesController', () => {
-	afterEach(() => {
-		jest.clearAllMocks();
-	});
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
 
   it('should be defined', () => {
     expect(CompaniesController).toBeDefined();
@@ -82,38 +83,35 @@ describe('CompaniesController', () => {
     const request = httpMocks.createRequest({
       method: 'GET',
       url: '/companies/',
-			params: {},
-			query: {}
+      params: {},
+      query: {}
     });
     const response = httpMocks.createResponse({ eventEmitter: EventEmitter });
 
-    it('should call the readFileSync with the right parameters', () => {
+    it('should call the getAllCompanies method of CompaniesProcessor with the right parameters', () => {
       onGetCompanies(request, response);
-      expect(readFileSync).toHaveBeenCalledWith('src/data/all-companies.json');
+      expect(mockGetAllCompanies).toHaveBeenCalled();
     });
 
     describe('response', () => {
       it('should return the list of all the companies', () => {
-        const spy = spyOn(response, 'send');
         onGetCompanies(request, response);
-        expect(spy).toHaveBeenCalledWith(companies);
+        expect(mockSendSuccessfulResponse).toHaveBeenCalledWith(response, companies);
       });
 
       it('should return the list of all the companies with the given symbols', () => {
-				request.params.symbols = 'FB';
-				const spy = spyOn(response, 'send');
+        request.params.symbols = 'FB';
         onGetCompanies(request, response);
-				expect(spy).toHaveBeenCalledWith([companyOne]);
-				delete request.params.symbols;
-			});
+        expect(mockSendSuccessfulResponse).toHaveBeenCalledWith(response, [companyOne]);
+        delete request.params.symbols;
+      });
 
       it('should return the list of all the companies with the given sectors', () => {
-				request.query.sectors = ['services'];
-				const spy = spyOn(response, 'send');
+        request.query.sectors = ['services'];
         onGetCompanies(request, response);
-				expect(spy).toHaveBeenCalledWith([companyTwo]);
-				delete request.query.sectors;
-			});
+        expect(mockSendSuccessfulResponse).toHaveBeenCalledWith(response, [companyTwo]);
+        delete request.query.sectors;
+      });
     });
   });
 });
