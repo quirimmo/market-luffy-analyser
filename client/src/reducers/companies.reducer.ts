@@ -4,7 +4,7 @@ import { FETCH_COMPANIES } from './../actions/companies.action';
 const companies = (state: Company[] = [], action: any): Company[] => {
 	switch (action.type) {
 		case FETCH_COMPANIES:
-			return [...state, ...action.companies];
+			return [...action.companies];
 		default:
 			return state;
 	}

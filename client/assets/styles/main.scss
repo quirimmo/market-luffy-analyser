@@ -1,3 +1,58 @@
+$background-color: #efefef;
+//
+* {
+  padding: 0;
+  margin: 0;
+}
+
 body {
-	background: red;
+  background: $background-color;
+}
+
+.float-cleared {
+  clear: both;
+}
+
+header .row,
+.main-content-section .row {
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+header .col {
+  padding: 0;
+}
+
+.main-app-wrapper {
+  max-width: 100%;
+  padding: 0;
+}
+
+.main-app-title {
+  text-align: center;
+  background-color: #007bff;
+  color: white;
+  padding: 20px 0px;
+}
+
+nav {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.main-app-wrapper {
+  max-width: 100%;
+  padding: 0;
+}
+
+.page-content-wrapper {
+  padding: 20px;
+  background-color: white;
+}
+
+.main-app-title {
+  text-align: center;
+  background-color: #007bff;
+  color: white;
+  padding: 20px 0px;
 }

@@ -4,17 +4,9 @@ import { Dispatch } from 'redux';
 import { fetchCompaniesAsync } from './../../actions/companies.action';
 import IStoreState from './../../models/IStoreState';
 
-const mapStateToProps = (state: IStoreState, ownProps: any) => {
-	return {
-		companies: state.companies
-	};
-};
+const mapStateToProps = (state: IStoreState, ownProps: any) => ({});
 
-const mapDispatchToProps: any = (dispatch: Dispatch<any>) => ({
-	fetchCompanies: () => {
-		dispatch(fetchCompaniesAsync());
-	}
-});
+const mapDispatchToProps: any = (dispatch: Dispatch<any>) => ({});
 
 const AppPage = connect(
 	mapStateToProps,
