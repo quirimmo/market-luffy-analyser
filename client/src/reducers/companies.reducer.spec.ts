@@ -1,5 +1,5 @@
 import Company from './../models/Company';
-import { FETCH_COMPANIES } from './../actions/companies.action';
+import { FETCH_COMPANIES_FULFILLED } from './../actions/companies.action';
 import companies from './companies.reducer';
 
 const NOT_EXISTENT_ACTION = {
@@ -8,7 +8,7 @@ const NOT_EXISTENT_ACTION = {
 };
 const NEW_COMPANY = new Company('Symbol 1', 'Company 1', 1, 2, 'Sector 1', 'Industry 1');
 const FETCH_COMPANIES_ACTION = {
-	type: FETCH_COMPANIES,
+	type: FETCH_COMPANIES_FULFILLED,
 	companies: [NEW_COMPANY]
 };
 

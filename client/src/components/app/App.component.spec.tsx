@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import App from './App.component';
-import Company from 'models/Company';
+import Company from './../../models/Company';
 import { BrowserRouter } from 'react-router-dom';
 import { Container } from 'reactstrap';
 
@@ -11,16 +11,12 @@ const companies: Company[] = [];
 
 describe('App Presentational Component', () => {
 	beforeEach(() => {
-		component = shallow(<App fetchCompanies={fetchCompanies} companies={companies} />);
+		component = shallow(<App />);
 	});
 
 	describe('Component', () => {
 		it('should be defined', () => {
 			expect(component).toBeDefined();
-		});
-
-		it('should define the public methods', () => {
-			expect(typeof component.instance().onRetrieveAllData).toEqual('function');
 		});
 
 		it('should contain the BrowserRouter', () => {

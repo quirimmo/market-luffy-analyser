@@ -9,13 +9,8 @@ import AppTitle from '../app-title/AppTitle.component';
 import AppNavigation from '../app-navigation/AppNavigation.component';
 import AppMainContent from '../app-main-content/AppMainContent.component';
 
-export interface IAppGroupProps {
-	fetchCompanies: () => void;
-	companies: Company[];
-}
-
-class App extends React.Component<IAppGroupProps, any> {
-	constructor(props: IAppGroupProps) {
+class App extends React.Component<any, any> {
+	constructor(props: any) {
 		super(props);
 	}
 
