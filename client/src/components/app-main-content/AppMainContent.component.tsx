@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { Row, Col } from 'reactstrap';
-import Home from './Home.component';
-import CompaniesPage from './../containers/CompaniesPage.component';
+import Home from '../home/Home.component';
+import CompaniesPage from '../companies/Companies.container';
 
 class AppMainContent extends React.Component<{}> {
 	constructor(props: {}) {

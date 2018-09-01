@@ -2,14 +2,14 @@ import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 import configureMockStore from 'redux-mock-store';
 
-import AppPage from './AppPage.component';
-import Company from './../../models/Company';
+import AppPage from './App.container';
+import Company from 'models/Company';
 
 const mockStore = configureMockStore();
-const company: Company = new Company('Symbol 1');
+const company: Company = new Company('Symbol 1', 'Company 1', 1, 2, 'Sector 1', 'Industry 1');
 const companies: Company[] = [company];
 const store = mockStore({
-	companies: [new Company('Symbol 1')]
+	companies
 });
 let component: ShallowWrapper<any, any>;
 

@@ -40,6 +40,10 @@ nav {
   padding-right: 20px;
 }
 
+nav a {
+  margin-right: 20px;
+}
+
 .main-app-wrapper {
   max-width: 100%;
   padding: 0;
@@ -55,4 +59,8 @@ nav {
   background-color: #007bff;
   color: white;
   padding: 20px 0px;
+}
+
+.badge-secondary {
+  background-color: transparent;
 }

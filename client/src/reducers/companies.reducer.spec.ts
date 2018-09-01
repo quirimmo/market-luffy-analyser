@@ -6,7 +6,7 @@ const NOT_EXISTENT_ACTION = {
 	type: 'NOT_EXISTENT',
 	companies: ['BLA']
 };
-const NEW_COMPANY = new Company('Company 1');
+const NEW_COMPANY = new Company('Symbol 1', 'Company 1', 1, 2, 'Sector 1', 'Industry 1');
 const FETCH_COMPANIES_ACTION = {
 	type: FETCH_COMPANIES,
 	companies: [NEW_COMPANY]

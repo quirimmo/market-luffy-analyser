@@ -1,5 +1,6 @@
 import * as React from 'react';
-import Company from './../../models/Company';
+import Company from 'models/Company';
+import CompanyCard from '../company/CompanyCard.component';
 
 export interface ICompaniesGroupProps {
 	companies: Company[];
@@ -13,16 +14,14 @@ class Companies extends React.Component<ICompaniesGroupProps, any> {
 
 	public render() {
 		return (
-			<div className="container">
-				<div className="row text-center">
-					{this.props.companies.map((company: Company, index: number) => {
-						return (
-							<div className="col-md-4" key={index}>
-								{company.symbol}
-							</div>
-						);
-					})}
-				</div>
+			<div className="row text-center">
+				{this.props.companies.map((company: Company, index: number) => {
+					return (
+						<div className="col-md-2" key={index}>
+							<CompanyCard company={company} />
+						</div>
+					);
+				})}
 			</div>
 		);
 	}

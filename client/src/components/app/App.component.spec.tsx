@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { shallow, ShallowWrapper } from 'enzyme';
+import { shallow } from 'enzyme';
 import App from './App.component';
-import Company from './../../models/Company';
+import Company from 'models/Company';
 import { BrowserRouter } from 'react-router-dom';
 import { Container } from 'reactstrap';
 

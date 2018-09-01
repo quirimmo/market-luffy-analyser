@@ -1,7 +1,7 @@
 import IStoreState from './IStoreState';
 import Company from './../models/Company';
 
-const company: Company = new Company('Symbol 1');
+const company: Company = new Company('Symbol 1', 'Company 1', 1, 2, 'Sector 1', 'Industry 1');
 
 const storeState: IStoreState = {
 	companies: [company]

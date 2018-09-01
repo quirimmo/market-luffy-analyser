@@ -11,7 +11,7 @@ export const fetchCompaniesAsync = () => {
 		axios
 			.get('http://localhost:3000/companies/')
 			.then((data: any) => {
-				return data.data.map((value: any) => new Company(value.symbol));
+				return data.data.map((value: any) => new Company(value.symbol, value.name, value.lastSale, value.marketCap, value.sector, value.industry));
 			})
 			.then((companies: Company[]) => {
 				dispatch(fetchCompanies(companies));

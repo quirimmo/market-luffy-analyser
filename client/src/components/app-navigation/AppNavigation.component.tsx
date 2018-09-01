@@ -12,8 +12,8 @@ class AppNavigation extends React.Component<object> {
 			<nav>
 				<Row>
 					<Col sm="2">
-						<NavLink to="/home">Home Page</NavLink>
-						<NavLink to="/companies">Companies Page</NavLink>
+						<NavLink to="/home">Home</NavLink>
+						<NavLink to="/companies">Companies</NavLink>
 					</Col>
 				</Row>
 			</nav>

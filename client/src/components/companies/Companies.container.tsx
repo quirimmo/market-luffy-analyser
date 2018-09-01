@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { fetchCompaniesAsync } from './../../actions/companies.action';
-import IStoreState from './../../models/IStoreState';
-import Companies from '../presentationals/Companies.component';
+import IStoreState from 'models/IStoreState';
+import Companies from './Companies.component';
 
 const mapStateToProps = (state: IStoreState, ownProps: any) => {
 	return {
