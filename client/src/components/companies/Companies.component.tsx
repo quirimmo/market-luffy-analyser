@@ -25,7 +25,7 @@ class Companies extends React.Component<ICompaniesProps, any> {
 						);
 					})
 				) : (
-					<p>Loading companies...</p>
+					<div className="companies-message">Loading companies...</div>
 				)}
 			</div>
 		);
