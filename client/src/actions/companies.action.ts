@@ -13,8 +13,7 @@ export const fetchCompaniesFulfilled = (companies: Company[]) => ({ type: 'FETCH
 export const fetchCompaniesEpic = (action$: Observable<Action>): Observable<Action> =>
 	action$.pipe(
 		ofType(FETCH_COMPANIES),
-		delay(5000),
-		// take(1), // execute just the first time you are requesting the full list of companies
+		take(1), // execute just the first time you are requesting the full list of companies
 		switchMap((action: any) =>
 			ajax(COMPANIES_RESOURCE_URL).pipe(
 				map((data: any) =>

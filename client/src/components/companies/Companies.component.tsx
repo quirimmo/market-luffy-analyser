@@ -19,7 +19,7 @@ class Companies extends React.Component<ICompaniesProps, any> {
 				{this.props.companies.length ? (
 					this.props.companies.map((company: Company, index: number) => {
 						return (
-							<div className="col-md-2" key={index}>
+							<div className="col-lg-3 col-md-4 col-sm-6" key={index}>
 								<CompanyCard company={company} />
 							</div>
 						);
