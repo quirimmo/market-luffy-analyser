@@ -2,17 +2,26 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, Action, Store } from 'redux';
 import thunk from 'redux-thunk';
 import history from './main-history';
 import reducers from './reducers';
 import AppPage from './components/app/App.container';
+import { createEpicMiddleware, combineEpics, Epic, EpicMiddleware } from 'redux-observable';
+import { fetchCompaniesEpic } from './actions/companies.action';
 
 // to supply the missing of __REDUX_DEVTOOLS_EXTENSION__ && __REDUX_DEVTOOLS_EXTENSION__() properties
 // for not having a static type error
 declare var window: any;
 
-const store = createStore(reducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), applyMiddleware(thunk));
+const rootEpic: Epic<Action<any>> = combineEpics(fetchCompaniesEpic);
+const epicMiddleware: EpicMiddleware<Action<any>> = createEpicMiddleware();
+const store: Store = createStore(
+	reducers,
+	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+	applyMiddleware(thunk, epicMiddleware)
+);
+epicMiddleware.run(rootEpic);
 
 const MainApp = ReactDOM.render(
 	<Provider store={store}>
