@@ -1,0 +1,22 @@
+.company-card {
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.company-card .company-button {
+  width: 100%;
+  white-space: pre-line;
+}
+
+.company-card .company-card-details {
+	padding: 5px;
+  background: #eaeaea;
+  font-size: 0.85em;
+}
+
+.company-card .company-card-details .company-card-details-value {
+	font-weight: bold;
+	font-style: italic;
+	white-space: pre-line;
+	word-break: break-all;
+}

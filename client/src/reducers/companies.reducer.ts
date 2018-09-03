@@ -1,10 +1,10 @@
 import Company from './../models/Company';
-import { FETCH_COMPANIES } from './../actions/companies.action';
+import { FETCH_COMPANIES_FULFILLED } from './../actions/companies.action';
 
 const companies = (state: Company[] = [], action: any): Company[] => {
 	switch (action.type) {
-		case FETCH_COMPANIES:
-			return [...state, ...action.companies];
+		case FETCH_COMPANIES_FULFILLED:
+			return [...action.companies];
 		default:
 			return state;
 	}

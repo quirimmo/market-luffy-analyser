@@ -75,9 +75,9 @@ const config = {
 	devServer: {
 		contentBase: path.join(__dirname, 'dist'),
 		// publicPath: SUBDOMAIN_PATH,
-		// historyApiFallback: {
-		// 	rewrites: [{ from: /./, to: `${SUBDOMAIN_PATH}` }]
-		// }
+		historyApiFallback: {
+			rewrites: [{ from: /./, to: '/' }]
+		}
 	}
 };
 
