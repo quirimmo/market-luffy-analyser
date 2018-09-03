@@ -35,14 +35,39 @@ const MainApp = ReactDOM.render(
 export default MainApp;
 
 // connect to socket
-// import * as io from 'socket.io-client';
-// const socket: SocketIOClient.Socket = io('http://localhost:3000');
+import * as io from 'socket.io-client';
+import { fromEvent } from 'rxjs';
+const socket: SocketIOClient.Socket = io('http://localhost:3000');
+
+fromEvent(socket, 'connect').subscribe(() => {
+	console.log('Socket client connected with id: ', socket.id);
+	socket.emit('luffy-message', {
+		action: 'getAllData'
+	});
+});
+fromEvent(socket, 'luffy-message').subscribe((data: any) => {
+	console.log('Client: results received', data);
+});
+fromEvent(socket, 'message').subscribe((data: any) => {
+	console.log('Client: message received', data);
+});
+
 // socket.on('luffy-message', (data: any) => {
 // 	console.log('Client: results received', data);
 // });
+
 // socket.on('connect', () => {
 // 	console.log('Socket client connected with id: ', socket.id);
 // 	socket.emit('luffy-message', {
 // 		action: 'getAllData'
 // 	});
+// });
+
+// import { WebSocketSubject } from 'rxjs/webSocket';
+
+// const socket$ = new WebSocketSubject('ws://localhost:3000');
+// socket$.subscribe(data => console.log(data), err => console.error(err), () => console.warn('Completed!'));
+// socket$.next({
+// 	event: 'events',
+// 	data: 'test'
 // });

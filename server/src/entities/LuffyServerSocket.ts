@@ -1,6 +1,6 @@
 import ApplicationServerSocket from './ApplicationServerSocket';
 import LuffyWebService from './LuffyWebService';
-import { Subject, Observable, Observer } from 'rxjs';
+import { Subject, Observable, Observer, Subscription } from 'rxjs';
 import DailyTimeSeries from './DailyTimeSeries';
 import AlphaVantageProxy from './AlphaVantageProxy';
 import PausableInterval from './PausableInterval';
@@ -57,11 +57,19 @@ class LuffyServerSocket extends ApplicationServerSocket {
     this.getAndSendData(socketInstance, firstRequestSymbols);
 
     let startingIndex: number = NUMBER_OF_REQUEST_PER_MINUTE;
+    let subscription: Subscription | undefined;
     if (symbolsToRequest.length > NUMBER_OF_REQUEST_PER_MINUTE) {
-      const pausableInterval: PausableInterval = new PausableInterval(1000 * 60, 10000);
-      pausableInterval.observable.subscribe(onSubscribe.bind(this, pausableInterval.pauser));
+      const pausableInterval: PausableInterval = new PausableInterval(1000 * 60, 10000, socketInstance);
+      subscription = pausableInterval.observable.subscribe(onSubscribe.bind(this, pausableInterval.pauser));
       pausableInterval.pauser.next(false);
     }
+
+    socketInstance.on('disconnect', () => {
+      if (subscription) {
+        console.log('unsubscribing');
+        subscription.unsubscribe();
+      }
+    });
 
     function onSubscribe(pauser: Subject<boolean>) {
       const symbols: string[] = symbolsToRequest.slice(startingIndex, startingIndex + 4);
@@ -72,6 +80,9 @@ class LuffyServerSocket extends ApplicationServerSocket {
       } else {
         pauser.complete();
         pauser.unsubscribe();
+        if (subscription) {
+          subscription.unsubscribe();
+        }
       }
     }
   }
