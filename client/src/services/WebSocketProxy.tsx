@@ -1,6 +1,6 @@
 import * as io from 'socket.io-client';
 import { SERVER_URL } from './../constants/constants';
-import { fromEvent, Observable, Observer, Subject } from 'rxjs';
+import { fromEvent, Observable, Observer, Subject, of } from 'rxjs';
 
 class WebSocketProxy {
 	public static socket: SocketIOClient.Socket;
@@ -32,6 +32,10 @@ class WebSocketProxy {
 			WebSocketProxy.streamObservable.next(data);
 		});
 		return fromEvent(WebSocketProxy.socket, 'connect');
+	}
+
+	public static disconnect(): Observable<any> {
+		return of(WebSocketProxy.socket.disconnect());
 	}
 
 	public static sendMessage(keyword: string, data: any) {

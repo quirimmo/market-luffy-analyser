@@ -5,6 +5,7 @@ class Home extends React.Component<any, any> {
 	constructor(props: any) {
 		super(props);
 		this.getAllData = this.getAllData.bind(this);
+		this.disconnect = this.disconnect.bind(this);
 	}
 
 	public render() {
@@ -13,8 +14,16 @@ class Home extends React.Component<any, any> {
 				HOME PAGE COMPONENT
 				<br />
 				<button onClick={this.getAllData}>GET ALL DATA</button>
+				<br />
+				<button onClick={this.disconnect}>DISCONNECT</button>
 			</div>
 		);
+	}
+
+	public disconnect() {
+		WebSocketProxy.disconnect().subscribe(() => {
+			console.log('I am disconnected now!');
+		});
 	}
 
 	public getAllData() {
