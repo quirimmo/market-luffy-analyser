@@ -182,7 +182,7 @@ describe('Luffy Server Socket', () => {
 
   describe('getAndSendData', () => {
     const socketInstance: any = {};
-    const pausableInterval: PausableInterval = new PausableInterval(1000 * 60, 10000);
+    const pausableInterval: PausableInterval = new PausableInterval(1000 * 60, 10000, socketInstance);
     const symbols: string[] = ['FB'];
 
     it('should call the getDailyPricesBySymbols of AlphaVantageProxy with the right parameter', () => {

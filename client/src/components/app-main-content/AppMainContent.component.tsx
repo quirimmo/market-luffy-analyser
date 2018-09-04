@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { Row, Col } from 'reactstrap';
-import Home from '../home/Home.component';
 import CompaniesPage from '../companies/Companies.container';
+import HomePage from '../home/Home.container';
 
 class AppMainContent extends React.Component<{}> {
 	constructor(props: {}) {
@@ -17,7 +17,7 @@ class AppMainContent extends React.Component<{}> {
 	}
 
 	public getHomePageRoute(routeProps: object) {
-		return <Home />;
+		return <HomePage />;
 	}
 
 	public render() {

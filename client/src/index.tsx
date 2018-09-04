@@ -35,22 +35,26 @@ const MainApp = ReactDOM.render(
 export default MainApp;
 
 // connect to socket
-import * as io from 'socket.io-client';
-import { fromEvent } from 'rxjs';
-const socket: SocketIOClient.Socket = io('http://localhost:3000');
+// import * as io from 'socket.io-client';
+// import { fromEvent } from 'rxjs';
+// const socket: SocketIOClient.Socket = io('http://localhost:3000');
 
-fromEvent(socket, 'connect').subscribe(() => {
-	console.log('Socket client connected with id: ', socket.id);
-	socket.emit('luffy-message', {
-		action: 'getAllData'
-	});
-});
-fromEvent(socket, 'luffy-message').subscribe((data: any) => {
-	console.log('Client: results received', data);
-});
-fromEvent(socket, 'message').subscribe((data: any) => {
-	console.log('Client: message received', data);
-});
+// fromEvent(socket, 'connect').subscribe(() => {
+// 	console.log('Socket client connected with id: ', socket.id);
+// 	socket.emit('luffy-message', {
+// 		action: 'getAllData'
+// 	});
+// });
+// fromEvent(socket, 'luffy-message').subscribe((data: any) => {
+// 	console.log('Client: results received', data);
+// });
+// fromEvent(socket, 'message').subscribe((data: any) => {
+// 	console.log('Client: message received', data);
+// });
+
+
+
+
 
 // socket.on('luffy-message', (data: any) => {
 // 	console.log('Client: results received', data);
