@@ -1,6 +1,7 @@
 import * as io from 'socket.io-client';
 import { SERVER_URL } from './../constants/constants';
 import { fromEvent, Observable, Observer, Subject, of } from 'rxjs';
+import DailySerie from './../models/DailySerie';
 
 class WebSocketProxy {
 	public static socket: SocketIOClient.Socket;
@@ -25,11 +26,12 @@ class WebSocketProxy {
 		});
 		fromEvent(WebSocketProxy.socket, 'message').subscribe((data: any) => {
 			console.log('Client: message received', data);
-			// WebSocketProxy.streamObservable.next(data);
 		});
-		fromEvent(WebSocketProxy.socket, 'luffy-message').subscribe((data: any) => {
-			console.log('Client: results received', data);
-			WebSocketProxy.streamObservable.next(data);
+		fromEvent(WebSocketProxy.socket, 'luffy-message').subscribe((message: any) => {
+			console.log('Client: results received', message);
+			const rawData: any = message.data;
+			const dailySerie: DailySerie = new DailySerie(rawData.symbol, rawData.lastMovement, rawData.priceChange, rawData.trend);
+			WebSocketProxy.streamObservable.next(dailySerie);
 		});
 		return fromEvent(WebSocketProxy.socket, 'connect');
 	}

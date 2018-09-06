@@ -16,6 +16,23 @@ class Home extends React.Component<any, any> {
 				<button onClick={this.getAllData}>GET ALL DATA</button>
 				<br />
 				<button onClick={this.disconnect}>DISCONNECT</button>
+				<br />
+				{this.props.dailySeries.length ? (
+					this.props.dailySeries.map((dailySerie: any, index: number) => {
+						return (
+							<div key={dailySerie.symbol}>
+								{dailySerie.symbol}
+								<br/>
+								{dailySerie.lastMovement}
+								<br/>
+								{dailySerie.trend}
+							<hr/><br/>
+							</div>
+						);
+					})
+				) : (
+					<div className="daily-series-message">Loading daily series...</div>
+				)}
 			</div>
 		);
 	}
@@ -34,7 +51,7 @@ class Home extends React.Component<any, any> {
 		// ];
 		// symbol: 'ACN';
 		// trend: 2.0103;
-
+		// symbol: "ACN", lastMovement: 0.1364, priceChange: Array(30), trend: 1.1452000000000002
 		console.log('Get All Data');
 		WebSocketProxy.connect().subscribe(() => {
 			WebSocketProxy.streamObservable.subscribe((data: any) => {
