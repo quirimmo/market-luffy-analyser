@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import { Dispatch, Action } from 'redux';
 import IStoreState from 'models/IStoreState';
-import { fetchAllDailySeries } from './../../actions/daily-series.action';
 import Home from './Home.component';
-import DailySerie from './../../models/DailySerie';
+import WebSocketProxy from './../../services/WebSocketProxy';
+import { fetchAllDailySeries } from './../../actions/daily-series.action';
 
 const mapStateToProps = (state: IStoreState, ownProps: any) => {
 	return {
@@ -12,8 +12,11 @@ const mapStateToProps = (state: IStoreState, ownProps: any) => {
 };
 
 const mapDispatchToProps: any = (dispatch: Dispatch<Action>) => ({
-	fetchDailySeries: (dailySeries: DailySerie): void => {
-		dispatch(fetchAllDailySeries(dailySeries));
+	fetchDailySeries: (): void => {
+		WebSocketProxy.streamObservable.subscribe((data: any) => {
+			dispatch(fetchAllDailySeries(data));
+		});
+		WebSocketProxy.requestAllData();
 	}
 });
 

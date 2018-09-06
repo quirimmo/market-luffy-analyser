@@ -3,10 +3,11 @@ import { shallow } from 'enzyme';
 import Home from './Home.component';
 
 let component: any;
+const mockFetchDailySeries = jest.fn(() => {});
 
 describe('Home Presentational Component', () => {
 	beforeEach(() => {
-		component = shallow(<Home />);
+		component = shallow(<Home dailySeries={[]} fetchDailySeries={mockFetchDailySeries} />);
 	});
 
 	describe('Component', () => {

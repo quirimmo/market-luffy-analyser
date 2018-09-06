@@ -6,12 +6,15 @@ import { Container } from 'reactstrap';
 import AppTitle from '../app-title/AppTitle.component';
 import AppNavigation from '../app-navigation/AppNavigation.component';
 import AppMainContent from '../app-main-content/AppMainContent.component';
+import { of } from 'rxjs';
 
 let component: any;
+const mockConnectToSocket = jest.fn(() => of(null));
+const mockDisconnectToSocket = jest.fn(() => of(null));
 
 describe('App Presentational Component', () => {
 	beforeEach(() => {
-		component = shallow(<App />);
+		component = shallow(<App connectToSocket={mockConnectToSocket} disconnectFromSocket={mockDisconnectToSocket} />);
 	});
 
 	it('should be defined', () => {
