@@ -15,8 +15,6 @@ class Home extends React.Component<IHomeProps, any> {
 	public render() {
 		return (
 			<div>
-				HOME PAGE COMPONENT
-				<br />
 				<button onClick={this.getAllData}>GET ALL DATA</button>
 				<br />
 				{this.props.dailySeries.length ? (

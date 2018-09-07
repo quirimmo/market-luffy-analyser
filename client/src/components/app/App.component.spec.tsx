@@ -10,15 +10,20 @@ import { of } from 'rxjs';
 
 let component: any;
 const mockConnectToSocket = jest.fn(() => of(null));
-const mockDisconnectToSocket = jest.fn(() => of(null));
+const mockDisconnectFromSocket = jest.fn(() => of(null));
 
 describe('App Presentational Component', () => {
 	beforeEach(() => {
-		component = shallow(<App connectToSocket={mockConnectToSocket} disconnectFromSocket={mockDisconnectToSocket} />);
+		component = shallow(<App connectToSocket={mockConnectToSocket} disconnectFromSocket={mockDisconnectFromSocket} />);
 	});
 
 	it('should be defined', () => {
 		expect(component).toBeDefined();
+	});
+
+	it('should define the public methods', () => {
+		expect(typeof component.instance().componentDidMount).toEqual('function');
+		expect(typeof component.instance().componentWillUnmount).toEqual('function');
 	});
 
 	it('should contain the BrowserRouter', () => {
@@ -41,5 +46,19 @@ describe('App Presentational Component', () => {
 
 	it('should define the AppMainContent component', () => {
 		expect(component.find(AppMainContent)).toHaveLength(1);
+	});
+
+	describe('componentDidMount', () => {
+		it('should call the connectToSocket method', () => {
+			component.instance().componentDidMount();
+			expect(mockConnectToSocket).toHaveBeenCalled();
+		});
+	});
+
+	describe('componentWillUnmount', () => {
+		it('should call the disconnectFromSocket method', () => {
+			component.instance().componentWillUnmount();
+			expect(mockDisconnectFromSocket).toHaveBeenCalled();
+		});
 	});
 });
