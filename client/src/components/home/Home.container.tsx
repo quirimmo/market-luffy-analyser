@@ -20,14 +20,10 @@ const mapDispatchToProps: any = (dispatch: Dispatch<Action>) => {
 				streamSubscription.unsubscribe();
 			}
 			streamSubscription = WebSocketProxy.getStreamObservable().subscribe((data: any) => {
-				console.log('inside subscribe');
-				if (data.finished) {
-					if (callback) {
-						callback();
-					}
-				} else {
-					dispatch(fetchAllDailySeries(data));
+				if (callback) {
+					callback();
 				}
+				dispatch(fetchAllDailySeries(data));
 			});
 			WebSocketProxy.requestAllData(size);
 		},

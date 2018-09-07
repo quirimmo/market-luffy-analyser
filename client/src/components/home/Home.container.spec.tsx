@@ -3,7 +3,7 @@ import { shallow, ShallowWrapper } from 'enzyme';
 import configureMockStore from 'redux-mock-store';
 import HomePage from './Home.container';
 import DailySerie from './../../models/DailySerie';
-import { RESET_DAILY_SERIES } from './../../actions/daily-series.action';
+import { RESET_DAILY_SERIES, FETCH_ALL_DAILY_SERIES } from './../../actions/daily-series.action';
 import { Subject } from 'rxjs';
 import WebSocketProxy from './../../services/WebSocketProxy';
 
@@ -38,13 +38,12 @@ describe('Home Container Component', () => {
 
 	describe('fetchDailySeries', () => {
 		let mockGetStreamObservable: any;
-		let mockSubscribeOnStreamObservable: any;
+		let mockRequestAllData: any;
 		const mockSubject = new Subject<any>();
 
 		beforeEach(() => {
 			mockGetStreamObservable = spyOn(WebSocketProxy, 'getStreamObservable').and.returnValue(mockSubject);
-			mockSubscribeOnStreamObservable = spyOn(WebSocketProxy.getStreamObservable(), 'subscribe');
-			spyOn(WebSocketProxy, 'requestAllData').and.returnValue([]);
+			mockRequestAllData = spyOn(WebSocketProxy, 'requestAllData').and.returnValue([]);
 		});
 
 		it('should call the getStreamObservable of WebSocketProxy', () => {
@@ -53,24 +52,40 @@ describe('Home Container Component', () => {
 		});
 
 		it('should subscribe to the stream observable of WebSocketProxy', () => {
+			const mockSubscribeOnStreamObservable = spyOn(WebSocketProxy.getStreamObservable(), 'subscribe');
 			component.props().fetchDailySeries();
 			expect(mockSubscribeOnStreamObservable).toHaveBeenCalled();
 		});
 
 		it('should call the provided callback', () => {
+			jest.useFakeTimers();
 			const spy = jest.fn();
-			component.props().fetchDailySeries(spy);
-			mockSubject.next({ finished: true });
+			component.props().fetchDailySeries(undefined, spy);
+			mockSubject.next({});
+			jest.runAllTimers();
 			expect(spy).toHaveBeenCalled();
-			// const spy = spyOn(WebSocketProxy.getStreamObservable(), 'subscribe');
-			// const mockInputFn =
-			// component.props().fetchDailySeries();
-			// expect(spy).toHaveBeenCalled();
+		});
+
+		it('should dispatch the FETCH_ALL_DAILY_SERIES action', () => {
+			const expectedAction = { type: FETCH_ALL_DAILY_SERIES, dailySerie: 'daily-serie' };
+			jest.useFakeTimers();
+			component.props().fetchDailySeries();
+			mockSubject.next('daily-serie');
+			jest.runAllTimers();
+			expect(store.getActions()).toContainEqual(expectedAction);
+		});
+
+		it('should call the requestAllData method of WebSocketProxy', () => {
+			jest.useFakeTimers();
+			component.props().fetchDailySeries();
+			mockSubject.next({});
+			jest.runAllTimers();
+			expect(mockRequestAllData).toHaveBeenCalled();
 		});
 	});
 
 	describe('resetDailySeries', () => {
-		it('should dispatch the RESET action', () => {
+		it('should dispatch the RESET_DAILY_SERIES action', () => {
 			const expectedAction = { type: RESET_DAILY_SERIES };
 			component.props().resetDailySeries();
 			expect(store.getActions()).toContainEqual(expectedAction);
