@@ -3,7 +3,8 @@ import DailySerie from 'models/DailySerie';
 
 export interface IHomeProps {
 	dailySeries: DailySerie[];
-	fetchDailySeries: () => {}
+	fetchDailySeries: (size: number, callback: () => void) => {};
+	resetDailySeries: () => {};
 }
 class Home extends React.Component<IHomeProps, any> {
 	constructor(props: any) {
@@ -23,11 +24,12 @@ class Home extends React.Component<IHomeProps, any> {
 						return (
 							<div key={dailySerie.symbol}>
 								{dailySerie.symbol}
-								<br/>
+								<br />
 								{dailySerie.lastMovement}
-								<br/>
+								<br />
 								{dailySerie.trend}
-							<hr/><br/>
+								<hr />
+								<br />
 							</div>
 						);
 					})
@@ -39,7 +41,10 @@ class Home extends React.Component<IHomeProps, any> {
 	}
 
 	public getAllData() {
-		this.props.fetchDailySeries();
+		this.props.resetDailySeries();
+		this.props.fetchDailySeries(6, () => {
+			console.log('I am a callback from component');
+		});
 	}
 }
 

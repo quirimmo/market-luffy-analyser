@@ -4,10 +4,11 @@ import Home from './Home.component';
 
 let component: any;
 const mockFetchDailySeries = jest.fn(() => {});
+const mockResetDailySeries = jest.fn(() => {});
 
 describe('Home Presentational Component', () => {
 	beforeEach(() => {
-		component = shallow(<Home dailySeries={[]} fetchDailySeries={mockFetchDailySeries} />);
+		component = shallow(<Home dailySeries={[]} fetchDailySeries={mockFetchDailySeries} resetDailySeries={mockResetDailySeries} />);
 	});
 
 	describe('Component', () => {

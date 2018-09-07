@@ -54,7 +54,7 @@ class LuffyServerSocket extends ApplicationServerSocket {
   processResponse(symbolsToRequest: string[], socketInstance: SocketIO.Socket): void {
     const instance: any = this;
     const firstRequestSymbols: string[] = symbolsToRequest.slice(0, NUMBER_OF_REQUEST_PER_MINUTE);
-    this.getAndSendData(socketInstance, firstRequestSymbols);
+    this.getAndSendData(socketInstance, firstRequestSymbols, symbolsToRequest.length < NUMBER_OF_REQUEST_PER_MINUTE);
 
     let startingIndex: number = NUMBER_OF_REQUEST_PER_MINUTE;
     let subscription: Subscription | undefined;
@@ -66,16 +66,17 @@ class LuffyServerSocket extends ApplicationServerSocket {
 
     socketInstance.on('disconnect', () => {
       if (subscription) {
-        console.log('unsubscribing');
+        console.log('Unsubscribing the connection to socket', socketInstance.id);
         subscription.unsubscribe();
       }
     });
 
     function onSubscribe(pauser: Subject<boolean>) {
-      const symbols: string[] = symbolsToRequest.slice(startingIndex, startingIndex + 4);
+      const finalIndex: number = startingIndex + 4;
+      const symbols: string[] = symbolsToRequest.slice(startingIndex, finalIndex);
       pauser.next(true);
       if (symbols.length) {
-        instance.getAndSendData(socketInstance, symbols, pauser);
+        instance.getAndSendData(socketInstance, symbols, finalIndex >= symbolsToRequest.length, pauser);
         startingIndex += 4;
       } else {
         pauser.complete();
@@ -87,7 +88,7 @@ class LuffyServerSocket extends ApplicationServerSocket {
     }
   }
 
-  getAndSendData(socketInstance: SocketIO.Socket, symbols: string[], pauser?: Subject<boolean>): void {
+  getAndSendData(socketInstance: SocketIO.Socket, symbols: string[], finished: boolean = false, pauser?: Subject<boolean>): void {
     const instance: any = this;
     const alphaVantageProxy: AlphaVantageProxy = new AlphaVantageProxy();
     alphaVantageProxy.getDailyPricesBySymbols(symbols).subscribe(onSubscribe);
@@ -103,6 +104,7 @@ class LuffyServerSocket extends ApplicationServerSocket {
       }
       console.log('Sending data to the following socket', socketInstance.id);
       instance.sendLuffyMessage(socketInstance, {
+        finished,
         data: {
           symbol: dailyTimeSerie.symbol,
           lastMovement: dailyTimeSerie.getLastMovement(),

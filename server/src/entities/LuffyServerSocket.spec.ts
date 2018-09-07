@@ -111,7 +111,7 @@ describe('Luffy Server Socket', () => {
 
   describe('parseLuffyMessage', () => {
     const data: any = {};
-    const socketInstance: any = {};
+    const socketInstance: any = { on: jest.fn() };
 
     it('should call the isRequestActionValid method of the request parser', () => {
       spyOn(instance.requestParser, 'parseRequest').and.returnValue(['SYMB1', 'SYMB2', 'SYMB3']);
@@ -153,30 +153,31 @@ describe('Luffy Server Socket', () => {
     });
   });
 
-  describe('parseLuffyMessage', () => {
-    const socketInstance: any = {};
+  describe('processResponse', () => {
+    const socketInstance: any = { on: jest.fn(), connected: true };
 
     it('should call the getAndSendData method', () => {
       spyOn(instance, 'getAndSendData');
       instance.processResponse([], socketInstance);
-      expect(instance.getAndSendData).toHaveBeenCalledWith(socketInstance, []);
+      expect(instance.getAndSendData).toHaveBeenCalledWith(socketInstance, [], true);
     });
 
     it('should slice the symbols and call the getAndSendData with the sliced symbols', () => {
       jest.useFakeTimers();
       const symbols: string[] = ['SYMB1', 'SYMB2', 'SYMB3', 'SYMB4', 'SYMB5', 'SYMB6'];
-      const spyFn = jest.fn((socketInstance: SocketIO.Socket, symbols: string[], pauser?: Subject<boolean>) => {
+      const spyFn = jest.fn((socketInstance: SocketIO.Socket, symbols: string[], finished?: boolean, pauser?: Subject<boolean>) => {
         if (pauser) {
           pauser.next(false);
         }
       });
+
       spyOn(instance, 'getAndSendData').and.callFake(spyFn);
       instance.processResponse(symbols, socketInstance);
       jest.runOnlyPendingTimers();
       jest.runOnlyPendingTimers();
       expect(spyFn).toHaveBeenCalledTimes(2);
-      expect(spyFn).toHaveBeenNthCalledWith(1, socketInstance, ['SYMB1', 'SYMB2', 'SYMB3', 'SYMB4']);
-      expect(spyFn).toHaveBeenNthCalledWith(2, socketInstance, ['SYMB5', 'SYMB6'], expect.anything());
+      expect(spyFn).toHaveBeenNthCalledWith(1, socketInstance, ['SYMB1', 'SYMB2', 'SYMB3', 'SYMB4'], false);
+      expect(spyFn).toHaveBeenNthCalledWith(2, socketInstance, ['SYMB5', 'SYMB6'], true, expect.anything());
     });
   });
 
@@ -193,7 +194,7 @@ describe('Luffy Server Socket', () => {
     it('should call the method next of pauser with false', () => {
       spyOn(instance, 'sendLuffyMessage').and.callFake(() => {});
       spyOn(pausableInterval.pauser, 'next');
-      instance.getAndSendData(socketInstance, symbols, pausableInterval.pauser);
+      instance.getAndSendData(socketInstance, symbols, false, pausableInterval.pauser);
       expect(pausableInterval.pauser.next).toHaveBeenCalledWith(false);
     });
 
@@ -201,7 +202,8 @@ describe('Luffy Server Socket', () => {
       spyOn(instance, 'sendLuffyMessage');
       instance.getAndSendData(socketInstance, symbols);
       expect(instance.sendLuffyMessage).toHaveBeenCalledWith(socketInstance, {
-        data: { lastMovement: 150, priceChange: [150], symbol: 'FB', trend: 150 }
+        data: { lastMovement: 150, priceChange: [150], symbol: 'FB', trend: 150 },
+        finished: false
       });
     });
   });

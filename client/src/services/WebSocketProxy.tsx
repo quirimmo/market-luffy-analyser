@@ -40,9 +40,13 @@ class WebSocketProxy {
 
 	public static onLuffyMessageSubscribe(message: any): void {
 		console.log('Client: luffy message received', message);
-		const rawData: any = message.data;
-		const dailySerie: DailySerie = new DailySerie(rawData.symbol, rawData.lastMovement, rawData.priceChange, rawData.trend);
-		WebSocketProxy.streamObservable.next(dailySerie);
+		if (message.finished === true) {
+			WebSocketProxy.streamObservable.next({ finished: true });
+		} else {
+			const rawData: any = message.data;
+			const dailySerie: DailySerie = new DailySerie(rawData.symbol, rawData.lastMovement, rawData.priceChange, rawData.trend);
+			WebSocketProxy.streamObservable.next(dailySerie);
+		}
 	}
 
 	public static disconnect(): Observable<any> {
@@ -53,8 +57,8 @@ class WebSocketProxy {
 		WebSocketProxy.socket.emit(keyword, data);
 	}
 
-	public static requestAllData() {
-		WebSocketProxy.socket.emit('luffy-message', { action: 'getAllData' });
+	public static requestAllData(size?: number) {
+		WebSocketProxy.socket.emit('luffy-message', { action: 'getAllData', size });
 	}
 }
 
