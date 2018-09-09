@@ -46,14 +46,6 @@ class WebSocketProxy {
 		const rawData: any = message.data;
 		const dailySerie: DailySerie = new DailySerie(rawData.symbol, rawData.lastMovement, rawData.priceChange, rawData.trend);
 		WebSocketProxy.getStreamObservable().next({ dailySerie, finished: message.finished });
-
-		// if (message.finished === true) {
-		// 	WebSocketProxy.getStreamObservable().next({ finished: true });
-		// } else {
-		// 	const rawData: any = message.data;
-		// 	const dailySerie: DailySerie = new DailySerie(rawData.symbol, rawData.lastMovement, rawData.priceChange, rawData.trend);
-		// 	WebSocketProxy.getStreamObservable().next(dailySerie);
-		// }
 	}
 
 	public static disconnect(): Observable<any> {

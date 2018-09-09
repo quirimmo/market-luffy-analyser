@@ -1,12 +1,11 @@
 import ApplicationServerSocket from './ApplicationServerSocket';
 import LuffyWebService from './LuffyWebService';
-import { Subject, Observable, Observer, Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import DailyTimeSeries from './DailyTimeSeries';
 import AlphaVantageProxy from './AlphaVantageProxy';
 import PausableInterval from './PausableInterval';
 import LuffyRequestParser from './LuffyRequestParser';
 import { LuffySocketRequest, LuffySocketResponse } from './LuffySocketUtils';
-import { takeUntil } from 'rxjs/operators';
 
 const DEFAULT_BASIC_MSG_KEYWORD: string = 'message';
 const DEFAULT_LUFFY_MSG_KEYWORD: string = 'luffy-message';
@@ -98,13 +97,14 @@ class LuffyServerSocket extends ApplicationServerSocket {
       if (pauser) pauser.next(false);
     }
 
-    function onEachDailyTimeSerie(dailyTimeSerie: DailyTimeSeries) {
+    function onEachDailyTimeSerie(dailyTimeSerie: DailyTimeSeries, index: number) {
+      const isFinished = index === symbols.length - 1 && finished ? true : false;
       if (dailyTimeSerie.getPriceChangeByPeriod().length === 0) {
         console.log('This symbol request returned empty values', dailyTimeSerie.symbol);
       }
       console.log('Sending data to the following socket', socketInstance.id);
       instance.sendLuffyMessage(socketInstance, {
-        finished,
+        isFinished,
         data: {
           symbol: dailyTimeSerie.symbol,
           lastMovement: dailyTimeSerie.getLastMovement(),

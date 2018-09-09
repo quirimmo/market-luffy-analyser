@@ -1,4 +1,4 @@
-$background-color: #efefef;
+$background-color: #f9f9f9;
 //
 * {
   padding: 0;
@@ -30,7 +30,7 @@ header .col {
 
 .main-app-title {
   text-align: center;
-  background-color: #007bff;
+  background-color: #444444;
   color: white;
   padding: 20px 0px;
 }
@@ -52,13 +52,6 @@ nav a {
 .page-content-wrapper {
   padding: 20px;
   background-color: white;
-}
-
-.main-app-title {
-  text-align: center;
-  background-color: #007bff;
-  color: white;
-  padding: 20px 0px;
 }
 
 .badge-secondary {

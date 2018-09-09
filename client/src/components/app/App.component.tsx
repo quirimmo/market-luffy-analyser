@@ -22,13 +22,14 @@ class App extends React.Component<IAppProps, any> {
 	public render() {
 		return (
 			<BrowserRouter basename="/">
-				<Container className="main-app-wrapper">
-					<AppTitle />
-					<br />
+				<div>
 					<AppNavigation />
-					<br />
-					<AppMainContent />
-				</Container>
+					<Container className="main-app-wrapper">
+						<AppTitle />
+						<br />
+						<AppMainContent />
+					</Container>
+				</div>
 			</BrowserRouter>
 		);
 	}

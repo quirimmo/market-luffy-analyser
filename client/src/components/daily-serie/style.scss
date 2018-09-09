@@ -1,0 +1,27 @@
+.daily-serie-card {
+  padding: 2px;
+  background: #eaeaea;
+  font-size: 0.85em;
+  margin-bottom: 10px;
+  text-align: left;
+  outline: 1px solid #d4d0d0;
+}
+
+.daily-serie-card .daily-serie-card-details-value {
+  font-weight: bold;
+  font-style: italic;
+  white-space: pre-line;
+  word-break: break-all;
+}
+
+.bullish-value {
+  color: green;
+}
+
+.bearish-value {
+  color: red;
+}
+
+.price-changes-button {
+  font-size: 0.85em;
+}
