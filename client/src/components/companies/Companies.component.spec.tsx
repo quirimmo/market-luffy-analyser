@@ -12,7 +12,7 @@ const mockFetchCompanies = jest.fn();
 
 describe('Companies Presentational Component', () => {
 	beforeEach(() => {
-		component = shallow(<Companies companies={companies} fetchCompanies={mockFetchCompanies} />);
+		component = shallow(<Companies companyName="" companies={companies} fetchCompanies={mockFetchCompanies} />);
 	});
 
 	it('should be defined', () => {
