@@ -5,8 +5,9 @@ import WebServiceProxy from './../services/WebServiceProxy';
 
 export const FETCH_COMPANIES: string = 'FETCH_COMPANIES';
 export const FETCH_COMPANIES_FULFILLED: string = 'FETCH_COMPANIES_FULFILLED';
+export const TOGGLE_COMPANY_VISIBILITY: string = 'TOGGLE_COMPANY_VISIBILITY';
 
-export const fetchCompaniesFulfilled = (companies: Company[]) => ({ type: 'FETCH_COMPANIES_FULFILLED', companies });
+export const fetchCompaniesFulfilled = (companies: Company[]) => ({ type: FETCH_COMPANIES_FULFILLED, companies });
 
 export const fetchCompaniesThunk = () => {
 	return (dispatch: any) => {
@@ -17,3 +18,5 @@ export const fetchCompaniesThunk = () => {
 export const fetchCompanies = (): Observable<any> => {
 	return WebServiceProxy.getCompanies().pipe(take(1));
 };
+
+export const toggleCompanyVisibility = (companyName: string) => ({ type: TOGGLE_COMPANY_VISIBILITY, companyName });

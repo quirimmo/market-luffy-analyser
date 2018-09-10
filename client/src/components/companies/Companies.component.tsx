@@ -8,7 +8,6 @@ import './style.scss';
 
 interface ICompaniesProps {
 	companies: Company[];
-	companyName: string;
 	companySectors: string[];
 	fetchCompanies: () => Observable<Company[]>;
 }
@@ -23,7 +22,6 @@ class Companies extends React.Component<ICompaniesProps, ICompaniesState> {
 		this.state = {
 			sectors: []
 		};
-		this.onFilterCompany = this.onFilterCompany.bind(this);
 		this.onMapCompany = this.onMapCompany.bind(this);
 	}
 
@@ -34,7 +32,7 @@ class Companies extends React.Component<ICompaniesProps, ICompaniesState> {
 				<hr />
 				<div className="row text-center">
 					{this.props.companies.length ? (
-						this.props.companies.filter(this.onFilterCompany).map(this.onMapCompany)
+						this.props.companies.filter((company: Company) => company.isVisible).map(this.onMapCompany)
 					) : (
 						<div className="companies-message row text-center">Loading companies...</div>
 					)}
@@ -43,18 +41,13 @@ class Companies extends React.Component<ICompaniesProps, ICompaniesState> {
 		);
 	}
 
-	public onFilterCompany(company: Company): boolean {
-		return (
-			(company.name.toUpperCase().includes(this.props.companyName) || company.symbol.toUpperCase().includes(this.props.companyName)) &&
-			this.props.companySectors.indexOf(company.sector.toUpperCase()) > -1
-		);
-	}
-
-	public onMapCompany(company: Company): JSX.Element {
-		return (
+	public onMapCompany(company: Company): JSX.Element | undefined {
+		return company.isVisible ? (
 			<div className="col-lg-3 col-md-4 col-sm-6" key={company.symbol}>
 				<CompanyCard company={company} />
 			</div>
+		) : (
+			undefined
 		);
 	}
 

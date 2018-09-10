@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { Form, FormGroup, Label, Input } from 'reactstrap';
+import Company from './../../models/Company';
 
 interface IFilterCompaniesProps {
 	sectors: string[];
-	filterCompanyName: (companyName: string) => void;
-	filterCompanySectors: (companySectors: string[]) => void;
 	companySectors: string[];
+	filterCompanySectors: (companySectors: string[]) => void;
+	toggleCompanyVisibility: (companyName: string) => void;
 }
 
 class FilterCompanies extends React.Component<IFilterCompaniesProps, any> {
@@ -48,6 +49,10 @@ class FilterCompanies extends React.Component<IFilterCompaniesProps, any> {
 		);
 	}
 
+	public onCompanyNameChange(event: any): void {
+		this.props.toggleCompanyVisibility(event.target.value.trim().toUpperCase());
+	}
+
 	public componentDidUpdate(prevProps: IFilterCompaniesProps) {
 		if (this.props.sectors.length > prevProps.sectors.length) {
 			console.log('Fetching sectors to company sectors filter');
@@ -73,10 +78,6 @@ class FilterCompanies extends React.Component<IFilterCompaniesProps, any> {
 		if (index === -1) {
 			this.props.companySectors.push(sector);
 		}
-	}
-
-	public onCompanyNameChange(event: any): void {
-		this.props.filterCompanyName(event.target.value.trim().toUpperCase());
 	}
 }
 
