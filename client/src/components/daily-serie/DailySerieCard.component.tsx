@@ -2,6 +2,8 @@ import * as React from 'react';
 import DailySerie from './../../models/DailySerie';
 import './style.scss';
 import { Collapse, Button } from 'reactstrap';
+import DailySerieCardInfoRow from './DailySerieCardInfoRow.component';
+import DailySerieCardPriceChange from './DailySerieCardPriceChange.component';
 
 interface IDailySerieCardProps {
 	dailySerie: DailySerie;
@@ -22,41 +24,18 @@ class DailySerieCard extends React.Component<IDailySerieCardProps, IDailySerieCa
 	public render() {
 		return (
 			<article className="daily-serie-card">
-				<div className="row">
-					<div className="col-sm-7 col-6">Symbol:</div>
-					<div className="col-sm-5 col-6 daily-serie-card-details-value text-right">{this.props.dailySerie.symbol}</div>
-				</div>
-				<div className="row">
-					<div className="col-sm-7 col-6">Last Movement:</div>
-					<div
-						className={`col-sm-5 col-6 daily-serie-card-details-value text-right ${this.getBearishBullishClass(this.props.dailySerie.lastMovement)}`}
-					>
-						{this.props.dailySerie.lastMovement.toFixed(2)} %
-					</div>
-				</div>
-				<div className="row">
-					<div className="col-sm-7 col-6">Trend:</div>
-					<div className={`col-sm-5 col-6 daily-serie-card-details-value text-right ${this.getBearishBullishClass(this.props.dailySerie.trend)}`}>
-						{this.props.dailySerie.trend.toFixed(2)} %
-					</div>
-				</div>
-				<div className="row text-center justify-content-center">
-					<Button className="price-changes-button mt-2 mb-1" color="info" onClick={this.toggle}>
-						{this.getPriceChangesButtonText()}
-					</Button>
-				</div>
-				<div className="row text-center justify-content-center">
-					<Collapse className="row company-card-details" isOpen={this.state.isPriceChangesOpen}>
-						{this.props.dailySerie.priceChange.map((price: number, index: number) => (
-							<div
-								key={index}
-								className={`col-xl-2 col-lg-3 col-md-3 col-sm-3 col-3 p-0 text-left price-change-value ${this.getBearishBullishClass(price)}`}
-							>
-								{`${price.toFixed(2)}%`}
-							</div>
-						))}
-					</Collapse>
-				</div>
+				<DailySerieCardInfoRow label="Symbol" value={this.props.dailySerie.symbol} />
+				<DailySerieCardInfoRow
+					label="Last Movement"
+					classes={this.getBearishBullishClass(this.props.dailySerie.lastMovement)}
+					value={`${this.props.dailySerie.lastMovement.toFixed(2)}%`}
+				/>
+				<DailySerieCardInfoRow
+					label="Trend"
+					classes={this.getBearishBullishClass(this.props.dailySerie.trend)}
+					value={`${this.props.dailySerie.trend.toFixed(2)}%`}
+				/>
+				<DailySerieCardPriceChange priceChange={this.props.dailySerie.priceChange} />
 			</article>
 		);
 	}
@@ -77,3 +56,21 @@ class DailySerieCard extends React.Component<IDailySerieCardProps, IDailySerieCa
 }
 
 export default DailySerieCard;
+
+// <div className="row text-center justify-content-center">
+// 					<Button className="price-changes-button mt-2 mb-1" color="info" onClick={this.toggle}>
+// 						{this.getPriceChangesButtonText()}
+// 					</Button>
+// 				</div>
+// 				<div className="row text-center justify-content-center">
+// 					<Collapse className="row company-card-details" isOpen={this.state.isPriceChangesOpen}>
+// 						{this.props.dailySerie.priceChange.map((price: number, index: number) => (
+// 							<div
+// 								key={index}
+// 								className={`col-xl-2 col-lg-3 col-md-3 col-sm-3 col-3 p-0 text-left price-change-value ${this.getBearishBullishClass(price)}`}
+// 							>
+// 								{`${price.toFixed(2)}%`}
+// 							</div>
+// 						))}
+// 					</Collapse>
+// 				</div>

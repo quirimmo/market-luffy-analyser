@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { Row, Col } from 'reactstrap';
 import CompaniesPage from '../companies/Companies.container';
 import HomePage from '../home/Home.container';
+import './style.scss';
 
 class AppMainContent extends React.Component<{}> {
 	constructor(props: {}) {

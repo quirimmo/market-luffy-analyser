@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Row, Col, Badge } from 'reactstrap';
+import './style.scss';
 
 class AppTitle extends React.Component<object> {
 	constructor(props: object) {

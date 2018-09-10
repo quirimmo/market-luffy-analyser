@@ -27,39 +27,3 @@ header .col {
   max-width: 100%;
   padding: 0;
 }
-
-.main-app-title {
-  text-align: center;
-  background-color: #444444;
-  color: white;
-  padding: 20px 0px;
-}
-
-@media (max-width: 420px) {
-  .main-app-title {
-    text-align: right;
-  }
-}
-
-nav {
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
-nav a {
-  margin-right: 20px;
-}
-
-.main-app-wrapper {
-  max-width: 100%;
-  padding: 0;
-}
-
-.page-content-wrapper {
-  padding: 20px;
-  background-color: white;
-}
-
-.badge-secondary {
-  background-color: transparent;
-}

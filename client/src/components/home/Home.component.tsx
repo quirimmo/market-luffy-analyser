@@ -40,7 +40,7 @@ class Home extends React.Component<IHomeProps, IHomeState> {
 			isLoadingData: true
 		});
 		this.props.resetDailySeries();
-		this.props.fetchDailySeries(4, onFetchDailySeriesCompleted);
+		this.props.fetchDailySeries(6, onFetchDailySeriesCompleted);
 
 		function onFetchDailySeriesCompleted() {
 			component.setState({
