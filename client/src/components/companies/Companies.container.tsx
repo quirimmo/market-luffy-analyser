@@ -3,6 +3,7 @@ import { Dispatch, Action } from 'redux';
 import IStoreState from 'models/IStoreState';
 import Companies from './Companies.component';
 import { FETCH_COMPANIES } from './../../actions/companies.action';
+import { Observable, of } from 'rxjs';
 
 const mapStateToProps = (state: IStoreState, ownProps: any) => {
 	return {
