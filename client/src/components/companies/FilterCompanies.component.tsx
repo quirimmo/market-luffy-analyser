@@ -34,10 +34,10 @@ class FilterCompanies extends React.Component<IFilterCompaniesProps, any> {
 					/>
 				</FormGroup>
 				<FormGroup className="row">
-					<Label className="col-xl-2 col-lg-3 col-md-4 col-sm-4">Sectors:</Label>
-					<FormGroup check={true}>
+					<Label className="col-xl-1 col-lg-3 col-md-4 col-sm-4">Sectors:</Label>
+					<FormGroup className="col-xl-11 col-xs-12 col-12" check={true}>
 						{this.props.sectors.map((sector: string, index: number) => (
-							<Label for={sector} key={index} className="mr-5 company-form-checkbox-label" check={true}>
+							<Label for={sector} key={index} className="col-lg-2 col-md-3 col-6 company-form-checkbox-label" check={true}>
 								<Input id={sector} name={sector} type="checkbox" onChange={this.onCompanySectorChange} defaultChecked={true} />
 								{sector}
 							</Label>
