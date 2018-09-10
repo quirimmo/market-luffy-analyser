@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import FilterCompaniesPage from './FilterCompanies.container';
 
 import './style.scss';
+import { JsxElement } from 'typescript';
 
 interface ICompaniesProps {
 	companies: Company[];
@@ -22,6 +23,8 @@ class Companies extends React.Component<ICompaniesProps, ICompaniesState> {
 		this.state = {
 			sectors: []
 		};
+		this.onFilterCompany = this.onFilterCompany.bind(this);
+		this.onMapCompany = this.onMapCompany.bind(this);
 	}
 
 	public render() {
@@ -31,15 +34,7 @@ class Companies extends React.Component<ICompaniesProps, ICompaniesState> {
 				<hr />
 				<div className="row text-center">
 					{this.props.companies.length ? (
-						this.props.companies
-							.filter((company: Company) => company.name.toUpperCase().includes(this.props.companyName))
-							.map((company: Company, index: number) => {
-								return (
-									<div className="col-lg-3 col-md-4 col-sm-6" key={index}>
-										<CompanyCard company={company} />
-									</div>
-								);
-							})
+						this.props.companies.filter(this.onFilterCompany).map(this.onMapCompany)
 					) : (
 						<div className="companies-message row text-center">Loading companies...</div>
 					)}
@@ -48,16 +43,26 @@ class Companies extends React.Component<ICompaniesProps, ICompaniesState> {
 		);
 	}
 
-	public componentDidMount() {
-		const onSubscribe = (companies: Company[]) => {
-			const sectors = new Set(this.props.companies.map((company: Company) => company.sector));
-			this.setState({ sectors: Array.from(sectors) });
-		};
+	public onFilterCompany(company: Company): boolean {
+		return company.name.toUpperCase().includes(this.props.companyName) || company.symbol.toUpperCase().includes(this.props.companyName);
+	}
 
+	public onMapCompany(company: Company): JSX.Element {
+		return (
+			<div className="col-lg-3 col-md-4 col-sm-6" key={company.symbol}>
+				<CompanyCard company={company} />
+			</div>
+		);
+	}
+
+	public componentDidMount() {
+		const instance: Companies = this;
 		this.props.fetchCompanies().subscribe(onSubscribe);
-		setInterval(() => {
-			console.log('TYPED COMPANY NAME:', this.props.companyName);
-		}, 5000);
+
+		function onSubscribe(companies: Company[]): void {
+			const sectors = new Set(instance.props.companies.map((company: Company) => company.sector));
+			instance.setState({ sectors: Array.from(sectors) });
+		}
 	}
 }
 
