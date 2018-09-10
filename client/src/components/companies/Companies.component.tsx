@@ -5,12 +5,12 @@ import { Observable } from 'rxjs';
 import FilterCompaniesPage from './FilterCompanies.container';
 
 import './style.scss';
-import { JsxElement } from 'typescript';
 
 interface ICompaniesProps {
 	companies: Company[];
-	fetchCompanies: () => Observable<Company[]>;
 	companyName: string;
+	companySectors: string[];
+	fetchCompanies: () => Observable<Company[]>;
 }
 
 interface ICompaniesState {
@@ -44,7 +44,10 @@ class Companies extends React.Component<ICompaniesProps, ICompaniesState> {
 	}
 
 	public onFilterCompany(company: Company): boolean {
-		return company.name.toUpperCase().includes(this.props.companyName) || company.symbol.toUpperCase().includes(this.props.companyName);
+		return (
+			(company.name.toUpperCase().includes(this.props.companyName) || company.symbol.toUpperCase().includes(this.props.companyName)) &&
+			this.props.companySectors.indexOf(company.sector.toUpperCase()) > -1
+		);
 	}
 
 	public onMapCompany(company: Company): JSX.Element {
