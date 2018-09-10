@@ -53,7 +53,7 @@ class LuffyServerSocket extends ApplicationServerSocket {
   processResponse(symbolsToRequest: string[], socketInstance: SocketIO.Socket): void {
     const instance: any = this;
     const firstRequestSymbols: string[] = symbolsToRequest.slice(0, NUMBER_OF_REQUEST_PER_MINUTE);
-    this.getAndSendData(socketInstance, firstRequestSymbols, symbolsToRequest.length < NUMBER_OF_REQUEST_PER_MINUTE);
+    this.getAndSendData(socketInstance, firstRequestSymbols, symbolsToRequest.length <= NUMBER_OF_REQUEST_PER_MINUTE);
 
     let startingIndex: number = NUMBER_OF_REQUEST_PER_MINUTE;
     let subscription: Subscription | undefined;
@@ -98,13 +98,13 @@ class LuffyServerSocket extends ApplicationServerSocket {
     }
 
     function onEachDailyTimeSerie(dailyTimeSerie: DailyTimeSeries, index: number) {
-      const isFinished = index === symbols.length - 1 && finished ? true : false;
+      const isLast = index === symbols.length - 1 && finished ? true : false;
       if (dailyTimeSerie.getPriceChangeByPeriod().length === 0) {
         console.log('This symbol request returned empty values', dailyTimeSerie.symbol);
       }
       console.log('Sending data to the following socket', socketInstance.id);
       instance.sendLuffyMessage(socketInstance, {
-        isFinished,
+        isLast,
         data: {
           symbol: dailyTimeSerie.symbol,
           lastMovement: dailyTimeSerie.getLastMovement(),

@@ -40,14 +40,12 @@ class Home extends React.Component<IHomeProps, IHomeState> {
 			isLoadingData: true
 		});
 		this.props.resetDailySeries();
-		this.props.fetchDailySeries(6, onDataLoaded);
+		this.props.fetchDailySeries(4, onFetchDailySeriesCompleted);
 
-		function onDataLoaded() {
-			console.log('changing the state');
+		function onFetchDailySeriesCompleted() {
 			component.setState({
 				isLoadingData: false
 			});
-			component.forceUpdate();
 		}
 	}
 }

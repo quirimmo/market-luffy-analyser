@@ -35,6 +35,12 @@ header .col {
   padding: 20px 0px;
 }
 
+@media (max-width: 420px) {
+  .main-app-title {
+    text-align: right;
+  }
+}
+
 nav {
   padding-left: 20px;
   padding-right: 20px;

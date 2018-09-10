@@ -21,11 +21,11 @@ const mapDispatchToProps: any = (dispatch: Dispatch<Action>) => {
 			WebSocketProxy.requestAllData(size);
 
 			function onStreamArrived(message: any) {
-				if (message.finished) {
-					sanityUnsubscribe(streamSubscription);
+				if (message.isLast) {
 					if (finalCallback) {
 						finalCallback();
 					}
+					sanityUnsubscribe(streamSubscription);
 				}
 				dispatch(fetchAllDailySeries(message.dailySerie));
 			}

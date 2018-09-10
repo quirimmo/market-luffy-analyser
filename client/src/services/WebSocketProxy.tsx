@@ -45,7 +45,7 @@ class WebSocketProxy {
 		console.log('Client: luffy message received', message);
 		const rawData: any = message.data;
 		const dailySerie: DailySerie = new DailySerie(rawData.symbol, rawData.lastMovement, rawData.priceChange, rawData.trend);
-		WebSocketProxy.getStreamObservable().next({ dailySerie, finished: message.finished });
+		WebSocketProxy.getStreamObservable().next({ dailySerie, isLast: message.isLast });
 	}
 
 	public static disconnect(): Observable<any> {
