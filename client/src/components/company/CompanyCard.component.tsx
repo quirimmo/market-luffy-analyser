@@ -1,8 +1,9 @@
 import * as React from 'react';
 import Company from 'models/Company';
-import { Collapse } from 'reactstrap';
+import { Collapse, Button } from 'reactstrap';
 
 import './style.scss';
+import CompanyCardInfoRow from './CompanyCardInfoRow.component';
 export interface ICompanyProps {
 	company: Company;
 }
@@ -17,30 +18,13 @@ class CompanyCard extends React.Component<ICompanyProps, any> {
 	public render() {
 		return (
 			<article className="company-card">
-				<button className="btn btn-lg btn-secondary company-button" onClick={this.toggle}>
-					{this.props.company.name}
-				</button>
+				<Button className="company-button" color="secondary" onClick={this.toggle}>{this.props.company.name}</Button>
 				<Collapse className="company-card-details" isOpen={this.state.collapsed}>
-					<div className="row">
-						<div className="col-sm-4">Symbol:</div>
-						<div className="col-sm-8 company-card-details-value">{this.props.company.symbol}</div>
-					</div>
-					<div className="row">
-						<div className="col-sm-4">Last Sale:</div>
-						<div className="col-sm-8 company-card-details-value">{this.props.company.lastSale}</div>
-					</div>
-					<div className="row">
-						<div className="col-sm-4">Market Cap:</div>
-						<div className="col-sm-8 company-card-details-value">{this.props.company.marketCap}</div>
-					</div>
-					<div className="row">
-						<div className="col-sm-4">Sector:</div>
-						<div className="col-sm-8 company-card-details-value">{this.props.company.sector}</div>
-					</div>
-					<div className="row">
-						<div className="col-sm-4">Industry:</div>
-						<div className="col-sm-8 company-card-details-value">{this.props.company.industry}</div>
-					</div>
+					<CompanyCardInfoRow label="Symbol" value={this.props.company.symbol} />
+					<CompanyCardInfoRow label="Last Sale" value={Math.round(this.props.company.lastSale).toString()} />
+					<CompanyCardInfoRow label="Market Cap" value={Math.round(this.props.company.marketCap).toString()} />
+					<CompanyCardInfoRow label="Sector" value={this.props.company.sector} />
+					<CompanyCardInfoRow label="Industry" value={this.props.company.industry} />
 				</Collapse>
 			</article>
 		);

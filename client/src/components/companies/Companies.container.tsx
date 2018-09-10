@@ -10,7 +10,7 @@ const mapStateToProps = (state: IStoreState, ownProps: any) => {
 	};
 };
 
-const mapDispatchToProps: any = (dispatch: Dispatch<Action>) => ({
+const mapDispatchToProps: any = (dispatch: Dispatch<Action>, ownProps: any) => ({
 	fetchCompanies: (): void => {
 		dispatch({ type: FETCH_COMPANIES });
 	}

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Button, Collapse } from 'reactstrap';
+import Utils from './../../utils/Utils';
 
 interface IDailySerieCardPriceChangeProps {
 	priceChange: number[];
@@ -30,7 +31,7 @@ class DailySerieCardPriceChange extends React.Component<IDailySerieCardPriceChan
 						{this.props.priceChange.map((price: number, index: number) => (
 							<div
 								key={index}
-								className={`col-xl-2 col-lg-3 col-md-3 col-sm-3 col-3 p-0 text-left price-change-value ${this.getBearishBullishClass(price)}`}
+								className={`col-xl-2 col-lg-3 col-md-3 col-sm-3 col-3 p-0 text-left price-change-value ${Utils.getBearishBullishClass(price)}`}
 							>
 								{`${price.toFixed(2)}%`}
 							</div>
@@ -39,10 +40,6 @@ class DailySerieCardPriceChange extends React.Component<IDailySerieCardPriceChan
 				</div>
 			</div>
 		);
-	}
-
-	public getBearishBullishClass(value: number): string {
-		return Math.sign(value) > 0 ? 'bullish-value' : Math.sign(value) < 0 ? 'bearish-value' : '';
 	}
 
 	public toggle() {
