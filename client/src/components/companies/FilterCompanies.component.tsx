@@ -1,21 +1,23 @@
 import * as React from 'react';
 import { Form, FormGroup, Label, Input } from 'reactstrap';
-import Company from './../../models/Company';
 
 interface IFilterCompaniesProps {
 	sectors: string[];
-	companySectors: string[];
-	filterCompanySectors: (companySectors: string[]) => void;
-	toggleCompanyVisibility: (companyName: string) => void;
+	toggleCompanyVisibility: (companyName: string, companySectors: string[]) => void;
 }
 
-class FilterCompanies extends React.Component<IFilterCompaniesProps, any> {
+interface IFilterCompaniesState {
+	selectedName: string;
+	selectedSectors: Set<string>;
+}
+
+class FilterCompanies extends React.Component<IFilterCompaniesProps, IFilterCompaniesState> {
 	public constructor(props: IFilterCompaniesProps) {
 		super(props);
 		this.onCompanyNameChange = this.onCompanyNameChange.bind(this);
 		this.onCompanySectorChange = this.onCompanySectorChange.bind(this);
-		this.removeSector = this.removeSector.bind(this);
-		this.addSector = this.addSector.bind(this);
+
+		this.state = { selectedSectors: new Set(), selectedName: '' };
 	}
 
 	public render() {
@@ -50,33 +52,37 @@ class FilterCompanies extends React.Component<IFilterCompaniesProps, any> {
 	}
 
 	public onCompanyNameChange(event: any): void {
-		this.props.toggleCompanyVisibility(event.target.value.trim().toUpperCase());
-	}
-
-	public componentDidUpdate(prevProps: IFilterCompaniesProps) {
-		if (this.props.sectors.length > prevProps.sectors.length) {
-			console.log('Fetching sectors to company sectors filter');
-			this.props.filterCompanySectors(this.props.sectors.map((sector: string) => sector.toUpperCase()));
-		}
+		const selectedName: string = event.target.value.trim().toUpperCase();
+		this.setState(
+			(prevState: IFilterCompaniesState) => ({
+				selectedName,
+				selectedSectors: prevState.selectedSectors
+			}),
+			this.dispatchToggleCompanyVisibility
+		);
 	}
 
 	public onCompanySectorChange(event: any): void {
 		const currentSector = event.target.id.toUpperCase();
-		event.target.checked ? this.addSector(currentSector) : this.removeSector(currentSector);
-		this.props.filterCompanySectors(this.props.companySectors);
+		event.target.checked ? this.state.selectedSectors.add(currentSector) : this.state.selectedSectors.delete(currentSector);
+		this.setState(
+			(prevState: IFilterCompaniesState) => ({
+				selectedName: prevState.selectedName,
+				selectedSectors: prevState.selectedSectors
+			}),
+			this.dispatchToggleCompanyVisibility
+		);
 	}
 
-	public removeSector(sector: string) {
-		const index: number = this.props.companySectors.indexOf(sector);
-		if (index > -1) {
-			this.props.companySectors.splice(index, 1);
-		}
+	public dispatchToggleCompanyVisibility(): void {
+		this.props.toggleCompanyVisibility(this.state.selectedName, Array.from(this.state.selectedSectors));
 	}
 
-	public addSector(sector: string) {
-		const index: number = this.props.companySectors.indexOf(sector);
-		if (index === -1) {
-			this.props.companySectors.push(sector);
+	public componentDidUpdate(prevProps: IFilterCompaniesProps) {
+		if (this.props.sectors.length > prevProps.sectors.length) {
+			this.props.sectors.forEach((sector: string) => {
+				this.state.selectedSectors.add(sector.toUpperCase());
+			});
 		}
 	}
 }

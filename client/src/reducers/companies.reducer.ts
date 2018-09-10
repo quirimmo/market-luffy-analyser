@@ -6,14 +6,15 @@ const companies = (state: Company[] = [], action: any): Company[] => {
 		case FETCH_COMPANIES_FULFILLED:
 			return [...action.companies];
 		case TOGGLE_COMPANY_VISIBILITY:
-			return state.map(onToggleCompany);
+			return state.map(toggleCompanyVisibility);
 		default:
 			return state;
 	}
 
-	function onToggleCompany(company: Company): Company {
+	function toggleCompanyVisibility(company: Company) {
 		company.isVisible =
-			company.name.toUpperCase().includes(action.companyName) || company.symbol.toUpperCase().includes(action.companyName) ? true : false;
+			(company.name.toUpperCase().includes(action.companyName) || company.symbol.toUpperCase().includes(action.companyName)) &&
+			action.companySectors.indexOf(company.sector.toUpperCase()) > -1;
 		return company;
 	}
 };

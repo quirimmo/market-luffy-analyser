@@ -19,4 +19,8 @@ export const fetchCompanies = (): Observable<any> => {
 	return WebServiceProxy.getCompanies().pipe(take(1));
 };
 
-export const toggleCompanyVisibility = (companyName: string) => ({ type: TOGGLE_COMPANY_VISIBILITY, companyName });
+export const toggleCompanyVisibility = (companyName: string, companySectors: string[]) => ({
+	type: TOGGLE_COMPANY_VISIBILITY,
+	companyName,
+	companySectors
+});
