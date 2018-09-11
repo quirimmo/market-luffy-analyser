@@ -66,49 +66,20 @@ class Companies extends React.Component<ICompaniesProps, ICompaniesState> {
 	}
 
 	public sortCompanies(activeSort: string): void {
-		// let sortField: string = '';
 		switch (activeSort) {
 			case 'NAME':
-				this.props.companies.sort(
-					(a: Company, b: Company): number => {
-						return a.name.toUpperCase().localeCompare(b.name.toUpperCase());
-					}
-				);
+			default:
+				this.props.companies.sort((a: Company, b: Company): number => a.name.toUpperCase().localeCompare(b.name.toUpperCase()));
 				break;
 			case 'MARKET CAP':
-				this.props.companies.sort(
-					(a: Company, b: Company): number => {
-						return b.marketCap - a.marketCap;
-					}
-				);
-				break;
+				this.props.companies.sort((a: Company, b: Company): number => b.marketCap - a.marketCap);
 			case 'SECTOR':
-				this.props.companies.sort(
-					(a: Company, b: Company): number => {
-						return a.sector.toUpperCase().localeCompare(b.sector.toUpperCase());
-					}
-				);
+				this.props.companies.sort((a: Company, b: Company): number => a.sector.toUpperCase().localeCompare(b.sector.toUpperCase()));
 				break;
 			case 'SYMBOL':
-				this.props.companies.sort(
-					(a: Company, b: Company): number => {
-						return a.symbol.toUpperCase().localeCompare(b.symbol.toUpperCase());
-					}
-				);
-				break;
-			default:
-				this.props.companies.sort(
-					(a: Company, b: Company): number => {
-						return a.name.toUpperCase().localeCompare(b.name.toUpperCase());
-					}
-				);
+				this.props.companies.sort((a: Company, b: Company): number => a.symbol.toUpperCase().localeCompare(b.symbol.toUpperCase()));
 				break;
 		}
-		// this.props.companies.sort(
-		// 	(a: Company, b: Company): number => {
-		// 		return b.marketCap - a.marketCap;
-		// 	}
-		// );
 		this.forceUpdate();
 	}
 }
