@@ -22,19 +22,19 @@ describe('Companies Container Component', () => {
 		expect(component).toBeDefined();
 	});
 
-	it('should init the companies prop of the store', () => {
-		expect(component.props().companies).toEqual(companies);
-	});
+	// it('should init the companies prop of the store', () => {
+	// 	expect(component.props().companies).toEqual(companies);
+	// });
 
-	it('should define the fetchCompanies prop', () => {
-		expect(typeof component.props().fetchCompanies).toEqual('function');
-	});
+	// it('should define the fetchCompanies prop', () => {
+	// 	expect(typeof component.props().fetchCompanies).toEqual('function');
+	// });
 
-	describe('fetchCompanies', () => {
-		it('should dispatch the FETCH_COMPANIES action', () => {
-			const expectedAction = { type: 'FETCH_COMPANIES' };
-			component.props().fetchCompanies();
-			expect(store.getActions()).toContainEqual(expectedAction);
-		});
-	});
+	// describe('fetchCompanies', () => {
+	// 	it('should dispatch the FETCH_COMPANIES action', () => {
+	// 		const expectedAction = { type: 'FETCH_COMPANIES' };
+	// 		component.props().fetchCompanies();
+	// 		expect(store.getActions()).toContainEqual(expectedAction);
+	// 	});
+	// });
 });
