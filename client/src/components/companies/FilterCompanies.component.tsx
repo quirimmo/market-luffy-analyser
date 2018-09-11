@@ -28,7 +28,7 @@ class FilterCompanies extends React.Component<IFilterCompaniesProps, IFilterComp
 						Company Name:
 					</Label>
 					<Input
-						className="col-xl-4 col-lg-5 col-md-6 col-sm-7"
+						className="col-xl-10 col-lg-9 col-md-8 col-sm-8"
 						type="text"
 						name="commpany-name"
 						id="commpany-name"
