@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Row, Col } from 'reactstrap';
 import { slide as Menu } from 'react-burger-menu';
 import './style.scss';
 
@@ -12,7 +11,6 @@ class AppNavigation extends React.Component<any, IAppNavigationState> {
 	constructor(props: any) {
 		super(props);
 		this.state = { isMenuOpen: false };
-		this.closeMenu = this.closeMenu.bind(this);
 	}
 
 	public render() {
@@ -24,10 +22,6 @@ class AppNavigation extends React.Component<any, IAppNavigationState> {
 				</Menu>
 			</nav>
 		);
-	}
-
-	public closeMenu() {
-		this.setState({ isMenuOpen: false });
 	}
 }
 
