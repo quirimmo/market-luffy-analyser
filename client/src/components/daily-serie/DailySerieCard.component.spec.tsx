@@ -29,6 +29,7 @@ describe('DailySerieCard Presentational Component', () => {
 		it('should display the DailySerieCardPriceChange component', () => {
 			const dailySerieCardPriceChange = component.find(DailySerieCardPriceChange);
 			expect(dailySerieCardPriceChange).toHaveLength(1);
+			expect(dailySerieCardPriceChange.props().priceChange).toEqual([2, 3]);
 		});
 	});
 });
