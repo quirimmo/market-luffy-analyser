@@ -2,10 +2,11 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import CompanyCard from './CompanyCard.component';
 import Company from './../../models/Company';
-import { Collapse } from 'reactstrap';
+import { Collapse, Button } from 'reactstrap';
+import CompanyCardInfoRow from './CompanyCardInfoRow.component';
 
 let component: any;
-const company: Company = new Company('Name', 'Symbol', 1, 2, 'Sector', 'Industry');
+const company: Company = new Company('Symbol', 'Name', 1, 2, 'Sector', 'Industry');
 
 describe('Company Card Presentational Component', () => {
 	beforeEach(() => {
@@ -37,11 +38,15 @@ describe('Company Card Presentational Component', () => {
 			expect(el.hasClass('company-card-details')).toBeTruthy();
 		});
 
-		describe('button', () => {
+		it('should define the 5 CompanyCardInfoRow components', () => {
+			expect(component.find(CompanyCardInfoRow)).toHaveLength(5);
+		});
+
+		describe('Button', () => {
 			let button: any;
 
 			beforeEach(() => {
-				button = component.find('button');
+				button = component.find(Button);
 			});
 
 			it('should be defined with class company-button', () => {
@@ -50,7 +55,7 @@ describe('Company Card Presentational Component', () => {
 			});
 
 			it('should have text as the company name', () => {
-				expect(button.text()).toEqual('Symbol');
+				expect(button.props().children).toEqual('Name');
 			});
 		});
 	});
