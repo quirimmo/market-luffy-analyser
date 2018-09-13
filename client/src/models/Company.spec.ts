@@ -19,6 +19,7 @@ describe('Company', () => {
 			expect(instance.marketCap).toEqual(2);
 			expect(instance.sector).toEqual('Sector 1');
 			expect(instance.industry).toEqual('Industry 1');
+			expect(instance.isVisible).toBeTruthy();
 		});
 	});
 });
