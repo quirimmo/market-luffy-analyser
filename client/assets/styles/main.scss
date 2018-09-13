@@ -1,4 +1,4 @@
-$background-color: #efefef;
+$background-color: #f9f9f9;
 //
 * {
   padding: 0;
@@ -26,41 +26,4 @@ header .col {
 .main-app-wrapper {
   max-width: 100%;
   padding: 0;
-}
-
-.main-app-title {
-  text-align: center;
-  background-color: #007bff;
-  color: white;
-  padding: 20px 0px;
-}
-
-nav {
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
-nav a {
-  margin-right: 20px;
-}
-
-.main-app-wrapper {
-  max-width: 100%;
-  padding: 0;
-}
-
-.page-content-wrapper {
-  padding: 20px;
-  background-color: white;
-}
-
-.main-app-title {
-  text-align: center;
-  background-color: #007bff;
-  color: white;
-  padding: 20px 0px;
-}
-
-.badge-secondary {
-  background-color: transparent;
 }

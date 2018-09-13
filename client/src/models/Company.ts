@@ -1,4 +1,6 @@
 class Company {
+	public isVisible: boolean;
+
 	constructor(
 		public symbol: string,
 		public name: string,
@@ -6,7 +8,9 @@ class Company {
 		public marketCap: number,
 		public sector: string,
 		public industry: string
-	) {}
+	) {
+		this.isVisible = true;
+	}
 }
 
 export default Company;

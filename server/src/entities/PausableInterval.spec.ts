@@ -2,7 +2,8 @@ import PausableInterval from './PausableInterval';
 import * as rxjs from 'rxjs';
 import * as rxjsOperators from 'rxjs/operators';
 
-const instance: PausableInterval = new PausableInterval(1000, 500);
+const socketInstance: any = { connected: false };
+const instance: PausableInterval = new PausableInterval(1000, 500, socketInstance);
 
 describe('PausableInterval', () => {
   it('should be defined', () => {
@@ -19,37 +20,37 @@ describe('PausableInterval', () => {
   });
 
   describe('constructor', () => {
-		it('should init the attributes', () => {
-			expect(instance.pauser).toBeDefined();
-			expect(instance.observable).toBeDefined();
-		});
+    it('should init the attributes', () => {
+      expect(instance.pauser).toBeDefined();
+      expect(instance.observable).toBeDefined();
+    });
 
-		it('should call the interval method with the right parameters', () => {
-			spyOn(rxjs, 'interval').and.callThrough();
-			new PausableInterval(1000, 500);
-			expect(rxjs.interval).toHaveBeenCalledWith(1500);
-		});
+    it('should call the interval method with the right parameters', () => {
+      spyOn(rxjs, 'interval').and.callThrough();
+      new PausableInterval(1000, 500, socketInstance);
+      expect(rxjs.interval).toHaveBeenCalledWith(1500);
+    });
 
-		it('should call the switchMap method on the source attribute', () => {
-			spyOn(rxjsOperators, 'switchMap').and.callThrough();
-			new PausableInterval(1000, 500);
-			expect(rxjsOperators.switchMap).toHaveBeenCalled();
-		});
-	});
+    it('should call the switchMap method on the source attribute', () => {
+      spyOn(rxjsOperators, 'switchMap').and.callThrough();
+      new PausableInterval(1000, 500, socketInstance);
+      expect(rxjsOperators.switchMap).toHaveBeenCalled();
+    });
+  });
 
-	describe('pause', () => {
-		it('should call the next method of the pauser with true', () => {
-			spyOn(instance.pauser, 'next');
-			instance.pause();
-			expect(instance.pauser.next).toHaveBeenCalledWith(true);
-		});
-	});
+  describe('pause', () => {
+    it('should call the next method of the pauser with true', () => {
+      spyOn(instance.pauser, 'next');
+      instance.pause();
+      expect(instance.pauser.next).toHaveBeenCalledWith(true);
+    });
+  });
 
   describe('resume', () => {
-		it('should call the next method of the pauser with false', () => {
-			spyOn(instance.pauser, 'next');
-			instance.resume();
-			expect(instance.pauser.next).toHaveBeenCalledWith(false);
-		});
-	});
+    it('should call the next method of the pauser with false', () => {
+      spyOn(instance.pauser, 'next');
+      instance.resume();
+      expect(instance.pauser.next).toHaveBeenCalledWith(false);
+    });
+  });
 });

@@ -1,25 +1,26 @@
 import Company from './../models/Company';
 import { Observable } from 'rxjs';
-import { map, switchMap, take } from 'rxjs/operators';
-import { ajax } from 'rxjs/ajax';
-import { Action } from 'redux';
-import { ofType } from 'redux-observable';
-import { COMPANIES_RESOURCE_URL } from './../constants/constants';
+import { map, take } from 'rxjs/operators';
+import WebServiceProxy from './../services/WebServiceProxy';
 
 export const FETCH_COMPANIES: string = 'FETCH_COMPANIES';
 export const FETCH_COMPANIES_FULFILLED: string = 'FETCH_COMPANIES_FULFILLED';
+export const TOGGLE_COMPANY_VISIBILITY: string = 'TOGGLE_COMPANY_VISIBILITY';
 
-export const fetchCompaniesFulfilled = (companies: Company[]) => ({ type: 'FETCH_COMPANIES_FULFILLED', companies });
-export const fetchCompaniesEpic = (action$: Observable<Action>): Observable<Action> =>
-	action$.pipe(
-		ofType(FETCH_COMPANIES),
-		take(1),
-		switchMap((action: any) =>
-			ajax(COMPANIES_RESOURCE_URL).pipe(
-				map((data: any) =>
-					data.response.map((value: any) => new Company(value.symbol, value.name, value.lastSale, value.marketCap, value.sector, value.industry))
-				),
-				map((companies: Company[]) => fetchCompaniesFulfilled(companies))
-			)
-		)
-	);
+export const fetchCompaniesFulfilled = (companies: Company[]) => ({ type: FETCH_COMPANIES_FULFILLED, companies });
+
+export const fetchCompaniesThunk = () => {
+	return (dispatch: any) => {
+		return fetchCompanies().pipe(map((companies: Company[]) => dispatch(fetchCompaniesFulfilled(companies))));
+	};
+};
+
+export const fetchCompanies = (): Observable<any> => {
+	return WebServiceProxy.getCompanies().pipe(take(1));
+};
+
+export const toggleCompanyVisibility = (companyName: string, companySectors: string[]) => ({
+	type: TOGGLE_COMPANY_VISIBILITY,
+	companyName,
+	companySectors
+});

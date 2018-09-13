@@ -1,12 +1,11 @@
 import ApplicationServerSocket from './ApplicationServerSocket';
 import LuffyWebService from './LuffyWebService';
-import { Subject, Observable, Observer } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import DailyTimeSeries from './DailyTimeSeries';
 import AlphaVantageProxy from './AlphaVantageProxy';
 import PausableInterval from './PausableInterval';
 import LuffyRequestParser from './LuffyRequestParser';
 import { LuffySocketRequest, LuffySocketResponse } from './LuffySocketUtils';
-import { takeUntil } from 'rxjs/operators';
 
 const DEFAULT_BASIC_MSG_KEYWORD: string = 'message';
 const DEFAULT_LUFFY_MSG_KEYWORD: string = 'luffy-message';
@@ -54,29 +53,41 @@ class LuffyServerSocket extends ApplicationServerSocket {
   processResponse(symbolsToRequest: string[], socketInstance: SocketIO.Socket): void {
     const instance: any = this;
     const firstRequestSymbols: string[] = symbolsToRequest.slice(0, NUMBER_OF_REQUEST_PER_MINUTE);
-    this.getAndSendData(socketInstance, firstRequestSymbols);
+    this.getAndSendData(socketInstance, firstRequestSymbols, symbolsToRequest.length <= NUMBER_OF_REQUEST_PER_MINUTE);
 
     let startingIndex: number = NUMBER_OF_REQUEST_PER_MINUTE;
+    let subscription: Subscription | undefined;
     if (symbolsToRequest.length > NUMBER_OF_REQUEST_PER_MINUTE) {
-      const pausableInterval: PausableInterval = new PausableInterval(1000 * 60, 10000);
-      pausableInterval.observable.subscribe(onSubscribe.bind(this, pausableInterval.pauser));
+      const pausableInterval: PausableInterval = new PausableInterval(1000 * 60, 10000, socketInstance);
+      subscription = pausableInterval.observable.subscribe(onSubscribe.bind(this, pausableInterval.pauser));
       pausableInterval.pauser.next(false);
     }
 
+    socketInstance.on('disconnect', () => {
+      if (subscription) {
+        console.log('Unsubscribing the connection to socket', socketInstance.id);
+        subscription.unsubscribe();
+      }
+    });
+
     function onSubscribe(pauser: Subject<boolean>) {
-      const symbols: string[] = symbolsToRequest.slice(startingIndex, startingIndex + 4);
+      const finalIndex: number = startingIndex + 4;
+      const symbols: string[] = symbolsToRequest.slice(startingIndex, finalIndex);
       pauser.next(true);
       if (symbols.length) {
-        instance.getAndSendData(socketInstance, symbols, pauser);
+        instance.getAndSendData(socketInstance, symbols, finalIndex >= symbolsToRequest.length, pauser);
         startingIndex += 4;
       } else {
         pauser.complete();
         pauser.unsubscribe();
+        if (subscription) {
+          subscription.unsubscribe();
+        }
       }
     }
   }
 
-  getAndSendData(socketInstance: SocketIO.Socket, symbols: string[], pauser?: Subject<boolean>): void {
+  getAndSendData(socketInstance: SocketIO.Socket, symbols: string[], finished: boolean = false, pauser?: Subject<boolean>): void {
     const instance: any = this;
     const alphaVantageProxy: AlphaVantageProxy = new AlphaVantageProxy();
     alphaVantageProxy.getDailyPricesBySymbols(symbols).subscribe(onSubscribe);
@@ -86,12 +97,14 @@ class LuffyServerSocket extends ApplicationServerSocket {
       if (pauser) pauser.next(false);
     }
 
-    function onEachDailyTimeSerie(dailyTimeSerie: DailyTimeSeries) {
+    function onEachDailyTimeSerie(dailyTimeSerie: DailyTimeSeries, index: number) {
+      const isLast = index === symbols.length - 1 && finished ? true : false;
       if (dailyTimeSerie.getPriceChangeByPeriod().length === 0) {
         console.log('This symbol request returned empty values', dailyTimeSerie.symbol);
       }
       console.log('Sending data to the following socket', socketInstance.id);
       instance.sendLuffyMessage(socketInstance, {
+        isLast,
         data: {
           symbol: dailyTimeSerie.symbol,
           lastMovement: dailyTimeSerie.getLastMovement(),

@@ -6,10 +6,10 @@ jest.mock('rxjs/ajax', () => {
 	};
 });
 
-import { FETCH_COMPANIES, FETCH_COMPANIES_FULFILLED, fetchCompaniesFulfilled, fetchCompaniesEpic } from './companies.action';
+// import { FETCH_COMPANIES, FETCH_COMPANIES_FULFILLED, fetchCompaniesFulfilled, fetchCompaniesEpic } from './companies.action';
+import { FETCH_COMPANIES, FETCH_COMPANIES_FULFILLED, fetchCompaniesFulfilled } from './companies.action';
 import Company from './../models/Company';
 import { of } from 'rxjs';
-import { ActionsObservable } from 'redux-observable';
 
 const company1: Company = new Company('Symbol 1', 'Name 1', 1, 2, 'Sector 1', 'Industry 1');
 const company2: Company = new Company('Symbol 2', 'Name 2', 3, 4, 'Sector 2', 'Industry 2');
@@ -23,7 +23,7 @@ describe('companies action', () => {
 
 	it('should define the actions', () => {
 		expect(typeof fetchCompaniesFulfilled).toEqual('function');
-		expect(typeof fetchCompaniesEpic).toEqual('function');
+		// expect(typeof fetchCompaniesEpic).toEqual('function');
 	});
 
 	describe('fetchCompaniesFulfilled', () => {
@@ -35,18 +35,18 @@ describe('companies action', () => {
 		});
 	});
 
-	describe('fetchCompaniesEpic', () => {
-		it('should return the action', () => {
-			const action$ = ActionsObservable.of({ type: FETCH_COMPANIES });
+	// describe('fetchCompaniesEpic', () => {
+	// 	it('should return the action', () => {
+	// 		const action$ = ActionsObservable.of({ type: FETCH_COMPANIES });
 
-			return fetchCompaniesEpic(action$)
-				.toPromise()
-				.then(actionReceived => {
-					expect(actionReceived).toEqual({
-						type: FETCH_COMPANIES_FULFILLED,
-						companies
-					});
-				});
-		});
-	});
+	// 		return fetchCompaniesEpic(action$)
+	// 			.toPromise()
+	// 			.then(actionReceived => {
+	// 				expect(actionReceived).toEqual({
+	// 					type: FETCH_COMPANIES_FULFILLED,
+	// 					companies
+	// 				});
+	// 			});
+	// 	});
+	// });
 });

@@ -27,12 +27,14 @@ class ApplicationServerSocket {
 
     function onSubscribe(observer: Observer<socketIo.Socket>) {
       instance.socket.on('connect', onSocketConnected);
+      instance.socket.on('disconnect', () => {
+        observer.complete();
+      });
 
       function onSocketConnected(socketInstance: socketIo.Socket) {
         console.log('Client Socket connected with an id', socketInstance.id);
         instance.onClientDisconnect(socketInstance, onDisconnect);
         observer.next(socketInstance);
-        observer.complete();
       }
     }
   }

@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import AppMainContent from './AppMainContent.component';
-import Home from '../home/Home.component';
 import CompaniesPage from '../companies/Companies.container';
 import { Row, Col } from 'reactstrap';
 import { Switch, Route, Redirect } from 'react-router';
+import HomePage from '../home/Home.container';
 
 let component: any;
 
@@ -105,7 +105,7 @@ describe('AppMainContent Presentational Component', () => {
 
 	describe('getHomePageRoute', () => {
 		it('should return the Home Component', () => {
-			expect(component.instance().getHomePageRoute()).toEqual(<Home />);
+			expect(component.instance().getHomePageRoute()).toEqual(<HomePage />);
 		});
 	});
 });

@@ -16,6 +16,7 @@ export interface LuffySocketResponse {
 
 export interface LuffySocketRequest {
   action: string;
+  size: number;
   sectors?: string[];
   symbols?: string[];
 }

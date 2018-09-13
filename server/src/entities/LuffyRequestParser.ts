@@ -15,7 +15,7 @@ class LuffyRequestParser {
   parseRequest(data: LuffySocketRequest): string[] {
     switch (data.action) {
       case 'getAllData':
-        return this.parseGetAllDataRequest();
+        return this.parseGetAllDataRequest(data.size);
       case 'getAllDataBySymbols':
         return this.parseGetAllDataBySymbolsRequest(data.symbols);
       case 'getAllDataBySectors':
@@ -25,8 +25,10 @@ class LuffyRequestParser {
     }
   }
 
-  parseGetAllDataRequest(): string[] {
-    const allCompanies: Company[] = CompaniesProcessor.getAllCompanies();
+  parseGetAllDataRequest(size?: number): string[] {
+    let allCompanies: Company[] = CompaniesProcessor.getAllCompanies();
+    size = size || allCompanies.length;
+    allCompanies = allCompanies.slice(0, size);
     return allCompanies.map((company: Company) => company.symbol);
   }
 

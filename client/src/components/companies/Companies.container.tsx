@@ -1,8 +1,9 @@
 import { connect } from 'react-redux';
-import { Dispatch, Action } from 'redux';
 import IStoreState from 'models/IStoreState';
 import Companies from './Companies.component';
-import { FETCH_COMPANIES } from './../../actions/companies.action';
+import { fetchCompaniesThunk } from './../../actions/companies.action';
+import Company from './../../models/Company';
+import { Observable } from 'rxjs';
 
 const mapStateToProps = (state: IStoreState, ownProps: any) => {
 	return {
@@ -10,9 +11,9 @@ const mapStateToProps = (state: IStoreState, ownProps: any) => {
 	};
 };
 
-const mapDispatchToProps: any = (dispatch: Dispatch<Action>) => ({
-	fetchCompanies: (): void => {
-		dispatch({ type: FETCH_COMPANIES });
+const mapDispatchToProps: any = (dispatch: (fn: any) => Observable<Company[]>, ownProps: any) => ({
+	fetchCompanies: (): Observable<Company[]> => {
+		return dispatch(fetchCompaniesThunk());
 	}
 });
 
