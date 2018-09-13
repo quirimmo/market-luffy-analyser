@@ -14,10 +14,13 @@ const company2: Company = new Company('Symbol 1', 'Name 2', 2, 4, 'Sector 2', 'I
 company2.isVisible = false;
 const companies: Company[] = [company1, company2];
 const mockFetchCompanies = jest.fn(() => of(companies));
+const mockSelectCompany = jest.fn();
 
 describe.only('Companies Presentational Component', () => {
 	beforeEach(() => {
-		component = shallow(<Companies companySectors={[]} companies={companies} fetchCompanies={mockFetchCompanies} />);
+		component = shallow(
+			<Companies selectCompany={mockSelectCompany} companySectors={[]} companies={companies} fetchCompanies={mockFetchCompanies} />
+		);
 	});
 	afterEach(() => {
 		jest.clearAllMocks();
@@ -168,7 +171,7 @@ describe.only('Companies Presentational Component', () => {
 		it('should return the company list element if the company is visible', () => {
 			expect(component.instance().onMapCompany(company1)).toEqual(
 				<div className="col-lg-3 col-md-4 col-sm-6" key={company1.symbol}>
-					<CompanyCard company={company1} />
+					<CompanyCard selectCompany={mockSelectCompany} company={company1} />
 				</div>
 			);
 		});

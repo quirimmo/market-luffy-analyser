@@ -28,8 +28,8 @@ const config = {
 	],
 	output: {
 		path: BUILD_DIR,
-		// publicPath: SUBDOMAIN_PATH,
-		filename: 'bundle.js'
+		publicPath: '/',
+		filename: 'bundle.js',
 	},
 	node: {
 		dns: 'mock',

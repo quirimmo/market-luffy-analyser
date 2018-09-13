@@ -12,6 +12,7 @@ interface ICompaniesProps {
 	companies: Company[];
 	companySectors: string[];
 	fetchCompanies: () => Observable<Company[]>;
+	selectCompany: (company: Company | null) => void;
 }
 
 interface ICompaniesState {
@@ -69,7 +70,7 @@ class Companies extends React.Component<ICompaniesProps, ICompaniesState> {
 	public onMapCompany(company: Company): JSX.Element | undefined {
 		return company.isVisible ? (
 			<div className="col-lg-3 col-md-4 col-sm-6" key={company.symbol}>
-				<CompanyCard company={company} />
+				<CompanyCard selectCompany={this.props.selectCompany} company={company} />
 			</div>
 		) : (
 			undefined

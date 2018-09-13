@@ -7,7 +7,8 @@ const dailySerie: DailySerie = new DailySerie('Symbol 1', 1, [2, 3], 4);
 
 const storeState: IStoreState = {
 	companies: [company],
-	dailySeries: [dailySerie]
+	dailySeries: [dailySerie],
+	selectedCompany: null
 };
 
 describe('StoreState', () => {

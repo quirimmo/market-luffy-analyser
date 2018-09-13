@@ -7,10 +7,11 @@ import CompanyCardInfoRow from './CompanyCardInfoRow.component';
 
 let component: any;
 const company: Company = new Company('Symbol', 'Name', 1, 2, 'Sector', 'Industry');
+const mockSelectCompany = jest.fn();
 
 describe('Company Card Presentational Component', () => {
 	beforeEach(() => {
-		component = shallow(<CompanyCard company={company} />);
+		component = shallow(<CompanyCard selectCompany={mockSelectCompany} company={company} />);
 	});
 
 	describe('Component', () => {

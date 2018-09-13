@@ -13,7 +13,7 @@ class CompanyCardInfoRow extends React.Component<ICompanyCardInfoRowProps, any> 
 	public render() {
 		return (
 			<div className="row">
-				<div className="col-sm-4 col-6 text-left">{this.props.label}:</div>
+				<div className="col-sm-4 col-6 text-left company-card-details-label">{this.props.label}:</div>
 				<div className="col-sm-8 col-6 text-right company-card-details-value">{this.props.value}</div>
 			</div>
 		);
