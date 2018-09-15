@@ -22,8 +22,8 @@ describe('utils.controller', () => {
 
   describe('getPrices', () => {
     it('should call the alpha vantage proxy getDailyPricesBySymbols method with the right parameters', () => {
-      getPrices(['FB', 'GOOG'], 31);
-      expect(mockGetDailyPricesBySymbols).toHaveBeenCalledWith(['FB', 'GOOG'], 31);
+      getPrices(['FB', 'GOOG'], 'compact');
+      expect(mockGetDailyPricesBySymbols).toHaveBeenCalledWith(['FB', 'GOOG'], 'compact');
     });
   });
 
@@ -33,7 +33,7 @@ describe('utils.controller', () => {
       url: 'url',
       params: {
         isPercentage: true,
-        numberOfValues: 31,
+        size: 'compact',
         symbols: 'FB,GOOG'
       }
     });
@@ -41,7 +41,7 @@ describe('utils.controller', () => {
     it('should return the composed object', () => {
       expect(getRequestParameters(request)).toEqual({
         isPercentage: true,
-        numberOfValues: 31,
+        size: 'compact',
         symbols: ['FB', 'GOOG']
       });
     });

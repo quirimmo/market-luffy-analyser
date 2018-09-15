@@ -90,16 +90,9 @@ describe('MovementsController', () => {
       expect(mockGetPrices).toHaveBeenCalledWith('FB,GOOG', 'compact');
     });
 
-    it('should call the response.send method sending the data', () => {
-      // const spy = spyOn(response, 'send');
+    it('should call the sendSuccessfulResponse method of utils for sending the data', () => {
       onGetMovements(request, response);
       expect(mockSendSuccessfulResponse).toHaveBeenCalledWith(response, { data: { FIRST_STOCK: 150, SECOND_STOCK: -200 } });
-      // expect(spy).toHaveBeenCalledWith({
-      //   data: {
-      //     FIRST_STOCK: 150,
-      //     SECOND_STOCK: -200
-      //   }
-      // });
     });
   });
 });
