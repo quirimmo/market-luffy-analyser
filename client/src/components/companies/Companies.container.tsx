@@ -17,7 +17,7 @@ const mapDispatchToProps: any = (dispatch: (fn: any) => any, ownProps: any) => (
 		return dispatch(fetchCompaniesThunk());
 	},
 	selectCompany: (company: Company | null): void => {
-		return dispatch(selectCompany(company));
+		dispatch(selectCompany(company));
 	}
 });
 

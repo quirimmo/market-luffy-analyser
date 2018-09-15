@@ -34,7 +34,6 @@ class CompanyCard extends React.Component<ICompanyProps, any> {
 					<CompanyCardInfoRow label="Sector" value={this.props.company.sector} />
 					<CompanyCardInfoRow label="Industry" value={this.props.company.industry} />
 					<div className="row text-center justify-content-center">
-						<Link to="/company/blablabla">React</Link>
 						<Button color="success" className="mt-2 mb-1 company-page-button" onClick={this.openCompanyPage}>
 							Company Page
 						</Button>
@@ -52,13 +51,7 @@ class CompanyCard extends React.Component<ICompanyProps, any> {
 
 	public openCompanyPage() {
 		this.props.selectCompany(this.props.company);
-		this.props.history.push('/company/blablabla');
-		// this.props.history.push({ pathname: '/company', search: 'symbol=blablabla', state: { symbol: 'blablabla' } });
-		// this.props.history.push({
-		// 	pathname: '/company',
-		// 	state: { symbol: 'blablabla' }
-		// });
-		// console.log('props', this.props);
+		this.props.history.push(`/company/${this.props.company.symbol}`);
 	}
 }
 

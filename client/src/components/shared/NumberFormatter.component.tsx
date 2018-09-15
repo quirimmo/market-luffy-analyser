@@ -9,7 +9,6 @@ class NumberFormatter extends React.Component<INumberFormatterProps, any> {
 
 	constructor(props: INumberFormatterProps) {
 		super(props);
-		console.log(this.props.value);
 		this.formattedValue = this.formatValue();
 	}
 

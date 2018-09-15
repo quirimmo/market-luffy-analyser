@@ -3,10 +3,11 @@ import Company from './../../models/Company';
 import { Alert } from 'reactstrap';
 import NumberFormatter from '../shared/NumberFormatter.component';
 import DailySerieCardPriceChange from '../daily-serie/DailySerieCardPriceChange.component';
+import { Observable } from 'rxjs';
 
 interface ICompanyPageProps {
 	company: Company | null;
-	fetchCompany: () => void;
+	fetchCompany: () => Observable<boolean>;
 }
 
 interface ICompanyPageState {
@@ -64,13 +65,9 @@ class CompanyPage extends React.Component<ICompanyPageProps, ICompanyPageState> 
 	}
 
 	public componentDidMount() {
-		this.props.fetchCompany();
-	}
-
-	public componentDidUpdate(prevProps: ICompanyPageProps, prevState: ICompanyPageState) {
-		if (prevProps.company !== this.props.company) {
+		this.props.fetchCompany().subscribe((data: any) => {
 			this.setState({ isError: !this.props.company || this.props.company === null });
-		}
+		});
 	}
 }
 

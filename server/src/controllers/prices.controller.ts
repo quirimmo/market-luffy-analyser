@@ -19,7 +19,13 @@ export function onGetPrices(req: Request, res: Response) {
     };
     resp.forEach((serie: DailyTimeSeries) => {
       if (serie.dailyTimes.length) {
-        ret.data[serie.symbol] = serie.dailyTimes;
+        serie.getPriceChangeByPeriod;
+        ret.data[serie.symbol] = {
+          lastMovement: serie.getLastMovement(),
+          priceChange: serie.getPriceChangeByPeriod(),
+          trend: serie.getTrendByPeriod(),
+          prices: serie.dailyTimes
+        };
       }
     });
     sendSuccessfulResponse(res, ret);
