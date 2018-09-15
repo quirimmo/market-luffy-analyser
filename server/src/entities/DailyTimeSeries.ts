@@ -26,7 +26,6 @@ export default class DailyTimeSeries {
       if (ind < period - 1) {
         let diff: number = parseFloat((val.close - arr[ind + 1].close).toFixed(val.decimalsPrecision));
         if (isPercentage) {
-          // const previousClose: number = ind > 0 ? arr[ind - 1] ;
           diff = parseFloat(((diff / Math.abs(arr[ind + 1].close)) * 100).toFixed(val.decimalsPrecision));
         }
         acc.push(diff);

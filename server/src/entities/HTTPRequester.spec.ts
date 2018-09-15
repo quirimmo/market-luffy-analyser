@@ -11,10 +11,9 @@ import { from, forkJoin } from 'rxjs';
 const instance = new HTTPRequester();
 
 describe('HTTPRequester', () => {
-
-	afterEach(() => {
-		jest.clearAllMocks();
-	});
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
 
   it('should be defined', () => {
     expect(HTTPRequester).toBeDefined();
@@ -30,8 +29,12 @@ describe('HTTPRequester', () => {
   });
 
   describe('get', () => {
+    let spy: any;
+    beforeEach(() => {
+      spy = spyOn(instance.axios, 'get').and.callFake(() => {});
+    });
+
     it('should call the axios.get method with the right parameter', () => {
-      const spy = jest.spyOn(instance.axios, 'get');
       instance.get('URL');
       expect(spy).toHaveBeenCalledWith('URL');
     });
@@ -45,16 +48,19 @@ describe('HTTPRequester', () => {
 
   describe('getAll', () => {
     const URLS = ['URL1', 'URL2'];
+    let spy: any;
+    beforeEach(() => {
+      spy = spyOn(instance.axios, 'get').and.callFake(() => {});
+    });
 
     it('should call the axios.get method with the right parameter for each url', () => {
-      const spy = jest.spyOn(instance.axios, 'get');
       instance.getAll(URLS);
       expect(spy).toHaveBeenCalledTimes(2);
       expect(spy).toHaveBeenCalledWith('URL1');
       expect(spy).toHaveBeenCalledWith('URL2');
-		});
+    });
 
-		it('should call the from method of rxjs with the right parameter for each url', () => {
+    it('should call the from method of rxjs with the right parameter for each url', () => {
       instance.getAll(URLS);
       expect(from).toHaveBeenCalledTimes(2);
       expect(from).toHaveBeenCalledWith(instance.axios.get('URL1'));
