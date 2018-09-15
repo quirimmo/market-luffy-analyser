@@ -203,7 +203,7 @@ describe('Luffy Server Socket', () => {
       instance.getAndSendData(socketInstance, symbols);
       expect(instance.sendLuffyMessage).toHaveBeenCalledWith(socketInstance, {
         data: { lastMovement: 150, priceChange: [150], symbol: 'FB', trend: 150 },
-        finished: false
+        isLast: false
       });
     });
   });
