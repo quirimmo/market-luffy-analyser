@@ -7,36 +7,53 @@ import './../../../assets/styles/main.scss';
 import AppTitle from '../app-title/AppTitle.component';
 import AppNavigation from '../app-navigation/AppNavigation.component';
 import AppMainContent from '../app-main-content/AppMainContent.component';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
+import Company from './../../models/Company';
+import { timeout, delay } from 'rxjs/operators';
 
 interface IAppProps {
 	connectToSocket: () => Observable<any>;
 	disconnectFromSocket: () => Observable<any>;
+	fetchCompanies: () => Observable<Company[]>;
 }
 
-class App extends React.Component<IAppProps, any> {
-	constructor(props: any) {
+interface IAppState {
+	isLoading: boolean;
+}
+
+class App extends React.Component<IAppProps, IAppState> {
+	constructor(props: IAppProps) {
 		super(props);
+		this.state = { isLoading: false };
 	}
 
 	public render() {
+		const content = this.state.isLoading ? this.getLoadingContent() : this.getMainContent();
+		return <BrowserRouter basename="/">{content}</BrowserRouter>;
+	}
+
+	public getLoadingContent(): JSX.Element {
+		return <div className="container-fluid loading-component" />;
+	}
+
+	public getMainContent(): JSX.Element {
 		return (
-			<BrowserRouter basename="/">
-				<div>
-					<AppNavigation />
-					<Container className="main-app-wrapper">
-						<AppTitle />
-						<br />
-						<AppMainContent />
-					</Container>
-				</div>
-			</BrowserRouter>
+			<div>
+				<AppNavigation />
+				<Container className="main-app-wrapper">
+					<AppTitle />
+					<br />
+					<AppMainContent />
+				</Container>
+			</div>
 		);
 	}
 
 	public componentDidMount() {
-		// connect to the web socket when the app starts
-		this.props.connectToSocket();
+		this.setState({ isLoading: true });
+		forkJoin(this.props.connectToSocket(), this.props.fetchCompanies().pipe(delay(5000))).subscribe((data: any) => {
+			this.setState({ isLoading: false });
+		});
 	}
 
 	public componentWillUnmount() {

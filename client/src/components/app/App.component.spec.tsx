@@ -11,10 +11,13 @@ import { of } from 'rxjs';
 let component: any;
 const mockConnectToSocket = jest.fn(() => of(null));
 const mockDisconnectFromSocket = jest.fn(() => of(null));
+const mockFetchCompanies = jest.fn(() => of(null));
 
 describe('App Presentational Component', () => {
 	beforeEach(() => {
-		component = shallow(<App connectToSocket={mockConnectToSocket} disconnectFromSocket={mockDisconnectFromSocket} />);
+		component = shallow(
+			<App fetchCompanies={mockFetchCompanies} connectToSocket={mockConnectToSocket} disconnectFromSocket={mockDisconnectFromSocket} />
+		);
 	});
 
 	it('should be defined', () => {

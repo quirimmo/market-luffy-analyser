@@ -19,7 +19,7 @@ class WebSocketProxy {
 		WebSocketProxy.streamObservable = new Subject<any>();
 		WebSocketProxy.socket = io(SERVER_URL);
 		WebSocketProxy.subscribeToSocketEvents();
-		return fromEvent(WebSocketProxy.getSocket(), 'connect');
+		return of(WebSocketProxy.getSocket());
 	}
 
 	public static subscribeToSocketEvents() {
