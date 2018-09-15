@@ -1,8 +1,6 @@
 import * as React from 'react';
 import Company from './../../models/Company';
 import { Alert } from 'reactstrap';
-import NumberFormatter from '../shared/NumberFormatter.component';
-import DailySerieCardPriceChange from '../daily-serie/DailySerieCardPriceChange.component';
 import { Observable } from 'rxjs';
 
 interface ICompanyPageProps {
@@ -12,61 +10,38 @@ interface ICompanyPageProps {
 
 interface ICompanyPageState {
 	isError: boolean;
+	isLoading: boolean;
 }
 
 class CompanyPage extends React.Component<ICompanyPageProps, ICompanyPageState> {
 	constructor(props: ICompanyPageProps) {
 		super(props);
 		this.state = {
-			isError: true
+			isError: false,
+			isLoading: false
 		};
 	}
 
 	public render() {
-		const instance: CompanyPage = this;
-		return this.state.isError ? getError() : getContent();
+		return this.state.isLoading ? this.getLoadingContent() : this.state.isError ? this.getErrorContent() : this.getCompanyContent();
+	}
 
-		function getContent(): JSX.Element | undefined {
-			const comp = instance.props.company;
-			if (comp !== null) {
-				return (
-					<div>
-						<div className="row text-center justify-content-center">
-							<b>{comp.name}</b>
-						</div>
-						<div className="row text-center justify-content-center">
-							<i>{comp.symbol}</i>
-						</div>
-						<div className="row text-left justify-content-left">
-							<label>Sector: </label>
-							{comp.sector}
-						</div>
-						<div className="row text-left justify-content-left">
-							<label>Industry: </label>
-							{comp.industry}
-						</div>
-						<div className="row text-left justify-content-left">
-							<label>Market Capital: </label>
-							<NumberFormatter value={comp.marketCap} />
-						</div>
-						<div className="row text-left justify-content-left">
-							<label>Last Sale: </label>
-							<NumberFormatter value={comp.lastSale} />
-						</div>
-					</div>
-				);
-			}
-			return undefined;
-		}
+	public getLoadingContent(): JSX.Element {
+		return <div>LOADING COMPANY DATA...</div>;
+	}
 
-		function getError(): JSX.Element {
-			return <Alert color="danger">Error retrieving the company</Alert>;
-		}
+	public getErrorContent(): JSX.Element {
+		return <Alert color="danger">Error retrieving the company</Alert>;
+	}
+
+	public getCompanyContent(): JSX.Element {
+		return <div>COMPANY CONTENT</div>;
 	}
 
 	public componentDidMount() {
+		this.setState((prevState: ICompanyPageState) => ({ ...prevState, isLoading: true }));
 		this.props.fetchCompany().subscribe((data: any) => {
-			this.setState({ isError: !this.props.company || this.props.company === null });
+			this.setState({ isError: !this.props.company || this.props.company === null, isLoading: false });
 		});
 	}
 }

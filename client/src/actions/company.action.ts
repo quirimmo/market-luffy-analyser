@@ -16,25 +16,17 @@ export const fetchCompanyThunk = (companySymbol: string) => {
 			const stateCompanies = getState().companies;
 			if (stateCompanies.length === 0) {
 				dispatch(fetchCompaniesThunk()).subscribe((data: any) => {
-					complete(data.companies, observer).subscribe((company: Company | null) => {
-						dispatch(selectCompany(company));
-						observer.next(true);
-						observer.complete();
-					});
+					complete(data.companies).subscribe(onSubscribe.bind(null, observer));
 				});
 			} else {
-				complete(stateCompanies, observer).subscribe((company: Company | null) => {
-					dispatch(selectCompany(company));
-					observer.next(true);
-					observer.complete();
-				});
+				complete(stateCompanies).subscribe(onSubscribe.bind(null, observer));
 			}
 		});
 
-		function complete(companies: Company[], observer: Observer<boolean>): Observable<Company | null> {
+		function complete(companies: Company[]): Observable<Company | null> {
 			const company = companies.find((el: Company) => el.symbol === companySymbol) || null;
 			if (company !== null) {
-				return WebServiceProxy.getCompanyPricesInfo(company.symbol, true).pipe(
+				return WebServiceProxy.getCompanyPricesInfo(company.symbol, false).pipe(
 					map((resp: any) => {
 						company.dailySerie = new DailySerie(
 							company.symbol,
@@ -47,6 +39,12 @@ export const fetchCompanyThunk = (companySymbol: string) => {
 				);
 			}
 			return of(company);
+		}
+
+		function onSubscribe(observer: Observer<boolean>, company: Company | null) {
+			dispatch(selectCompany(company));
+			observer.next(true);
+			observer.complete();
 		}
 	};
 };
