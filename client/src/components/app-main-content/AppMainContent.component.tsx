@@ -4,7 +4,7 @@ import { Row, Col } from 'reactstrap';
 import CompaniesPage from '../companies/Companies.container';
 import HomePage from '../home/Home.container';
 import './style.scss';
-import CompanyPage from '../company/CompanyPage.component';
+import CompanyPageContainer from '../company/CompanyPage.container';
 
 class AppMainContent extends React.Component<{}> {
 	constructor(props: {}) {
@@ -15,17 +15,16 @@ class AppMainContent extends React.Component<{}> {
 		this.getCompanyPageRoute = this.getCompanyPageRoute.bind(this);
 	}
 
-	public getCompaniesPageRoute(routeProps: object) {
+	public getCompaniesPageRoute(routeProps: any) {
 		return <CompaniesPage />;
 	}
 
-	public getHomePageRoute(routeProps: object) {
+	public getHomePageRoute(routeProps: any) {
 		return <HomePage />;
 	}
 
-	public getCompanyPageRoute(routeProps: object) {
-		console.log('Company Page Route', routeProps);
-		return <CompanyPage />
+	public getCompanyPageRoute(routeProps: any) {
+		return <CompanyPageContainer companySymbol={routeProps.match.params.symbol} />
 	}
 
 	public render() {

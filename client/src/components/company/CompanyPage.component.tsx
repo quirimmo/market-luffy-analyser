@@ -1,16 +1,77 @@
 import * as React from 'react';
-import { withRouter } from 'react-router-dom';
+import Company from './../../models/Company';
+import { Alert } from 'reactstrap';
+import NumberFormatter from '../shared/NumberFormatter.component';
+import DailySerieCardPriceChange from '../daily-serie/DailySerieCardPriceChange.component';
 
-class CompanyPage extends React.Component<any, any> {
-	constructor(props: any) {
+interface ICompanyPageProps {
+	company: Company | null;
+	fetchCompany: () => void;
+}
+
+interface ICompanyPageState {
+	isError: boolean;
+}
+
+class CompanyPage extends React.Component<ICompanyPageProps, ICompanyPageState> {
+	constructor(props: ICompanyPageProps) {
 		super(props);
-		console.log(this.props);
+		this.state = {
+			isError: true
+		};
 	}
 
 	public render() {
-		console.log('rendering company page');
-		return <div>COMPANY PAGE</div>;
+		const instance: CompanyPage = this;
+		return this.state.isError ? getError() : getContent();
+
+		function getContent(): JSX.Element | undefined {
+			const comp = instance.props.company;
+			if (comp !== null) {
+				return (
+					<div>
+						<div className="row text-center justify-content-center">
+							<b>{comp.name}</b>
+						</div>
+						<div className="row text-center justify-content-center">
+							<i>{comp.symbol}</i>
+						</div>
+						<div className="row text-left justify-content-left">
+							<label>Sector: </label>
+							{comp.sector}
+						</div>
+						<div className="row text-left justify-content-left">
+							<label>Industry: </label>
+							{comp.industry}
+						</div>
+						<div className="row text-left justify-content-left">
+							<label>Market Capital: </label>
+							<NumberFormatter value={comp.marketCap} />
+						</div>
+						<div className="row text-left justify-content-left">
+							<label>Last Sale: </label>
+							<NumberFormatter value={comp.lastSale} />
+						</div>
+					</div>
+				);
+			}
+			return undefined;
+		}
+
+		function getError(): JSX.Element {
+			return <Alert color="danger">Error retrieving the company</Alert>;
+		}
+	}
+
+	public componentDidMount() {
+		this.props.fetchCompany();
+	}
+
+	public componentDidUpdate(prevProps: ICompanyPageProps, prevState: ICompanyPageState) {
+		if (prevProps.company !== this.props.company) {
+			this.setState({ isError: !this.props.company || this.props.company === null });
+		}
 	}
 }
 
-export default withRouter(CompanyPage);
+export default CompanyPage;

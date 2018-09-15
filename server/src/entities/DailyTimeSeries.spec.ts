@@ -128,7 +128,7 @@ describe('DailyTimeSeries', () => {
     });
 
     it('should return the truncated DailyTimeSeries instance', () => {
-      const built: DailyTimeSeries = DailyTimeSeries.buildFromData('FB', rawData, 2);
+      const built: DailyTimeSeries = DailyTimeSeries.buildFromData('FB', rawData);
       expect(built).toBeDefined();
       expect(built.dailyTimes.length).toEqual(2);
       expect(built.dailyTimes).toEqual([
@@ -144,6 +144,20 @@ describe('DailyTimeSeries', () => {
           '2. high': '20.00',
           '3. low': '30.00',
           '4. close': '40.00',
+          '5. volume': '50.00'
+        }),
+        new DailyTime('2018-08-14', {
+          '1. open': '10.00',
+          '2. high': '20.00',
+          '3. low': '30.00',
+          '4. close': '-10.00',
+          '5. volume': '50.00'
+        }),
+        new DailyTime('2018-08-13', {
+          '1. open': '10.00',
+          '2. high': '20.00',
+          '3. low': '30.00',
+          '4. close': '10.00',
           '5. volume': '50.00'
         })
       ]);

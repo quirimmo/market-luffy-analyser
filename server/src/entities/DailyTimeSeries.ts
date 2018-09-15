@@ -40,13 +40,12 @@ export default class DailyTimeSeries {
     return priceChange.reduce((acc: number, val: number) => acc + val, 0);
   }
 
-  static buildFromData(symbol: string, data: any, numberOfValues: number = 31): DailyTimeSeries {
+  static buildFromData(symbol: string, data: any): DailyTimeSeries {
     if (!data) {
       return new DailyTimeSeries(symbol);
     }
     const keys: Array<string> = Object.keys(data);
     const values: DailyTime[] = keys.map(key => new DailyTime(key, data[key]));
-    const slicedValues: DailyTime[] = values.slice(0, numberOfValues);
-    return new DailyTimeSeries(symbol, slicedValues);
+    return new DailyTimeSeries(symbol, values);
   }
 }
