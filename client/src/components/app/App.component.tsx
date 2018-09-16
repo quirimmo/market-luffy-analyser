@@ -34,7 +34,7 @@ class App extends React.Component<IAppProps, IAppState> {
 	}
 
 	public getLoadingContent(): JSX.Element {
-		return <LoadingGears />;
+		return <LoadingGears imgClasses="mt-5" />;
 	}
 
 	public getMainContent(): JSX.Element {
@@ -45,7 +45,6 @@ class App extends React.Component<IAppProps, IAppState> {
 					<AppTitle />
 					<br />
 					<AppMainContent />
-					<div style={{ width: '200px', height: '200px', position: 'relative' }}>{this.getLoadingContent()}</div>
 				</Container>
 			</div>
 		);
@@ -53,7 +52,7 @@ class App extends React.Component<IAppProps, IAppState> {
 
 	public componentDidMount() {
 		this.setState({ isLoading: true });
-		forkJoin(this.props.connectToSocket(), this.props.fetchCompanies().pipe(delay(5000))).subscribe((data: any) => {
+		forkJoin(this.props.connectToSocket(), this.props.fetchCompanies()).subscribe((data: any) => {
 			this.setState({ isLoading: false });
 		});
 	}
