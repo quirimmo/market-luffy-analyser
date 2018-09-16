@@ -1,10 +1,8 @@
 import { connect } from 'react-redux';
 import IStoreState from './../../models/IStoreState';
 import CompanyPage from './CompanyPage.component';
-import Company from 'models/Company';
-import { fetchCompaniesThunk } from './../../actions/companies.action';
-import { selectCompany, fetchCompanyThunk } from './../../actions/company.action';
-import { Observable, Observer } from 'rxjs';
+import { fetchCompanyThunk } from './../../actions/company.action';
+import { Observable } from 'rxjs';
 
 const mapStateToProps = (state: IStoreState, ownProps: any) => {
 	return {

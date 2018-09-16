@@ -9,7 +9,6 @@ import AppNavigation from '../app-navigation/AppNavigation.component';
 import AppMainContent from '../app-main-content/AppMainContent.component';
 import { Observable, forkJoin } from 'rxjs';
 import Company from './../../models/Company';
-import { timeout, delay } from 'rxjs/operators';
 import LoadingGears from '../shared/LoadingGears.component';
 
 interface IAppProps {

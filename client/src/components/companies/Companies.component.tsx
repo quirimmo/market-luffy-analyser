@@ -12,14 +12,12 @@ import LoadingGears from '../shared/LoadingGears.component';
 interface ICompaniesProps {
 	companies: Company[];
 	companySectors: string[];
-	fetchCompanies: () => Observable<Company[]>;
 	selectCompany: (company: Company | null) => void;
 }
 
 interface ICompaniesState {
 	sectors: string[];
 	isLoading: boolean;
-	isError: boolean;
 }
 
 class Companies extends React.Component<ICompaniesProps, ICompaniesState> {
@@ -27,8 +25,7 @@ class Companies extends React.Component<ICompaniesProps, ICompaniesState> {
 		super(props);
 		this.state = {
 			sectors: [],
-			isLoading: true,
-			isError: false
+			isLoading: true
 		};
 		this.onMapCompany = this.onMapCompany.bind(this);
 		this.sortCompanies = this.sortCompanies.bind(this);
@@ -37,17 +34,11 @@ class Companies extends React.Component<ICompaniesProps, ICompaniesState> {
 	public render() {
 		let mainContent: any;
 
-		if (this.state.isError) {
-			mainContent = <Alert color="danger">Error fetching the companies</Alert>;
-		} else if (this.state.isLoading) {
+		if (this.state.isLoading) {
 			mainContent = <LoadingGears imgClasses="mt-5" />;
 		} else {
 			if (this.props.companies.length === 0) {
-				mainContent = (
-					<div className="no-companies-message row text-center">
-						<div>There are no companies</div>
-					</div>
-				);
+				mainContent = <Alert color="warning">The are no companies in the list</Alert>;
 			} else {
 				mainContent = (
 					<div className="companies-section-wrapper">
@@ -77,23 +68,6 @@ class Companies extends React.Component<ICompaniesProps, ICompaniesState> {
 	public componentDidMount() {
 		const sectors = new Set(this.props.companies.map((company: Company) => company.sector));
 		this.setState({ sectors: Array.from(sectors), isLoading: false });
-
-		// const instance: Companies = this;
-		// this.setState((prevState: ICompaniesState) => ({
-		// 	...prevState,
-		// 	isLoading: true
-		// }));
-		// this.props.fetchCompanies().subscribe(onSubscribe, onError);
-
-		// function onSubscribe(companies: Company[]): void {
-		// 	const sectors = new Set(instance.props.companies.map((company: Company) => company.sector));
-		// 	instance.setState({ sectors: Array.from(sectors), isLoading: false });
-		// }
-
-		// function onError(err: any): void {
-		// 	console.error('Error fetching the list of companies!', err);
-		// 	instance.setState((prevState: ICompaniesState) => ({ ...prevState, isError: true }));
-		// }
 	}
 
 	public sortCompanies(activeSort: string): void {

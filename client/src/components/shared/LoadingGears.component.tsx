@@ -8,6 +8,7 @@ interface ILoadingGearsProps {
 }
 
 class LoadingGears extends React.Component<ILoadingGearsProps, any> {
+
 	constructor(props: ILoadingGearsProps) {
 		super(props);
 	}
@@ -25,7 +26,7 @@ class LoadingGears extends React.Component<ILoadingGearsProps, any> {
 		}
 		return (
 			<div className="loading-component container-fluid justify-content-center text-center">
-				<img {...attributes} src="images/gear-animation-orange.gif" />
+				<img {...attributes} src="./../images/gear-animation-orange.gif" />
 			</div>
 		);
 	}

@@ -13,13 +13,12 @@ const company1: Company = new Company('Symbol 2', 'Name 1', 1, 3, 'Sector 1', 'I
 const company2: Company = new Company('Symbol 1', 'Name 2', 2, 4, 'Sector 2', 'Industry 2');
 company2.isVisible = false;
 const companies: Company[] = [company1, company2];
-const mockFetchCompanies = jest.fn(() => of(companies));
 const mockSelectCompany = jest.fn();
 
 describe.only('Companies Presentational Component', () => {
 	beforeEach(() => {
 		component = shallow(
-			<Companies selectCompany={mockSelectCompany} companySectors={[]} companies={companies} fetchCompanies={mockFetchCompanies} />
+			<Companies selectCompany={mockSelectCompany} companySectors={[]} companies={companies} />
 		);
 	});
 	afterEach(() => {

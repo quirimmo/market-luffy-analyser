@@ -11,7 +11,7 @@ const mapStateToProps = (state: IStoreState, ownProps: any) => {
 };
 
 const mapDispatchToProps: any = (dispatch: (fn: any) => any, ownProps: any) => ({
-	selectCompany: (company: Company | null): void => {
+	selectCompany: (company: Company): void => {
 		dispatch(selectCompany(company));
 	}
 });
