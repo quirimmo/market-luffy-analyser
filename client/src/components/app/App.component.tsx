@@ -10,6 +10,7 @@ import AppMainContent from '../app-main-content/AppMainContent.component';
 import { Observable, forkJoin } from 'rxjs';
 import Company from './../../models/Company';
 import { timeout, delay } from 'rxjs/operators';
+import LoadingGears from '../shared/LoadingGears.component';
 
 interface IAppProps {
 	connectToSocket: () => Observable<any>;
@@ -33,7 +34,7 @@ class App extends React.Component<IAppProps, IAppState> {
 	}
 
 	public getLoadingContent(): JSX.Element {
-		return <div className="container-fluid loading-component" />;
+		return <LoadingGears />;
 	}
 
 	public getMainContent(): JSX.Element {
@@ -44,6 +45,7 @@ class App extends React.Component<IAppProps, IAppState> {
 					<AppTitle />
 					<br />
 					<AppMainContent />
+					<div style={{ width: '200px', height: '200px', position: 'relative' }}>{this.getLoadingContent()}</div>
 				</Container>
 			</div>
 		);

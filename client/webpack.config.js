@@ -24,7 +24,8 @@ const config = {
 			template: SRC_DIR + '/index.html'
 		}),
 		new ExtractTextPlugin('styles.css'),
-		new CopyWebpackPlugin([{ from: './src/models/data/**/*', to: 'data/', flatten: true }])
+		new CopyWebpackPlugin([{ from: './assets/images/**/*', to: 'images/', flatten: true }])
+		// new CopyWebpackPlugin([{ from: './src/models/data/**/*', to: 'data/', flatten: true }])
 	],
 	output: {
 		path: BUILD_DIR,
