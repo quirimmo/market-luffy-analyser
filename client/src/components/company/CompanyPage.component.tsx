@@ -3,6 +3,8 @@ import Company from './../../models/Company';
 import { Alert } from 'reactstrap';
 import { Observable } from 'rxjs';
 import LoadingGears from '../shared/LoadingGears.component';
+import DailySerieCardPriceChange from '../daily-serie/DailySerieCardPriceChange.component';
+import CompanyDetails from './CompanyDetails.component';
 
 interface ICompanyPageProps {
 	company: Company;
@@ -24,7 +26,11 @@ class CompanyPage extends React.Component<ICompanyPageProps, ICompanyPageState> 
 	}
 
 	public render() {
-		return this.state.isLoading ? this.getLoadingContent() : this.state.isError ? this.getErrorContent() : this.getCompanyContent();
+		return this.state.isLoading
+			? this.getLoadingContent()
+			: this.state.isError || this.props.company === null
+				? this.getErrorContent()
+				: this.getCompanyContent();
 	}
 
 	public getLoadingContent(): JSX.Element {
@@ -36,7 +42,13 @@ class CompanyPage extends React.Component<ICompanyPageProps, ICompanyPageState> 
 	}
 
 	public getCompanyContent(): JSX.Element {
-		return <div>COMPANY CONTENT</div>;
+		return (
+			<div>
+				<div className="row text-center justify-content-center text-uppercase font-weight-bold">{this.props.company.name}</div>
+				<div className="row text-center justify-content-center text-uppercase font-italic">{this.props.company.symbol}</div>
+				<CompanyDetails company={this.props.company} />
+			</div>
+		);
 	}
 
 	public componentDidMount() {
