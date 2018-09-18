@@ -121,7 +121,7 @@ describe.only('Filter Companies Component', () => {
 	describe('dispatchToggleCompanyVisibility', () => {
 		it('should call the toggleCompanyVisibility with the parameters', () => {
 			component.setProps({ sectors: filledSectors });
-			component.setState({ selectedName: 'name'});
+			component.setState({ selectedName: 'name' });
 			component.instance().dispatchToggleCompanyVisibility();
 			expect(mockToggleCompanyVisibility).toHaveBeenCalledWith('name', ['SECTOR 1', 'SECTOR 2', 'SECTOR 3']);
 		});
