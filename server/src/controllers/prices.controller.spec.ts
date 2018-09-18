@@ -94,8 +94,18 @@ describe('PricesController', () => {
       onGetPrices(request, response);
       expect(mockSendSuccessfulResponse).toHaveBeenCalledWith(response, {
         data: {
-          FIRST_STOCK: [firstStockFirstDailyTime, secondStockFirstDailyTime],
-          SECOND_STOCK: [firstStockSecondDailyTime, secondStockSecondDailyTime]
+          FIRST_STOCK: {
+            lastMovement: 150,
+            prices: [firstStockFirstDailyTime, secondStockFirstDailyTime],
+            trend: 150,
+            priceChange: [150]
+          },
+          SECOND_STOCK: {
+            lastMovement: -200,
+            prices: [firstStockSecondDailyTime, secondStockSecondDailyTime],
+            trend: -200,
+            priceChange: [-200]
+          }
         }
       });
     });

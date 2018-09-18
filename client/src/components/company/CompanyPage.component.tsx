@@ -3,7 +3,6 @@ import Company from './../../models/Company';
 import { Alert } from 'reactstrap';
 import { Observable } from 'rxjs';
 import LoadingGears from '../shared/LoadingGears.component';
-import DailySerieCardPriceChange from '../daily-serie/DailySerieCardPriceChange.component';
 import CompanyDetails from './CompanyDetails.component';
 
 interface ICompanyPageProps {
