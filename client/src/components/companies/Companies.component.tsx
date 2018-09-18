@@ -1,14 +1,12 @@
 import * as React from 'react';
 import Company from 'models/Company';
 import CompanyCard from '../company/CompanyCard.component';
-import { Observable } from 'rxjs';
 import FilterCompaniesPage from './FilterCompanies.container';
-
-import './style.scss';
 import SortCompanies from './SortCompanies.component';
 import { Alert } from 'reactstrap';
 import LoadingGears from '../shared/LoadingGears.component';
 
+import './style.scss';
 interface ICompaniesProps {
 	companies: Company[];
 	companySectors: string[];
