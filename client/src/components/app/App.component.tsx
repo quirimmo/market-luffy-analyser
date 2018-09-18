@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { Container } from 'reactstrap';
+import { Container, Alert } from 'reactstrap';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import './../../../assets/styles/main.scss';
@@ -19,17 +19,22 @@ interface IAppProps {
 
 interface IAppState {
 	isLoading: boolean;
+	isError: boolean;
 }
 
 class App extends React.Component<IAppProps, IAppState> {
 	constructor(props: IAppProps) {
 		super(props);
-		this.state = { isLoading: false };
+		this.state = { isLoading: false, isError: false };
 	}
 
 	public render() {
-		const content = this.state.isLoading ? this.getLoadingContent() : this.getMainContent();
+		const content = this.state.isLoading ? this.getLoadingContent() : this.state.isError ? this.getErrorContent() : this.getMainContent();
 		return <BrowserRouter basename="/">{content}</BrowserRouter>;
+	}
+
+	public getErrorContent(): JSX.Element {
+		return <Alert className="text-center" color="danger">Error bootstrapping the application</Alert>;
 	}
 
 	public getLoadingContent(): JSX.Element {
@@ -50,14 +55,19 @@ class App extends React.Component<IAppProps, IAppState> {
 	}
 
 	public componentDidMount() {
-		this.setState({ isLoading: true });
-		forkJoin(this.props.connectToSocket(), this.props.fetchCompanies()).subscribe((data: any) => {
-			this.setState({ isLoading: false });
-		});
+		this.setState({ isError: false, isLoading: true });
+		forkJoin(this.props.connectToSocket(), this.props.fetchCompanies()).subscribe(
+			(data: any) => {
+				this.setState({ isLoading: false });
+			},
+			(err: any) => {
+				console.error('Error bootstrapping the application', err);
+				this.setState({ isLoading: false, isError: true });
+			}
+		);
 	}
 
 	public componentWillUnmount() {
-		// disconnect from the web socket when the app starts
 		this.props.disconnectFromSocket();
 	}
 }
