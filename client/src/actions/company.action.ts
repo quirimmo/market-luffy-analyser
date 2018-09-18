@@ -1,6 +1,5 @@
 import Company from './../models/Company';
 import { Observable, Observer, of } from 'rxjs';
-import { fetchCompaniesThunk } from './companies.action';
 import WebServiceProxy from './../services/WebServiceProxy';
 import { map } from 'rxjs/operators';
 import DailySerie from './../models/DailySerie';

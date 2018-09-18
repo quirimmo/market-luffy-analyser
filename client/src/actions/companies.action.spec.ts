@@ -7,15 +7,6 @@ jest.mock('rxjs/ajax', () => {
 });
 
 import * as companiesActions from './companies.action';
-// import {
-// 	FETCH_COMPANIES,
-// 	FETCH_COMPANIES_FULFILLED,
-// 	TOGGLE_COMPANY_VISIBILITY,
-// 	fetchCompaniesFulfilled,
-// 	fetchCompanies,
-// 	toggleCompanyVisibility,
-// 	fetchCompaniesThunk
-// } from './companies.action';
 import Company from './../models/Company';
 import { of } from 'rxjs';
 import WebServiceProxy from './../services/WebServiceProxy';
@@ -91,19 +82,4 @@ describe('companies action', () => {
 			});
 		});
 	});
-
-	// describe('fetchCompaniesEpic', () => {
-	// 	it('should return the action', () => {
-	// 		const action$ = ActionsObservable.of({ type: FETCH_COMPANIES });
-
-	// 		return fetchCompaniesEpic(action$)
-	// 			.toPromise()
-	// 			.then(actionReceived => {
-	// 				expect(actionReceived).toEqual({
-	// 					type: FETCH_COMPANIES_FULFILLED,
-	// 					companies
-	// 				});
-	// 			});
-	// 	});
-	// });
 });

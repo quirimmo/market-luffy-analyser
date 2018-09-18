@@ -44,7 +44,7 @@ describe('AppMainContent Presentational Component', () => {
 
 	describe('Route', () => {
 		it('should define the Route components', () => {
-			expect(component.find(Route)).toHaveLength(2);
+			expect(component.find(Route)).toHaveLength(3);
 		});
 
 		describe('home Route', () => {
