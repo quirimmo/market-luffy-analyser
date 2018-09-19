@@ -2,8 +2,7 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import { CompanyCard } from './CompanyCard.component';
 import Company from './../../models/Company';
-import { withRouter } from 'react-router-dom';
-import { Collapse, Button } from 'reactstrap';
+import { Collapse } from 'reactstrap';
 import CompanyCardInfoRow from './CompanyCardInfoRow.component';
 
 let component: any;
