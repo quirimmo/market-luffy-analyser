@@ -4,6 +4,7 @@ import Utils from './../../utils/Utils';
 
 interface IDailySerieCardPriceChangeProps {
 	priceChange: number[];
+	priceClasses?: string;
 }
 
 interface IDailySerieCardPriceChangeState {
@@ -19,6 +20,7 @@ class DailySerieCardPriceChange extends React.Component<IDailySerieCardPriceChan
 	}
 
 	public render() {
+		const cssClasses = this.props.priceClasses || 'col-xl-2 col-lg-3 col-md-3 col-sm-3 col-3 text-left';
 		return (
 			<div>
 				<div className="row text-center justify-content-center">
@@ -31,7 +33,7 @@ class DailySerieCardPriceChange extends React.Component<IDailySerieCardPriceChan
 						{this.props.priceChange.map((price: number, index: number) => (
 							<div
 								key={index}
-								className={`col-xl-2 col-lg-3 col-md-3 col-sm-3 col-3 p-0 text-left price-change-value ${Utils.getBearishBullishClass(price)}`}
+								className={`${cssClasses} p-0 price-change-value ${Utils.getBearishBullishClass(price)}`}
 							>
 								{`${price.toFixed(2)}%`}
 							</div>

@@ -1,16 +1,16 @@
 import { Router, Request, Response } from 'express';
 import { Observable } from 'rxjs';
 import DailyTimeSeries from '../entities/DailyTimeSeries';
-import { getRequestParameters, RequestParameters, getPrices } from './utils.controller';
+import { getRequestParameters, RequestParameters, getPrices, sendSuccessfulResponse } from './utils.controller';
 
 const router: Router = Router();
 
-router.get('/:symbols/:isPercentage?/:numberOfValues?', onGetTrends);
+router.get('/:symbols/:size?/:isPercentage?', onGetTrends);
 
 export function onGetTrends(req: Request, res: Response) {
-  const { isPercentage, numberOfValues, symbols }: RequestParameters = getRequestParameters(req);
+  const { isPercentage, symbols, size }: RequestParameters = getRequestParameters(req);
 
-  const results: Observable<any> = getPrices(symbols, numberOfValues);
+  const results: Observable<any> = getPrices(symbols, size);
   results.subscribe(onSubscribe);
 
   function onSubscribe(resp: DailyTimeSeries[]): void {
@@ -18,9 +18,9 @@ export function onGetTrends(req: Request, res: Response) {
       data: {}
     };
     resp.forEach((serie: DailyTimeSeries) => {
-      ret.data[serie.symbol] = serie.getTrendByPeriod(isPercentage, numberOfValues);
+      ret.data[serie.symbol] = serie.getTrendByPeriod(isPercentage);
     });
-    res.status(200).send(ret);
+    sendSuccessfulResponse(res, ret);
   }
 }
 

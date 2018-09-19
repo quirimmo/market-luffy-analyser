@@ -40,22 +40,23 @@ const firstStockDailyTimeSeries: DailyTimeSeries = new DailyTimeSeries('FIRST_ST
 const secondStockDailyTimeSeries: DailyTimeSeries = new DailyTimeSeries('SECOND_STOCK', second_daily_times);
 const dailyTimeSeries: DailyTimeSeries[] = [firstStockDailyTimeSeries, secondStockDailyTimeSeries];
 
-const mockGetPrices = jest.fn((symbols: string[], numberOfValues: number) => {
+const mockGetPrices = jest.fn((symbols: string[], size: string) => {
   return of(dailyTimeSeries);
 });
 const mockGetRequestParameters = jest.fn((req: any) => {
   return {
     isPercentage: req.params.isPercentage,
-    numberOfValues: req.params.numberOfValues,
+    size: req.params.size,
     symbols: req.params.symbols
   };
 });
-
+const mockSendSuccessfulResponse = jest.fn((resp: Response, data: any) => {});
 jest.mock('./utils.controller', () => ({
   getRequestParameters: mockGetRequestParameters,
-  getPrices: mockGetPrices
+  getPrices: mockGetPrices,
+  sendSuccessfulResponse: mockSendSuccessfulResponse
 }));
-import { getPrices, getRequestParameters } from './utils.controller';
+import { getPrices, getRequestParameters, sendSuccessfulResponse } from './utils.controller';
 import { MovementsController, onGetMovements } from './movements.controller';
 
 describe('MovementsController', () => {
@@ -73,7 +74,7 @@ describe('MovementsController', () => {
       url: '/movement/',
       params: {
         isPercentage: true,
-        numberOfValues: 31,
+        size: 'compact',
         symbols: 'FB,GOOG'
       }
     });
@@ -86,18 +87,12 @@ describe('MovementsController', () => {
 
     it('should call the getPrices with the right parameters', () => {
       onGetMovements(request, response);
-      expect(mockGetPrices).toHaveBeenCalledWith('FB,GOOG', 31);
+      expect(mockGetPrices).toHaveBeenCalledWith('FB,GOOG', 'compact');
     });
 
-    it('should call the response.send method sending the data', () => {
-      const spy = spyOn(response, 'send');
+    it('should call the sendSuccessfulResponse method of utils for sending the data', () => {
       onGetMovements(request, response);
-      expect(spy).toHaveBeenCalledWith({
-        data: {
-          FIRST_STOCK: 150,
-          SECOND_STOCK: -200
-        }
-      });
+      expect(mockSendSuccessfulResponse).toHaveBeenCalledWith(response, { data: { FIRST_STOCK: 150, SECOND_STOCK: -200 } });
     });
   });
 });

@@ -1,31 +1,42 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import CompanyCard from './CompanyCard.component';
+import { CompanyCard } from './CompanyCard.component';
 import Company from './../../models/Company';
-import { Collapse, Button } from 'reactstrap';
+import { Collapse } from 'reactstrap';
 import CompanyCardInfoRow from './CompanyCardInfoRow.component';
 
 let component: any;
 const company: Company = new Company('Symbol', 'Name', 1, 2, 'Sector', 'Industry');
+const mockSelectCompany = jest.fn();
+const match: any = {};
+const location: any = {};
+const mockHistoryPush = jest.fn();
+const history: any = {
+	push: mockHistoryPush
+};
 
 describe('Company Card Presentational Component', () => {
 	beforeEach(() => {
-		component = shallow(<CompanyCard company={company} />);
+		component = shallow(<CompanyCard selectCompany={mockSelectCompany} company={company} match={match} location={location} history={history} />);
+	});
+	afterEach(() => {
+		jest.clearAllMocks();
 	});
 
-	describe('Component', () => {
-		it('should be defined', () => {
-			expect(component).toBeDefined();
-		});
+	it('should be defined', () => {
+		expect(component).toBeDefined();
+	});
 
-		it('should define the public methods', () => {
-			expect(typeof component.instance().toggle).toEqual('function');
-		});
+	it('should define the public methods', () => {
+		expect(typeof component.instance().toggle).toEqual('function');
+		expect(typeof component.instance().openCompanyPage).toEqual('function');
+	});
 
-		it('should set the collapsed prop to false', () => {
-			expect(component.state().collapsed).toBeFalsy();
-		});
+	it('should init the state', () => {
+		expect(component.state().collapsed).toBeFalsy();
+	});
 
+	describe('render', () => {
 		it('should contain the article with class company-card', () => {
 			const el = component.find('article');
 			expect(el).toHaveLength(1);
@@ -38,24 +49,37 @@ describe('Company Card Presentational Component', () => {
 			expect(el.hasClass('company-card-details')).toBeTruthy();
 		});
 
-		it('should define the 5 CompanyCardInfoRow components', () => {
+		it('should display the 5 CompanyCardInfoRow components', () => {
 			expect(component.find(CompanyCardInfoRow)).toHaveLength(5);
 		});
 
 		describe('Button', () => {
 			let button: any;
+			let companyPageButton: any;
 
 			beforeEach(() => {
-				button = component.find(Button);
+				button = component.find('.company-button');
+				companyPageButton = component.find('.company-page-button');
 			});
 
-			it('should be defined with class company-button', () => {
-				expect(button).toHaveLength(1);
-				expect(button.hasClass('company-button')).toBeTruthy();
+			describe('toggle button', () => {
+				it('should be displayed', () => {
+					expect(button).toHaveLength(1);
+				});
+
+				it('should have text as the company name', () => {
+					expect(button.props().children).toEqual('Name');
+				});
 			});
 
-			it('should have text as the company name', () => {
-				expect(button.props().children).toEqual('Name');
+			describe('company page button', () => {
+				it('should be displayed', () => {
+					expect(companyPageButton).toHaveLength(1);
+				});
+
+				it('should have text as the company name', () => {
+					expect(companyPageButton.props().children).toEqual('Company Page');
+				});
 			});
 		});
 	});
@@ -64,6 +88,18 @@ describe('Company Card Presentational Component', () => {
 		it('should set the collapsed prop to true', () => {
 			component.instance().toggle();
 			expect(component.state().collapsed).toBeTruthy();
+		});
+	});
+
+	describe('openCompanyPage', () => {
+		it('should call the selectCompany method', () => {
+			component.instance().openCompanyPage();
+			expect(mockSelectCompany).toHaveBeenCalledWith(company);
+		});
+
+		it('should call the history push', () => {
+			component.instance().openCompanyPage();
+			expect(mockHistoryPush).toHaveBeenCalledWith('/company/Symbol');
 		});
 	});
 });

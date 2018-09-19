@@ -4,19 +4,19 @@ import { Observable } from 'rxjs';
 import DailyTimeSeries from '../entities/DailyTimeSeries';
 export interface RequestParameters {
   isPercentage: boolean;
-  numberOfValues: number;
+  size: string;
   symbols: string[];
 }
 
 export function getRequestParameters(req: Request): RequestParameters {
   const isPercentage = req.params.isPercentage || true;
-  const numberOfValues = req.params.numberOfValues;
   const symbols = req.params.symbols.split(',');
+  const size = req.params.size;
 
   return {
     isPercentage,
-    numberOfValues,
-    symbols
+    symbols,
+    size
   };
 }
 
@@ -26,8 +26,8 @@ export function sendSuccessfulResponse(response: Response, data: any) {
   response.status(200).send(data);
 }
 
-export function getPrices(symbols: string[], numberOfValues: number): Observable<any> {
+export function getPrices(symbols: string[], size: string = 'compact'): Observable<any> {
   const alphaVantageProxy: AlphaVantageProxy = new AlphaVantageProxy();
-  const results: Observable<DailyTimeSeries[]> = alphaVantageProxy.getDailyPricesBySymbols(symbols, numberOfValues);
+  const results: Observable<DailyTimeSeries[]> = alphaVantageProxy.getDailyPricesBySymbols(symbols, size);
   return results;
 }

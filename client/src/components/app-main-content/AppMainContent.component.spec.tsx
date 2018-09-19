@@ -5,12 +5,16 @@ import CompaniesPage from '../companies/Companies.container';
 import { Row, Col } from 'reactstrap';
 import { Switch, Route, Redirect } from 'react-router';
 import HomePage from '../home/Home.container';
+import CompanyPageContainer from '../company/CompanyPage.container';
 
 let component: any;
 
 describe('AppMainContent Presentational Component', () => {
 	beforeEach(() => {
 		component = shallow(<AppMainContent />);
+	});
+	afterEach(() => {
+		jest.clearAllMocks();
 	});
 
 	it('should be defined', () => {
@@ -20,6 +24,7 @@ describe('AppMainContent Presentational Component', () => {
 	it('should define the public methods', () => {
 		expect(typeof component.instance().getCompaniesPageRoute).toEqual('function');
 		expect(typeof component.instance().getHomePageRoute).toEqual('function');
+		expect(typeof component.instance().getCompanyPageRoute).toEqual('function');
 	});
 
 	it('should define the section element', () => {
@@ -44,7 +49,7 @@ describe('AppMainContent Presentational Component', () => {
 
 	describe('Route', () => {
 		it('should define the Route components', () => {
-			expect(component.find(Route)).toHaveLength(2);
+			expect(component.find(Route)).toHaveLength(3);
 		});
 
 		describe('home Route', () => {
@@ -74,6 +79,21 @@ describe('AppMainContent Presentational Component', () => {
 
 			it('should define the render prop', () => {
 				expect(companiesRoute.prop('render')).toEqual(component.instance().getCompaniesPageRoute);
+			});
+		});
+
+		describe('company page Route', () => {
+			let companyPageRoute: any;
+			beforeEach(() => {
+				companyPageRoute = component.find(Route).at(2);
+			});
+
+			it('should define the path prop', () => {
+				expect(companyPageRoute.prop('path')).toEqual('/company/:symbol');
+			});
+
+			it('should define the render prop', () => {
+				expect(companyPageRoute.prop('render')).toEqual(component.instance().getCompanyPageRoute);
 			});
 		});
 	});
@@ -106,6 +126,14 @@ describe('AppMainContent Presentational Component', () => {
 	describe('getHomePageRoute', () => {
 		it('should return the Home Component', () => {
 			expect(component.instance().getHomePageRoute()).toEqual(<HomePage />);
+		});
+	});
+
+	describe('getCompanyPageRoute', () => {
+		it('should return the CompanyPageContainer component', () => {
+			expect(component.instance().getCompanyPageRoute({ match: { params: { symbol: 'symb' } } })).toEqual(
+				<CompanyPageContainer companySymbol="symb" />
+			);
 		});
 	});
 });

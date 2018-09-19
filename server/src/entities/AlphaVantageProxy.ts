@@ -15,32 +15,32 @@ export default class AlphaVantageProxy {
     this.httpRequester = new HTTPRequester();
   }
 
-  getDailyPricesBySymbol(symbol: string, numberOfValues: number = 31): Observable<DailyTimeSeries> {
-    const REQUEST_URL: string = this.getRequestURL(DAILY_PRICES_FUNCTION, symbol);
+  getDailyPricesBySymbol(symbol: string, size: string = 'compact'): Observable<DailyTimeSeries> {
+    const REQUEST_URL: string = this.getRequestURL(DAILY_PRICES_FUNCTION, symbol, size);
     return this.httpRequester
       .get(REQUEST_URL)
       .pipe(this.pluckResponseData(DAILY_TIME_SERIES_KEY))
       .pipe(map(onMap));
 
     function onMap(data: any) {
-      return DailyTimeSeries.buildFromData(symbol, data, numberOfValues);
+      return DailyTimeSeries.buildFromData(symbol, data);
     }
   }
 
-  getDailyPricesBySymbols(symbols: string[], numberOfValues: number = 31): Observable<DailyTimeSeries[]> {
-    const REQUEST_URLS: string[] = symbols.map(symbol => this.getRequestURL(DAILY_PRICES_FUNCTION, symbol));
+  getDailyPricesBySymbols(symbols: string[], size: string = 'compact'): Observable<DailyTimeSeries[]> {
+    const REQUEST_URLS: string[] = symbols.map(symbol => this.getRequestURL(DAILY_PRICES_FUNCTION, symbol, size));
 
     return this.httpRequester.getAll(REQUEST_URLS).pipe(map(onMap));
 
     function onMap(el: any) {
       return el.map((item: any, index: number) =>
-        DailyTimeSeries.buildFromData(symbols[index], item.data[DAILY_TIME_SERIES_KEY], numberOfValues)
+        DailyTimeSeries.buildFromData(symbols[index], item.data[DAILY_TIME_SERIES_KEY])
       );
     }
   }
 
-  getRequestURL(alphavantageMethod: string, symbol: string): string {
-    return `${BASE_URL}?function=${alphavantageMethod}&symbol=${symbol}&apikey=${API_KEY}`;
+  getRequestURL(alphavantageMethod: string, symbol: string, size: string = 'compact'): string {
+    return `${BASE_URL}?function=${alphavantageMethod}&symbol=${symbol}&apikey=${API_KEY}&outputsize=${size}`;
   }
 
   pluckResponseData(valuesKey: string): OperatorFunction<{}, {}> {

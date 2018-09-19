@@ -15,7 +15,7 @@ export const fetchCompaniesThunk = () => {
 	};
 };
 
-export const fetchCompanies = (): Observable<any> => {
+export const fetchCompanies = (): Observable<Company[]> => {
 	return WebServiceProxy.getCompanies().pipe(take(1));
 };
 

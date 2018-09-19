@@ -26,7 +26,6 @@ export default class DailyTimeSeries {
       if (ind < period - 1) {
         let diff: number = parseFloat((val.close - arr[ind + 1].close).toFixed(val.decimalsPrecision));
         if (isPercentage) {
-          // const previousClose: number = ind > 0 ? arr[ind - 1] ;
           diff = parseFloat(((diff / Math.abs(arr[ind + 1].close)) * 100).toFixed(val.decimalsPrecision));
         }
         acc.push(diff);
@@ -40,13 +39,12 @@ export default class DailyTimeSeries {
     return priceChange.reduce((acc: number, val: number) => acc + val, 0);
   }
 
-  static buildFromData(symbol: string, data: any, numberOfValues: number = 31): DailyTimeSeries {
+  static buildFromData(symbol: string, data: any): DailyTimeSeries {
     if (!data) {
       return new DailyTimeSeries(symbol);
     }
     const keys: Array<string> = Object.keys(data);
     const values: DailyTime[] = keys.map(key => new DailyTime(key, data[key]));
-    const slicedValues: DailyTime[] = values.slice(0, numberOfValues);
-    return new DailyTimeSeries(symbol, slicedValues);
+    return new DailyTimeSeries(symbol, values);
   }
 }

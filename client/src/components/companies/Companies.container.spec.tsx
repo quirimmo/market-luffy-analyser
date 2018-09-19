@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 import configureMockStore from 'redux-mock-store';
-
 import CompaniesPage from './Companies.container';
 import Company from './../../models/Company';
 import thunk from 'redux-thunk';
+import * as companyActions from './../../actions/company.action';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -30,18 +30,14 @@ describe('Companies Container Component', () => {
 	});
 
 	it('should define the fetchCompanies prop', () => {
-		expect(typeof component.props().fetchCompanies).toEqual('function');
+		expect(typeof component.props().selectCompany).toEqual('function');
 	});
 
-	describe('fetchCompanies', () => {
-		it('should dispatch the FETCH_COMPANIES action', () => {
-			const expectedAction = { type: 'FETCH_COMPANIES' };
-			component
-				.props()
-				.fetchCompanies()
-				.subscribe(() => {
-					expect(store.getActions()).toContainEqual(expectedAction);
-				});
+	describe('selectCompany', () => {
+		it('should dispatch the selectCompany action', () => {
+			const spy = spyOn(companyActions, 'selectCompany').and.returnValue({ type: 'MOCKED_ACTION' });
+			component.props().selectCompany(company);
+			expect(spy).toHaveBeenCalledWith(company);
 		});
 	});
 });

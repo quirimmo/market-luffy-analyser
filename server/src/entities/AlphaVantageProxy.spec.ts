@@ -37,14 +37,16 @@ describe('AlphaVantageProxy', () => {
       const spy = spyOn(instance, 'getRequestURL');
       instance.getDailyPricesBySymbol('FB');
       expect(spy).toHaveBeenCalledTimes(1);
-      expect(spy).toHaveBeenCalledWith('TIME_SERIES_DAILY', 'FB');
+      expect(spy).toHaveBeenCalledWith('TIME_SERIES_DAILY', 'FB', 'compact');
     });
 
     it('should call the get method of httprequester with the right parameter', () => {
       const spy = jest.spyOn(instance.httpRequester, 'get');
       instance.getDailyPricesBySymbol('FB');
       expect(spy).toHaveBeenCalledTimes(1);
-      expect(spy).toHaveBeenCalledWith('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=FB&apikey=X71A1MTU6F1C1B4G');
+      expect(spy).toHaveBeenCalledWith(
+        'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=FB&apikey=X71A1MTU6F1C1B4G&outputsize=compact'
+      );
     });
 
     it('should call the pluckResponseData method', () => {
@@ -65,7 +67,8 @@ describe('AlphaVantageProxy', () => {
       const spy = jest.spyOn(instance, 'getRequestURL');
       instance.getDailyPricesBySymbols(['FB', 'TWITTER']);
       expect(spy).toHaveBeenCalledTimes(2);
-      expect(spy).toHaveBeenCalledWith('TIME_SERIES_DAILY', 'FB');
+      expect(spy).toHaveBeenNthCalledWith(1, 'TIME_SERIES_DAILY', 'FB', 'compact');
+      expect(spy).toHaveBeenNthCalledWith(2, 'TIME_SERIES_DAILY', 'TWITTER', 'compact');
     });
 
     it('should call the getAll method of httprequester twice with the right parameters', () => {
@@ -73,8 +76,8 @@ describe('AlphaVantageProxy', () => {
       instance.getDailyPricesBySymbols(['FB', 'TWITTER']);
       expect(spy).toHaveBeenCalledTimes(1);
       expect(spy).toHaveBeenCalledWith([
-        'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=FB&apikey=X71A1MTU6F1C1B4G',
-        'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=TWITTER&apikey=X71A1MTU6F1C1B4G'
+        'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=FB&apikey=X71A1MTU6F1C1B4G&outputsize=compact',
+        'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=TWITTER&apikey=X71A1MTU6F1C1B4G&outputsize=compact'
       ]);
     });
 
@@ -87,7 +90,7 @@ describe('AlphaVantageProxy', () => {
   describe('getRequestURL', () => {
     it('should return the composed URL', () => {
       expect(instance.getRequestURL('method', 'symbol')).toEqual(
-        'https://www.alphavantage.co/query?function=method&symbol=symbol&apikey=X71A1MTU6F1C1B4G'
+        'https://www.alphavantage.co/query?function=method&symbol=symbol&apikey=X71A1MTU6F1C1B4G&outputsize=compact'
       );
     });
   });

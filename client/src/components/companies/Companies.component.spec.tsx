@@ -3,21 +3,23 @@ import { shallow } from 'enzyme';
 import Company from './../../models/Company';
 import Companies from './Companies.component';
 import CompanyCard from '../company/CompanyCard.component';
-import { of } from 'rxjs';
 import { Alert } from 'reactstrap';
 import FilterCompaniesPage from './FilterCompanies.container';
 import SortCompanies from './SortCompanies.component';
+import LoadingGears from '../shared/LoadingGears.component';
 
 let component: any;
 const company1: Company = new Company('Symbol 2', 'Name 1', 1, 3, 'Sector 1', 'Industry 1');
 const company2: Company = new Company('Symbol 1', 'Name 2', 2, 4, 'Sector 2', 'Industry 2');
 company2.isVisible = false;
 const companies: Company[] = [company1, company2];
-const mockFetchCompanies = jest.fn(() => of(companies));
+const mockSelectCompany = jest.fn();
 
 describe.only('Companies Presentational Component', () => {
 	beforeEach(() => {
-		component = shallow(<Companies companySectors={[]} companies={companies} fetchCompanies={mockFetchCompanies} />);
+		component = shallow(
+			<Companies selectCompany={mockSelectCompany} companySectors={[]} companies={companies} />
+		);
 	});
 	afterEach(() => {
 		jest.clearAllMocks();
@@ -41,47 +43,17 @@ describe.only('Companies Presentational Component', () => {
 		it('should init the state', () => {
 			expect(component.state()).toEqual({
 				sectors: ['Sector 1', 'Sector 2'],
-				isLoading: false,
-				isError: false
+				isLoading: false
 			});
 		});
 	});
 
 	describe('render', () => {
-		describe('error', () => {
-			let alert: any;
-			beforeEach(() => {
-				component.setState({ isError: true });
-				alert = component.find(Alert);
-			});
-			afterEach(() => {
-				component.setState({ isError: false });
-			});
-
-			it('should display the Alert component', () => {
-				expect(alert).toHaveLength(1);
-			});
-
-			it('should have the danger color prop', () => {
-				expect(alert.props().color).toEqual('danger');
-			});
-
-			it('should display the text', () => {
-				expect(alert.props().children).toEqual('Error fetching the companies');
-			});
-
-			it('should not display the other content', () => {
-				expect(component.find('.loading-companies-message')).toHaveLength(0);
-				expect(component.find('.no-companies-message')).toHaveLength(0);
-				expect(component.find('.companies-section-wrapper')).toHaveLength(0);
-			});
-		});
-
 		describe('loading', () => {
 			let loading: any;
 			beforeEach(() => {
 				component.setState({ isLoading: true });
-				loading = component.find('.loading-companies-message');
+				loading = component.find(LoadingGears);
 			});
 			afterEach(() => {
 				component.setState({ isLoading: false });
@@ -91,13 +63,8 @@ describe.only('Companies Presentational Component', () => {
 				expect(loading).toHaveLength(1);
 			});
 
-			it('should display the loading companies message', () => {
-				expect(loading.text()).toEqual('Loading companies...');
-			});
-
 			it('should not display the other content', () => {
 				expect(component.find(Alert)).toHaveLength(0);
-				expect(component.find('.no-companies-message')).toHaveLength(0);
 				expect(component.find('.companies-section-wrapper')).toHaveLength(0);
 			});
 		});
@@ -106,7 +73,7 @@ describe.only('Companies Presentational Component', () => {
 			let noResults: any;
 			beforeEach(() => {
 				component.setProps({ companies: [] });
-				noResults = component.find('.no-companies-message');
+				noResults = component.find(Alert);
 			});
 			afterEach(() => {
 				component.setProps({ companies });
@@ -117,12 +84,11 @@ describe.only('Companies Presentational Component', () => {
 			});
 
 			it('should display the no companies message', () => {
-				expect(noResults.text()).toEqual('There are no companies');
+				expect(noResults.props().children).toEqual('The are no companies in the list');
 			});
 
 			it('should not display the other content', () => {
-				expect(component.find(Alert)).toHaveLength(0);
-				expect(component.find('.loading-companies-message')).toHaveLength(0);
+				expect(component.find(LoadingGears)).toHaveLength(0);
 				expect(component.find('.companies-section-wrapper')).toHaveLength(0);
 			});
 		});
@@ -157,6 +123,11 @@ describe.only('Companies Presentational Component', () => {
 				expect(component.find(CompanyCard)).toHaveLength(1);
 				expect(component.find(CompanyCard).props().company).toEqual(company1);
 			});
+
+			it('should not display the other contents', () => {
+				expect(component.find(Alert)).toHaveLength(0);
+				expect(component.find(LoadingGears)).toHaveLength(0);
+			});
 		});
 	});
 
@@ -168,7 +139,7 @@ describe.only('Companies Presentational Component', () => {
 		it('should return the company list element if the company is visible', () => {
 			expect(component.instance().onMapCompany(company1)).toEqual(
 				<div className="col-lg-3 col-md-4 col-sm-6" key={company1.symbol}>
-					<CompanyCard company={company1} />
+					<CompanyCard selectCompany={mockSelectCompany} company={company1} />
 				</div>
 			);
 		});

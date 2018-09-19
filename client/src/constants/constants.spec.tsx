@@ -1,4 +1,4 @@
-import { SERVER_URL, COMPANIES_PATH, COMPANIES_RESOURCE_URL } from './constants';
+import { SERVER_URL, COMPANIES_PATH, COMPANIES_RESOURCE_URL, PRICES_PATH, PRICES_RESOURCE_URL } from './constants';
 
 describe('constants', () => {
 	it('should define the server URL', () => {
@@ -9,7 +9,15 @@ describe('constants', () => {
 		expect(COMPANIES_PATH).toEqual('companies/');
 	});
 
+	it('should define the prices path', () => {
+		expect(PRICES_PATH).toEqual('prices/');
+	});
+
 	it('should define the full companies URL', () => {
 		expect(COMPANIES_RESOURCE_URL).toEqual('http://localhost:3000/companies/');
+	});
+
+	it('should define the full prices URL', () => {
+		expect(PRICES_RESOURCE_URL).toEqual('http://localhost:3000/prices/');
 	});
 });

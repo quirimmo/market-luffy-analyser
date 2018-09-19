@@ -45,16 +45,18 @@ const mockGetPrices = jest.fn((symbols: string[], numberOfValues: number) => {
 const mockGetRequestParameters = jest.fn((req: any) => {
   return {
     isPercentage: req.params.isPercentage,
-    numberOfValues: req.params.numberOfValues,
+    size: req.params.size,
     symbols: req.params.symbols
   };
 });
+const mockSendSuccessfulResponse = jest.fn((resp: Response, data: any) => {});
 
 jest.mock('./utils.controller', () => ({
   getRequestParameters: mockGetRequestParameters,
-  getPrices: mockGetPrices
+  getPrices: mockGetPrices,
+  sendSuccessfulResponse: mockSendSuccessfulResponse
 }));
-import { getPrices, getRequestParameters } from './utils.controller';
+import { getPrices, getRequestParameters, sendSuccessfulResponse } from './utils.controller';
 import { PricesController, onGetPrices } from './prices.controller';
 
 describe('PricesController', () => {
@@ -72,7 +74,7 @@ describe('PricesController', () => {
       url: '/price/',
       params: {
         isPercentage: true,
-        numberOfValues: 31,
+        size: 'compact',
         symbols: 'FB,GOOG'
       }
     });
@@ -85,16 +87,25 @@ describe('PricesController', () => {
 
     it('should call the getPrices with the right parameters', () => {
       onGetPrices(request, response);
-      expect(mockGetPrices).toHaveBeenCalledWith('FB,GOOG', 31);
+      expect(mockGetPrices).toHaveBeenCalledWith('FB,GOOG', 'compact');
     });
 
-    it('should call the response.send method sending the data', () => {
-      const spy = spyOn(response, 'send');
+    it('should call the sendSuccessfulResponse method of utils for sending the data', () => {
       onGetPrices(request, response);
-      expect(spy).toHaveBeenCalledWith({
+      expect(mockSendSuccessfulResponse).toHaveBeenCalledWith(response, {
         data: {
-          FIRST_STOCK: [firstStockFirstDailyTime, secondStockFirstDailyTime],
-          SECOND_STOCK: [firstStockSecondDailyTime, secondStockSecondDailyTime]
+          FIRST_STOCK: {
+            lastMovement: 150,
+            prices: [firstStockFirstDailyTime, secondStockFirstDailyTime],
+            trend: 150,
+            priceChange: [150]
+          },
+          SECOND_STOCK: {
+            lastMovement: -200,
+            prices: [firstStockSecondDailyTime, secondStockSecondDailyTime],
+            trend: -200,
+            priceChange: [-200]
+          }
         }
       });
     });

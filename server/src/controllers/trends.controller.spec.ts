@@ -45,16 +45,18 @@ const mockGetPrices = jest.fn((symbols: string[], numberOfValues: number) => {
 const mockGetRequestParameters = jest.fn((req: any) => {
   return {
     isPercentage: req.params.isPercentage,
-    numberOfValues: req.params.numberOfValues,
+    size: req.params.size,
     symbols: req.params.symbols
   };
 });
+const mockSendSuccessfulResponse = jest.fn((resp: Response, data: any) => {});
 
 jest.mock('./utils.controller', () => ({
   getRequestParameters: mockGetRequestParameters,
-  getPrices: mockGetPrices
+  getPrices: mockGetPrices,
+  sendSuccessfulResponse: mockSendSuccessfulResponse
 }));
-import { getPrices, getRequestParameters } from './utils.controller';
+import { getPrices, getRequestParameters, sendSuccessfulResponse } from './utils.controller';
 import { TrendsController, onGetTrends } from './trends.controller';
 
 describe('TrendsController', () => {
@@ -72,7 +74,7 @@ describe('TrendsController', () => {
       url: '/trend/',
       params: {
         isPercentage: true,
-        numberOfValues: 2,
+        size: 'compact',
         symbols: 'FB,GOOG'
       }
     });
@@ -85,13 +87,12 @@ describe('TrendsController', () => {
 
     it('should call the getPrices with the right parameters', () => {
       onGetTrends(request, response);
-      expect(mockGetPrices).toHaveBeenCalledWith('FB,GOOG', 2);
+      expect(mockGetPrices).toHaveBeenCalledWith('FB,GOOG', 'compact');
     });
 
-    it('should call the response.send method sending the data', () => {
-      const spy = spyOn(response, 'send');
+    it('should call the sendSuccessfulResponse method of utils for sending the data', () => {
       onGetTrends(request, response);
-      expect(spy).toHaveBeenCalledWith({
+      expect(mockSendSuccessfulResponse).toHaveBeenCalledWith(response, {
         data: {
           FIRST_STOCK: 150,
           SECOND_STOCK: -200

@@ -1,8 +1,10 @@
 import Company from './Company';
+import DailySerie from './DailySerie';
 
 interface IStoreState {
 	companies: Company[];
-	dailySeries: any[];
+	dailySeries: DailySerie[];
+	selectedCompany?: Company;
 }
 
 export default IStoreState;
