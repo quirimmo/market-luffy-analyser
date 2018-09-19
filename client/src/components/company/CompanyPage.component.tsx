@@ -22,6 +22,9 @@ class CompanyPage extends React.Component<ICompanyPageProps, ICompanyPageState> 
 			isError: false,
 			isLoading: false
 		};
+		this.getLoadingContent = this.getLoadingContent.bind(this);
+		this.getErrorContent = this.getErrorContent.bind(this);
+		this.getCompanyContent = this.getCompanyContent.bind(this);
 	}
 
 	public render() {
