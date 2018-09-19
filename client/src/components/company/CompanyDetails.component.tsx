@@ -19,7 +19,7 @@ class CompanyDetails extends React.Component<ICompanyDetailsProps, any> {
 		return (
 			<div>
 				{/* large screens */}
-				<table className="table d-none d-md-table">
+				<table className="company-details-table-container table d-none d-md-table">
 					<thead>
 						<tr>
 							<th scope="col">Sector</th>
@@ -50,7 +50,7 @@ class CompanyDetails extends React.Component<ICompanyDetailsProps, any> {
 					</tbody>
 				</table>
 				{/* small screens */}
-				<div className="row d-block d-md-none">
+				<div className="company-details-div-container row d-block d-md-none">
 					<div className="row col-xl-3 text-left">
 						<label className="col-4 font-weight-bold text-left">Sector</label>
 						<span className="col-8 font-italic text-left">{this.props.company.sector}</span>
