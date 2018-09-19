@@ -1,11 +1,11 @@
 import * as React from 'react';
 import Company from 'models/Company';
 import { Collapse, Button } from 'reactstrap';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import './style.scss';
 import CompanyCardInfoRow from './CompanyCardInfoRow.component';
-export interface ICompanyProps {
+export interface ICompanyCardProps {
 	selectCompany: (company: Company | null) => void;
 	company: Company;
 	match: any;
@@ -13,8 +13,8 @@ export interface ICompanyProps {
 	history: any;
 }
 
-class CompanyCard extends React.Component<ICompanyProps, any> {
-	constructor(props: any) {
+export class CompanyCard extends React.Component<ICompanyCardProps, any> {
+	constructor(props: ICompanyCardProps) {
 		super(props);
 		this.state = { collapsed: false };
 		this.toggle = this.toggle.bind(this);
