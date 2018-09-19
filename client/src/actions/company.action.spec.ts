@@ -17,7 +17,6 @@ describe('company action', () => {
 
 	it('should define the action types', () => {
 		expect(companyActions.SELECT_COMPANY).toEqual('SELECT_COMPANY');
-		expect(companyActions.FETCH_COMPANY).toEqual('FETCH_COMPANY');
 	});
 
 	it('should define the actions', () => {

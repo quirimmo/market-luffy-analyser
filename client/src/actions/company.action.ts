@@ -5,7 +5,6 @@ import { map } from 'rxjs/operators';
 import DailySerie from './../models/DailySerie';
 
 export const SELECT_COMPANY: string = 'SELECT_COMPANY';
-export const FETCH_COMPANY: string = 'FETCH_COMPANY';
 
 export const selectCompany = (company: Company) => ({ type: SELECT_COMPANY, company });
 
