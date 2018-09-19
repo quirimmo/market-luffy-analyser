@@ -39,6 +39,7 @@ describe('WebServiceProxy', () => {
 
 	it('should define the exposed methdos', () => {
 		expect(typeof WebServiceProxy.getCompanies).toEqual('function');
+		expect(typeof WebServiceProxy.getCompanyPricesInfo).toEqual('function');
 	});
 
 	describe('getCompanies', () => {
@@ -53,6 +54,18 @@ describe('WebServiceProxy', () => {
 				expect(data).toEqual([new Company('Symbol', 'Name', 1, 2, 'Sector', 'Industry')]);
 			});
 			jest.runOnlyPendingTimers();
+		});
+	});
+
+	describe('getCompanyPricesInfo', () => {
+		it('should call the ajax method of rxjs with the compact size parameter', () => {
+			WebServiceProxy.getCompanyPricesInfo('symbol');
+			expect(mockAjax).toHaveBeenCalledWith(`http://localhost:3000/prices/symbol/compact`);
+		});
+
+		it('should call the ajax method of rxjs with the full size parameter', () => {
+			WebServiceProxy.getCompanyPricesInfo('symbol', false);
+			expect(mockAjax).toHaveBeenCalledWith(`http://localhost:3000/prices/symbol/full`);
 		});
 	});
 });

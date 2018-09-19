@@ -17,11 +17,6 @@ class WebServiceProxy {
 	public static getCompanyPricesInfo(symbol: string, isCompact: boolean = true) {
 		const size: string = isCompact ? 'compact' : 'full';
 		return ajax(`${PRICES_RESOURCE_URL}${symbol}/${size}`);
-		// return ajax(PRICES_RESOURCE_URL).pipe(
-		// 	map((data: any) =>
-		// 		data.response.map((value: any) => new Company(value.symbol, value.name, value.lastSale, value.marketCap, value.sector, value.industry))
-		// 	)
-		// );
 	}
 }
 
