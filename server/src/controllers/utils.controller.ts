@@ -13,6 +13,13 @@ export function getRequestParameters(req: Request): RequestParameters {
   const symbols = req.params.symbols.split(',');
   const size = req.params.size;
 
+  if (typeof size === 'number') {
+    console.log('you gave me a number');
+  }
+  if (typeof size === 'string') {
+    console.log('you gave me a string');
+  }
+
   return {
     isPercentage,
     symbols,

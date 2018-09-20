@@ -41,10 +41,10 @@ class CompanyDetails extends React.Component<ICompanyDetailsProps, any> {
 								<NumberFormatter value={this.props.company.lastSale} />
 							</td>
 							<td scope="row" className={`${Utils.getBearishBullishClass(dailySerie.lastMovement)}`}>
-								{dailySerie.lastMovement}
+								<NumberFormatter value={dailySerie.lastMovement} suffix="%" />
 							</td>
 							<td scope="row" className={`${Utils.getBearishBullishClass(dailySerie.trend)}`}>
-								{dailySerie.trend}
+								<NumberFormatter value={dailySerie.trend} suffix="%" />
 							</td>
 						</tr>
 					</tbody>
@@ -73,11 +73,15 @@ class CompanyDetails extends React.Component<ICompanyDetailsProps, any> {
 					</div>
 					<div className="row col-xl-3 text-left">
 						<label className="col-4 font-weight-bold text-left">Movement</label>
-						<span className={`col-8 font-italic text-left ${Utils.getBearishBullishClass(dailySerie.lastMovement)}`}>{dailySerie.lastMovement}</span>
+						<span className={`col-8 font-italic text-left ${Utils.getBearishBullishClass(dailySerie.lastMovement)}`}>
+							<NumberFormatter value={dailySerie.lastMovement} suffix="%" />
+						</span>
 					</div>
 					<div className="row col-xl-3 text-left">
 						<label className="col-4 font-weight-bold text-left">Trend</label>
-						<span className={`col-8 font-italic text-left ${Utils.getBearishBullishClass(dailySerie.trend)}`}>{dailySerie.trend}</span>
+						<span className={`col-8 font-italic text-left ${Utils.getBearishBullishClass(dailySerie.trend)}`}>
+							<NumberFormatter value={dailySerie.trend} suffix="%" />
+						</span>
 					</div>
 				</div>
 				{/* daily serie prices change */}
