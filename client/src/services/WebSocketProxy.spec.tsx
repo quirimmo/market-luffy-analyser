@@ -10,7 +10,7 @@ const instance: WebSocketProxy = new WebSocketProxy();
 
 describe('WebSocketProxy', () => {
 	const luffyMessage = {
-		finished: false,
+		isLast: false,
 		data: {
 			symbol: 'Symbol',
 			lastMovement: 0,
@@ -83,7 +83,7 @@ describe('WebSocketProxy', () => {
 			const spy = spyOn(WebSocketProxy.getStreamObservable(), 'next');
 			WebSocketProxy.onLuffyMessageSubscribe(luffyMessage);
 			const dailySerie: DailySerie = new DailySerie('Symbol', 0, [1, 2], 3);
-			expect(spy).toHaveBeenCalledWith({ dailySerie, finished: false });
+			expect(spy).toHaveBeenCalledWith({ dailySerie, isLast: false });
 		});
 	});
 

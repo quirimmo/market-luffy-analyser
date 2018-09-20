@@ -31,6 +31,8 @@ export const fetchCompanyThunk = (companySymbol: string) => {
 			resp.response.data[companySymbol].priceChange,
 			resp.response.data[companySymbol].trend
 		);
+		company.dailySerie.buildDailyTimes(resp.response.data[companySymbol].prices);
+		company.dailySerie.setupTrendInfo();
 		return company;
 	}
 
