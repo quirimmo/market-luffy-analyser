@@ -7,6 +7,7 @@ import * as moment from 'moment';
 import DailyTime from './../../models/DailyTime';
 import DailySerieTrendDetails from './DailySerieTrendDetails.component';
 import DailySeriePriceStatisticsDetails from './DailySeriePriceStatisticsDetails.component';
+import DailySerieDaysDetails from './DailySerieDaysDetails.component';
 
 interface IDailySerieDetails {
 	dailySerie: DailySerie;
@@ -19,10 +20,16 @@ class DailySerieDetails extends React.Component<IDailySerieDetails, any> {
 
 	public render() {
 		return (
-			<div>
-				<DailySerieTrendDetails dailySerie={this.props.dailySerie} />
-				<br />
-				<DailySeriePriceStatisticsDetails dailySerie={this.props.dailySerie} />
+			<div className="row">
+				<div className="col-xl-4 col-lg-6 col-md-4 col-sm-6 col-12">
+					<DailySerieTrendDetails dailySerie={this.props.dailySerie} />
+				</div>
+				<div className="col-xl-4 col-lg-6 col-md-4 col-sm-6 col-12">
+					<DailySeriePriceStatisticsDetails dailySerie={this.props.dailySerie} />
+				</div>
+				<div className="col-xl-4 col-lg-6 col-md-4 col-sm-6 col-12">
+				 <DailySerieDaysDetails dailySerie={this.props.dailySerie} />
+				</div>
 			</div>
 		);
 	}
