@@ -48,6 +48,7 @@ class CompanyPage extends React.Component<ICompanyPageProps, ICompanyPageState> 
 			<div>
 				<div className="row text-center justify-content-center text-uppercase font-weight-bold">{this.props.company.name}</div>
 				<div className="row text-center justify-content-center text-uppercase font-italic">{this.props.company.symbol}</div>
+				<br />
 				<CompanyDetails company={this.props.company} />
 			</div>
 		);

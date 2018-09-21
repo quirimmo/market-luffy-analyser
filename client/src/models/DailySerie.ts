@@ -30,11 +30,11 @@ class DailySerie {
 	}
 
 	public getStartingDailyTime(): DailyTime {
-		return this.dailyTimes[this.dailyTimes.length - 1];
+		return this.dailyTimes[this.dailyTimes.length - 1] || new DailyTime('', 0, 0, 0, 0, 0, 0);
 	}
 
 	public getLastDailyTime(): DailyTime {
-		return this.dailyTimes[0];
+		return this.dailyTimes[0] || new DailyTime('', 0, 0, 0, 0, 0, 0);
 	}
 
 	public getLastHigherCloseDailyTime(): DailyTime {

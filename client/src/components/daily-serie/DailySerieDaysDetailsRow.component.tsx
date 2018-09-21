@@ -5,6 +5,7 @@ import NumberFormatter from '../shared/NumberFormatter.component';
 interface IDailySerieDaysDetailsRow {
 	label: string;
 	value: number;
+	className?: string;
 }
 
 class DailySerieDaysDetailsRow extends React.Component<IDailySerieDaysDetailsRow, any> {
@@ -13,10 +14,11 @@ class DailySerieDaysDetailsRow extends React.Component<IDailySerieDaysDetailsRow
 	}
 
 	public render() {
+		const cssClasses = this.props.className || '';
 		return (
 			<div className="row">
-				<div className="col-lg-8 col-sm-12 col-12">{this.props.label}</div>
-				<div className="col-lg-4 col-sm-12 col-12">{this.props.value}</div>
+				<div className="col-lg-8 col-sm-12 col-12 font-weight-bold">{this.props.label}</div>
+				<div className={`col-lg-4 col-sm-12 col-12  ${cssClasses}`}>{this.props.value}</div>
 			</div>
 		);
 	}

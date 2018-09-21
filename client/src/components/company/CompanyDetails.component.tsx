@@ -85,8 +85,9 @@ class CompanyDetails extends React.Component<ICompanyDetailsProps, any> {
 						</span>
 					</div>
 				</div>
+				<br />
 				<DailySerieDetails dailySerie={dailySerie} />
-				{/* daily serie prices change */}
+				<br />
 				<DailySerieCardPriceChange priceClasses="col-xl-1 col-lg-1 col-md-2 col-sm-2 col-3 text-center" priceChange={dailySerie.priceChange} />
 			</div>
 		);

@@ -14,7 +14,7 @@ class DailySerieTrendDetailsRow extends React.Component<IDailySerieTrendDetailsR
 	public render() {
 		return (
 			<div className="row">
-				<div className="col-lg-6 col-sm-12 col-12">{this.props.label}</div>
+				<div className="col-lg-6 col-sm-12 col-12 font-weight-bold">{this.props.label}</div>
 				<div className="col-lg-6 col-sm-12 col-12">
 					<PercentageFormatter value={this.props.value} />
 				</div>
