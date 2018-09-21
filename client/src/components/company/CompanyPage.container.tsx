@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
 
 const mapStateToProps = (state: IStoreState, ownProps: any) => {
 	return {
-		company: state.selectedCompany
+		company: state.selectedCompany,
+		companies: state.companies
 	};
 };
 

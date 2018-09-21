@@ -1,7 +1,7 @@
 import Company from './../models/Company';
 import { Observable, Observer, of } from 'rxjs';
 import WebServiceProxy from './../services/WebServiceProxy';
-import { map } from 'rxjs/operators';
+import { map, delay } from 'rxjs/operators';
 import DailySerie from './../models/DailySerie';
 
 export const SELECT_COMPANY: string = 'SELECT_COMPANY';

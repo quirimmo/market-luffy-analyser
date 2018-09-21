@@ -4,6 +4,7 @@ interface INumberFormatterProps {
 	value: number;
 	decimalsPrecision?: number;
 	suffix?: string;
+	className?: string;
 }
 
 class NumberFormatter extends React.Component<INumberFormatterProps, any> {
@@ -19,7 +20,12 @@ class NumberFormatter extends React.Component<INumberFormatterProps, any> {
 	}
 
 	public render() {
-		return <div>{this.formattedValue}{this.suffix}</div>;
+		return (
+			<div className={this.props.className}>
+				{this.formattedValue}
+				{this.suffix}
+			</div>
+		);
 	}
 
 	public formatValue(): string {

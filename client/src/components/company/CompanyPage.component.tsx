@@ -7,6 +7,7 @@ import CompanyDetails from './CompanyDetails.component';
 
 interface ICompanyPageProps {
 	company: Company;
+	companies: Company[];
 	fetchCompany: () => Observable<boolean>;
 }
 
@@ -54,16 +55,18 @@ class CompanyPage extends React.Component<ICompanyPageProps, ICompanyPageState> 
 	}
 
 	public componentDidMount() {
-		this.setState((prevState: ICompanyPageState) => ({ ...prevState, isLoading: true }));
-		this.props.fetchCompany().subscribe(
-			(data: any) => {
-				this.setState({ isError: false, isLoading: false });
-			},
-			(err: any) => {
-				this.setState({ isError: true, isLoading: false });
-				console.error('Error fetching the company', err, this.props.company);
-			}
-		);
+		if (this.props.companies.length) {
+			this.setState((prevState: ICompanyPageState) => ({ ...prevState, isLoading: true }));
+			this.props.fetchCompany().subscribe(
+				(data: any) => {
+					this.setState({ isError: false, isLoading: false });
+				},
+				(err: any) => {
+					this.setState({ isError: true, isLoading: false });
+					console.error('Error fetching the company', err, this.props.company);
+				}
+			);
+		}
 	}
 }
 

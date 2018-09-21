@@ -15,7 +15,7 @@ let component: any;
 
 describe('CompanyPage', () => {
 	beforeEach(() => {
-		component = shallow(<CompanyPage company={company} fetchCompany={mockFetchCompany} />);
+		component = shallow(<CompanyPage companies={[]} company={company} fetchCompany={mockFetchCompany} />);
 	});
 	afterEach(() => {
 		jest.clearAllMocks();
@@ -106,12 +106,12 @@ describe('CompanyPage', () => {
 			});
 
 			it('should log the error', () => {
-				shallow(<CompanyPage company={company} fetchCompany={mockFetchCompanyError} />);
+				shallow(<CompanyPage companies={[]} company={company} fetchCompany={mockFetchCompanyError} />);
 				expect(spy).toHaveBeenCalledWith('Error fetching the company', 'ERROR', company);
 			});
 
 			it('should set the isError prop of the state to true', () => {
-				const comp: any = shallow(<CompanyPage company={company} fetchCompany={mockFetchCompanyError} />);
+				const comp: any = shallow(<CompanyPage companies={[]} company={company} fetchCompany={mockFetchCompanyError} />);
 				expect(comp.state().isError).toBeTruthy();
 			});
 		});

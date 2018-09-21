@@ -2,7 +2,7 @@ import DailyTime from './DailyTime';
 
 class DailySerie {
 	public weeklyTrend: number = 0;
-	public montlyTrend: number = 0;
+	public monthlyTrend: number = 0;
 	public quarterTrend: number = 0;
 	public semesterTrend: number = 0;
 	public yearlyTrend: number = 0;
@@ -31,7 +31,7 @@ class DailySerie {
 
 	public setupTrendInfo(): void {
 		this.weeklyTrend = this.calculateTrend(7);
-		this.montlyTrend = this.calculateTrend(30);
+		this.monthlyTrend = this.calculateTrend(30);
 		this.quarterTrend = this.calculateTrend(90);
 		this.semesterTrend = this.calculateTrend(180);
 		this.yearlyTrend = this.calculateTrend(365);
