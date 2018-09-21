@@ -29,12 +29,87 @@ class DailySerie {
 		return slicedPriceChange.reduce((acc: number, val: number) => acc + val, 0);
 	}
 
-	public setupTrendInfo(): void {
-		this.weeklyTrend = this.calculateTrend(7);
-		this.monthlyTrend = this.calculateTrend(30);
-		this.quarterTrend = this.calculateTrend(90);
-		this.semesterTrend = this.calculateTrend(180);
-		this.yearlyTrend = this.calculateTrend(365);
+	public getStartingDailyTime(): DailyTime {
+		return this.dailyTimes[this.dailyTimes.length - 1];
+	}
+
+	public getLastDailyTime(): DailyTime {
+		return this.dailyTimes[0];
+	}
+
+	public getLastHigherCloseDailyTime(): DailyTime {
+		const lastClosePrice: number = this.getLastDailyTime().close;
+		return this.dailyTimes.find((dailyTime: DailyTime) => lastClosePrice < dailyTime.close) || new DailyTime('', 0, 0, 0, 0, 0, 0);
+	}
+
+	public getLastLowerCloseDailyTime(): DailyTime {
+		const lastClosePrice: number = this.getLastDailyTime().close;
+		return this.dailyTimes.find((dailyTime: DailyTime) => lastClosePrice > dailyTime.close) || new DailyTime('', 0, 0, 0, 0, 0, 0);
+	}
+
+	public getHighestCloseDailyTime(): DailyTime {
+		const closePrices = this.dailyTimes.map((dailyTime: DailyTime) => dailyTime.close);
+		const highestClosePrice: number = Math.max(...closePrices);
+		return this.dailyTimes.find((dailyTime: DailyTime) => dailyTime.close === highestClosePrice) || new DailyTime('', 0, 0, 0, 0, 0, 0);
+	}
+
+	public getLowestCloseDailyTime(): DailyTime {
+		const closePrices = this.dailyTimes.map((dailyTime: DailyTime) => dailyTime.close);
+		const highestClosePrice: number = Math.min(...closePrices);
+		return this.dailyTimes.find((dailyTime: DailyTime) => dailyTime.close === highestClosePrice) || new DailyTime('', 0, 0, 0, 0, 0, 0);
+	}
+
+	public getMaxNumberOfNegativeDailyTimes(): number {
+		return this.getNumberOfConsecutiveDailyTimes(false, true);
+	}
+
+	public getMaxNumberOfPositiveDailyTimes(): number {
+		return this.getNumberOfConsecutiveDailyTimes(true, true);
+	}
+
+	public getMinNumberOfNegativeDailyTimes(): number {
+		return this.getNumberOfConsecutiveDailyTimes(false, false);
+	}
+
+	public getMinNumberOfPositiveDailyTimes(): number {
+		return this.getNumberOfConsecutiveDailyTimes(true, false);
+	}
+
+	public getNumberOfPositiveDailyTimes(): number {
+		return this.priceChange.filter((priceChange: number) => priceChange > 0).length;
+	}
+
+	public getNumberOfNegativeDailyTimes(): number {
+		return this.priceChange.filter((priceChange: number) => priceChange < 0).length;
+	}
+
+	private getNumberOfConsecutiveDailyTimes(isPositive: boolean, isMax: boolean): number {
+		return isMax ? Math.max(...this.getConsecutiveDailyTimes(isPositive)) : Math.min(...this.getConsecutiveDailyTimes(isPositive));
+	}
+
+	private getConsecutiveDailyTimes(isPositive: boolean): number[] {
+		const daysCounterArray: number[] = [];
+		let daysCounter = 0;
+		this.priceChange.forEach((priceChange: number, index: number, arr: number[]) => {
+			const signCondition: boolean = isPositive ? Math.sign(priceChange) > 0 : Math.sign(priceChange) < 0;
+			if (signCondition) {
+				daysCounter++;
+			} else {
+				if (daysCounter > 0) {
+					daysCounterArray.push(daysCounter);
+					daysCounter = 0;
+				}
+			}
+			if (isLastElement(index, arr) && daysCounter > 0) {
+				daysCounterArray.push(daysCounter);
+			}
+		});
+
+		return daysCounterArray;
+
+		function isLastElement(index: number, arr: number[]): boolean {
+			return index === arr.length - 1;
+		}
 	}
 }
 

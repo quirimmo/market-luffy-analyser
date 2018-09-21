@@ -36,10 +36,10 @@ class CompanyDetails extends React.Component<ICompanyDetailsProps, any> {
 							<td scope="row">{this.props.company.sector}</td>
 							<td scope="row">{this.props.company.industry}</td>
 							<td scope="row" className={`${Utils.getBearishBullishClass(this.props.company.marketCap)}`}>
-								<NumberFormatter value={this.props.company.marketCap} />
+								<NumberFormatter value={this.props.company.marketCap} suffix="$" />
 							</td>
 							<td scope="row" className={`${Utils.getBearishBullishClass(this.props.company.lastSale)}`}>
-								<NumberFormatter value={this.props.company.lastSale} />
+								<NumberFormatter value={this.props.company.lastSale} suffix="$" />
 							</td>
 							<td scope="row" className={`${Utils.getBearishBullishClass(dailySerie.lastMovement)}`}>
 								<NumberFormatter value={dailySerie.lastMovement} suffix="%" />
@@ -63,13 +63,13 @@ class CompanyDetails extends React.Component<ICompanyDetailsProps, any> {
 					<div className="row col-xl-3 text-left">
 						<label className="col-4 font-weight-bold text-left">Capital</label>
 						<span className={`col-8 font-italic text-left ${Utils.getBearishBullishClass(this.props.company.marketCap)}`}>
-							<NumberFormatter value={this.props.company.marketCap} />
+							<NumberFormatter value={this.props.company.marketCap} suffix="$" />
 						</span>
 					</div>
 					<div className="row col-xl-3 text-left">
 						<label className="col-4 font-weight-bold text-left">Sale</label>
 						<span className={`col-8 font-italic text-left ${Utils.getBearishBullishClass(this.props.company.lastSale)}`}>
-							<NumberFormatter value={this.props.company.lastSale} />
+							<NumberFormatter value={this.props.company.lastSale} suffix="$" />
 						</span>
 					</div>
 					<div className="row col-xl-3 text-left">

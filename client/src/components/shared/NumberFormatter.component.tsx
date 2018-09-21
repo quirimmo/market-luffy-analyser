@@ -21,10 +21,10 @@ class NumberFormatter extends React.Component<INumberFormatterProps, any> {
 
 	public render() {
 		return (
-			<div className={this.props.className}>
+			<span className={this.props.className}>
 				{this.formattedValue}
 				{this.suffix}
-			</div>
+			</span>
 		);
 	}
 
