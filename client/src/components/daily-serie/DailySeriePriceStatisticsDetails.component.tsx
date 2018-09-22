@@ -29,21 +29,25 @@ class DailySeriePriceStatisticsDetails extends React.Component<IDailySeriePriceS
 					value={this.props.dailySerie.getLastHigherCloseDailyTime().close}
 					label="Previous Higher Close Price:"
 					time={this.props.dailySerie.getLastHigherCloseDailyTime().time.format('YYYY-MM-DD')}
+					className="green-text"
 				/>
 				<DailySeriePriceStatisticsDetailsRow
 					value={this.props.dailySerie.getLastLowerCloseDailyTime().close}
 					label="Previous Lower Close Price:"
 					time={this.props.dailySerie.getLastLowerCloseDailyTime().time.format('YYYY-MM-DD')}
+					className="red-text"
 				/>
 				<DailySeriePriceStatisticsDetailsRow
 					value={this.props.dailySerie.getHighestCloseDailyTime().close}
 					label="Highest Close Price:"
 					time={this.props.dailySerie.getHighestCloseDailyTime().time.format('YYYY-MM-DD')}
+					className="green-text"
 				/>
 				<DailySeriePriceStatisticsDetailsRow
 					value={this.props.dailySerie.getLowestCloseDailyTime().close}
 					label="Lowest Close Price:"
 					time={this.props.dailySerie.getLowestCloseDailyTime().time.format('YYYY-MM-DD')}
+					className="red-text"
 				/>
 			</React.Fragment>
 		);

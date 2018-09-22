@@ -14,7 +14,7 @@ class NumberFormatter extends React.Component<INumberFormatterProps, any> {
 
 	constructor(props: INumberFormatterProps) {
 		super(props);
-		this.decimalsPrecision = this.props.decimalsPrecision || 4;
+		this.decimalsPrecision = this.props.decimalsPrecision || this.getDecimalPrecisionToUse();
 		this.suffix = this.props.suffix || '';
 		this.formattedValue = this.formatValue();
 	}
@@ -30,8 +30,8 @@ class NumberFormatter extends React.Component<INumberFormatterProps, any> {
 
 	public formatValue(): string {
 		const stringValue: string = this.props.value.toFixed(this.decimalsPrecision);
-		const decimalValues: string = stringValue.split('.')[1];
 		const integerValues: string = stringValue.split('.')[0];
+		const decimalValues: string = stringValue.split('.')[1] || '';
 		const formattedIntegers: string[] = [];
 		for (let i = integerValues.length - 1, j = 1; i >= 0; i--, j++) {
 			formattedIntegers.unshift(integerValues.charAt(i));
@@ -39,8 +39,24 @@ class NumberFormatter extends React.Component<INumberFormatterProps, any> {
 				formattedIntegers.unshift(',');
 			}
 		}
-		const ret = `${formattedIntegers.join('')}.${decimalValues}`;
+		let ret = formattedIntegers.join('');
+		if (decimalValues.length) {
+			ret += `.${decimalValues}`;
+		}
+	// };.${decimalValues}`;
 		return ret;
+	}
+
+	public getDecimalPrecisionToUse(): number {
+		const stringNumber = this.props.value.toString().replace('-', '');
+		const integerDigits = stringNumber.split('.')[0].length;
+		if (integerDigits < 2) {
+			return 4;
+		}
+		if (integerDigits > 6) {
+			return 0;
+		}
+		return 2;
 	}
 }
 

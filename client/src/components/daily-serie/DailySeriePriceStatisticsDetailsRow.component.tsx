@@ -6,6 +6,7 @@ interface IDailySeriePriceStatisticsDetailsRow {
 	label: string;
 	value: number;
 	time: string;
+	className?: string;
 }
 
 class DailySeriePriceStatisticsDetailsRow extends React.Component<IDailySeriePriceStatisticsDetailsRow, any> {
@@ -18,7 +19,8 @@ class DailySeriePriceStatisticsDetailsRow extends React.Component<IDailySeriePri
 			<div className="row">
 				<div className="col-lg-6 col-sm-12 col-12 font-weight-bold">{this.props.label}</div>
 				<div className="col-lg-6 col-sm-12 col-12">
-					<NumberFormatter value={this.props.value} suffix="$" /> <span className="font-italic daily-serie-price-times">({this.props.time})</span>
+					<NumberFormatter className={this.props.className} value={this.props.value} suffix="$" />{' '}
+					<span className="font-italic daily-serie-price-times">({this.props.time})</span>
 				</div>
 			</div>
 		);

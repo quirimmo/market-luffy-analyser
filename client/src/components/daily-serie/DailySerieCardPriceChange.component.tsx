@@ -31,10 +31,7 @@ class DailySerieCardPriceChange extends React.Component<IDailySerieCardPriceChan
 				<div className="row text-center justify-content-center">
 					<Collapse className="row company-card-details" isOpen={this.state.isOpen}>
 						{this.props.priceChange.map((price: number, index: number) => (
-							<div
-								key={index}
-								className={`${cssClasses} p-0 price-change-value ${Utils.getBearishBullishClass(price)}`}
-							>
+							<div key={index} className={`${cssClasses} p-0 price-change-value ${Utils.getBearishBullishClass(price)}`}>
 								{`${price.toFixed(2)}%`}
 							</div>
 						))}
