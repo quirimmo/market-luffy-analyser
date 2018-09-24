@@ -12,6 +12,8 @@ interface IDailySeriePriceStatisticsDetailsRow {
 class DailySeriePriceStatisticsDetailsRow extends React.Component<IDailySeriePriceStatisticsDetailsRow, any> {
 	constructor(props: IDailySeriePriceStatisticsDetailsRow) {
 		super(props);
+
+		this.getContent = this.getContent.bind(this);
 	}
 
 	public render() {
@@ -19,11 +21,24 @@ class DailySeriePriceStatisticsDetailsRow extends React.Component<IDailySeriePri
 			<div className="row">
 				<div className="col-lg-6 col-sm-12 col-12 font-weight-bold">{this.props.label}</div>
 				<div className="col-lg-6 col-sm-12 col-12">
-					<NumberFormatter className={this.props.className} value={this.props.value} suffix="$" />{' '}
-					<span className="font-italic daily-serie-price-times">({this.props.time})</span>
+					{this.getContent()}
 				</div>
 			</div>
 		);
+	}
+
+	public getContent() {
+		return this.props.time !== 'Invalid date' ? (
+			<React.Fragment>
+				<NumberFormatter className={this.props.className} value={this.props.value} suffix="$" />{' '}
+				<span className="font-italic daily-serie-price-times">({this.props.time})</span>
+			</React.Fragment>
+		) : (
+			<span className="font-italic daily-serie-price-times">Not Found</span>
+		);
+		if (this.props.time) {
+		}
+		console.log(this.props.time);
 	}
 }
 
