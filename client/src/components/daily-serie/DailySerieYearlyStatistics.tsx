@@ -38,11 +38,11 @@ class DailySerieYearlyStatistics extends React.Component<IDailySerieYearlyStatis
 				<div className="col-6 justify-content-end text-right">
 					<YearsDropdownSelector onSelectYear={this.onSelectSecondYear} years={Array.from(this.state.years)} />
 				</div>
-				<div className="col-6 justify-content-start text-left">
-					<MonthlyTrendByYear dailySerie={this.props.dailySerie} year={this.firstYear} />
+				<div className="mt-2 col-6 justify-content-start text-left">
+					<MonthlyTrendByYear className="text-left" dailySerie={this.props.dailySerie} year={this.firstYear} />
 				</div>
-				<div className="col-6 justify-content-end text-right">
-					<MonthlyTrendByYear dailySerie={this.props.dailySerie} year={this.secondYear} />
+				<div className="mt-2 col-6 justify-content-end text-right">
+					<MonthlyTrendByYear className="text-right" dailySerie={this.props.dailySerie} year={this.secondYear} />
 				</div>
 			</React.Fragment>
 		);

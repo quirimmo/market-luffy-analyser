@@ -34,7 +34,7 @@ class DailySerieDetails extends React.Component<IDailySerieDetails, any> {
 					</div>
 				</div>
 				<br />
-				<div className="row w-100">
+				<div className="row w-100 small">
 					<DailySerieYearlyStatistics dailySerie={this.props.dailySerie} />
 				</div>
 			</React.Fragment>

@@ -29,10 +29,17 @@ class YearsDropdownSelector extends React.Component<IYearsDropdownSelectorProps,
 	public render() {
 		return (
 			<ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-				<DropdownToggle caret={true}>{this.getToggleText()}</DropdownToggle>
-				<DropdownMenu>
+				<DropdownToggle className="font-size-1em" caret={true}>
+					{this.getToggleText()}
+				</DropdownToggle>
+				<DropdownMenu className="font-size-1em">
 					{Array.from(this.props.years).map((year: number) => (
-						<DropdownItem key={`dropdown-item-${year}`} onClick={this.selectYear.bind(this, year)} disabled={this.isDisabled(year)}>
+						<DropdownItem
+							className="font-size-1em"
+							key={`dropdown-item-${year}`}
+							onClick={this.selectYear.bind(this, year)}
+							disabled={this.isDisabled(year)}
+						>
 							{year}
 						</DropdownItem>
 					))}
@@ -57,9 +64,12 @@ class YearsDropdownSelector extends React.Component<IYearsDropdownSelectorProps,
 	}
 
 	public selectYear(year: number) {
-		this.setState((prevState: IYearsDropdownSelectorState) => ({ ...prevState, selectedYear: year }), () => {
-			this.props.onSelectYear(this.state.selectedYear);
-		});
+		this.setState(
+			(prevState: IYearsDropdownSelectorState) => ({ ...prevState, selectedYear: year }),
+			() => {
+				this.props.onSelectYear(this.state.selectedYear);
+			}
+		);
 	}
 }
 
