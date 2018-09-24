@@ -34,7 +34,11 @@ class App extends React.Component<IAppProps, IAppState> {
 	}
 
 	public getErrorContent(): JSX.Element {
-		return <Alert className="text-center" color="danger">Error bootstrapping the application</Alert>;
+		return (
+			<Alert className="text-center" color="danger">
+				Error bootstrapping the application
+			</Alert>
+		);
 	}
 
 	public getLoadingContent(): JSX.Element {

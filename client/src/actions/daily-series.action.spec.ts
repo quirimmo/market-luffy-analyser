@@ -2,11 +2,8 @@ import { FETCH_ALL_DAILY_SERIES, RESET_DAILY_SERIES, fetchAllDailySeries, resetD
 import DailySerie from './../models/DailySerie';
 
 describe('daily-series.action', () => {
-	it('should define the FETCH_ALL_DAILY_SERIES action type', () => {
+	it('should define the action types', () => {
 		expect(FETCH_ALL_DAILY_SERIES).toEqual('FETCH_ALL_DAILY_SERIES');
-	});
-
-	it('should define the RESET_DAILY_SERIES action type', () => {
 		expect(RESET_DAILY_SERIES).toEqual('RESET_DAILY_SERIES');
 	});
 
