@@ -83,6 +83,20 @@ class DailySerie {
 		return this.priceChange.filter((priceChange: number) => priceChange < 0).length;
 	}
 
+	public getYearMonthTrend(year: number, month: number): number {
+		const monthYearDailyTimes = this.dailyTimes.filter((dailyTime: DailyTime) => dailyTime.time.year() === year && dailyTime.time.month() === month);
+		return monthYearDailyTimes.reduce(onReduce, 0);
+
+		function onReduce(acc: number, val: DailyTime, ind: number, arr: DailyTime[]): number {
+			if (ind < arr.length - 1) {
+				let diff: number = parseFloat((val.close - arr[ind + 1].close).toFixed(val.decimalsPrecision));
+				diff = parseFloat(((diff / Math.abs(arr[ind + 1].close)) * 100).toFixed(val.decimalsPrecision));
+				acc += diff;
+			}
+			return acc;
+		}
+	}
+
 	private getNumberOfConsecutiveDailyTimes(isPositive: boolean, isMax: boolean): number {
 		return isMax ? Math.max(...this.getConsecutiveDailyTimes(isPositive)) : Math.min(...this.getConsecutiveDailyTimes(isPositive));
 	}
