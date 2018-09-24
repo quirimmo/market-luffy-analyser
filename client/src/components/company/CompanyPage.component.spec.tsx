@@ -70,6 +70,7 @@ describe('CompanyPage', () => {
 				<div>
 					<div className="row text-center justify-content-center text-uppercase font-weight-bold">Name</div>
 					<div className="row text-center justify-content-center text-uppercase font-italic">Symbol</div>
+					<br />
 					<CompanyDetails company={company} />
 				</div>
 			);

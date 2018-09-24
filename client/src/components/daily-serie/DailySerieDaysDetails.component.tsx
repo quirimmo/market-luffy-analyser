@@ -2,12 +2,12 @@ import * as React from 'react';
 import DailySerie from './../../models/DailySerie';
 import DailySerieDaysDetailsRow from './DailySerieDaysDetailsRow.component';
 
-interface IDailySerieDaysDetails {
+interface IDailySerieDaysDetailsProps {
 	dailySerie: DailySerie;
 }
 
-class DailySerieDaysDetails extends React.Component<IDailySerieDaysDetails, any> {
-	constructor(props: any) {
+class DailySerieDaysDetails extends React.Component<IDailySerieDaysDetailsProps, any> {
+	constructor(props: IDailySerieDaysDetailsProps) {
 		super(props);
 	}
 
