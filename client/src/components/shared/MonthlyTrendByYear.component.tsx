@@ -26,6 +26,8 @@ class MonthlyTrendByYear extends React.Component<IMonthlyTrendByYearProps, any> 
 
 	constructor(props: IMonthlyTrendByYearProps) {
 		super(props);
+
+		this.getYearMonthValue = this.getYearMonthValue.bind(this);
 	}
 
 	public render() {
@@ -42,7 +44,7 @@ class MonthlyTrendByYear extends React.Component<IMonthlyTrendByYearProps, any> 
 							<div key={`${instance.props.year}-${index}`} className={`row ${instance.props.className}`}>
 								<div className="col-sm-8 col-12">{month}</div>
 								<div className="col-sm-4 col-12">
-									<PercentageFormatter value={instance.getYearMonthValue(year, index)} />
+									{instance.getYearMonthValue(year, index)}
 								</div>
 							</div>
 						))}
@@ -54,7 +56,8 @@ class MonthlyTrendByYear extends React.Component<IMonthlyTrendByYearProps, any> 
 	}
 
 	public getYearMonthValue(year: number, month: number) {
-		return this.props.dailySerie.getYearMonthTrend(year, month);
+		const value: number = this.props.dailySerie.getYearMonthTrend(year, month);
+		return value === 0 ? '-' : <PercentageFormatter value={value} />;
 	}
 }
 

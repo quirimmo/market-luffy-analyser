@@ -34,11 +34,8 @@ class DailySeriePriceStatisticsDetailsRow extends React.Component<IDailySeriePri
 				<span className="font-italic daily-serie-price-times">({this.props.time})</span>
 			</React.Fragment>
 		) : (
-			<span className="font-italic daily-serie-price-times">Not Found</span>
+			<span className="font-italic daily-serie-price-times">Not Available</span>
 		);
-		if (this.props.time) {
-		}
-		console.log(this.props.time);
 	}
 }
 
