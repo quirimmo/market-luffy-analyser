@@ -1,6 +1,5 @@
 import * as React from 'react';
 import DailySerie from 'models/DailySerie';
-import PercentageFormatter from '../shared/PercentageFormatter';
 import DailySerieTrendDetailsRow from './DailySerieTrendDetailsRow.component';
 
 interface IDailySerieTrendDetails {
