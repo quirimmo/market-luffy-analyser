@@ -19,7 +19,7 @@ describe('NumberFormatter', () => {
 		});
 
 		it('should display the formatted number adding decimals and not changing the integers', () => {
-			expect(component.text()).toEqual('50.0000');
+			expect(component.text()).toEqual('50.00');
 		});
 
 		it('should display the formatted number as it is', () => {
@@ -29,17 +29,22 @@ describe('NumberFormatter', () => {
 
 		it('should display the formatted number corrected', () => {
 			const comp = shallow(<NumberFormatter value={1234567.89} />);
-			expect(comp.text()).toEqual('1,234,567.8900');
+			expect(comp.text()).toEqual('1,234,568');
 		});
 
 		it('should display the formatted number corrected', () => {
 			const comp = shallow(<NumberFormatter value={111234567.89} />);
-			expect(comp.text()).toEqual('111,234,567.8900');
+			expect(comp.text()).toEqual('111,234,568');
 		});
 
 		it('should display the formatted number corrected', () => {
 			const comp = shallow(<NumberFormatter value={11234567} />);
-			expect(comp.text()).toEqual('11,234,567.0000');
+			expect(comp.text()).toEqual('11,234,567');
+		});
+
+		it('should display the formatted number corrected with the suffix', () => {
+			const comp = shallow(<NumberFormatter value={11234567} suffix="$"/>);
+			expect(comp.text()).toEqual('11,234,567$');
 		});
 	});
 });

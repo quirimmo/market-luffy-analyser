@@ -1,6 +1,6 @@
 import * as React from 'react';
 import DailySerie from './../../models/DailySerie';
-import PercentageFormatter from './PercentageFormatter';
+import PercentageFormatter from './PercentageFormatter.component';
 
 interface IMonthlyTrendByYearProps {
 	year: number | undefined;
@@ -41,7 +41,7 @@ class MonthlyTrendByYear extends React.Component<IMonthlyTrendByYearProps, any> 
 				return (
 					<React.Fragment>
 						{instance.months.map((month: string, index: number) => (
-							<div key={`${instance.props.year}-${index}`} className={`row ${instance.props.className}`}>
+							<div key={`${instance.props.year}-${index}`} className={`row month-container ${instance.props.className}`}>
 								<div className="col-sm-8 col-12">{month}</div>
 								<div className="col-sm-4 col-12">
 									{instance.getYearMonthValue(year, index)}

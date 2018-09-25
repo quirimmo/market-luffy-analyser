@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import DailySerieTrendDetailsRow from './DailySerieTrendDetailsRow.component';
-import PercentageFormatter from '../shared/PercentageFormatter';
+import PercentageFormatter from '../shared/PercentageFormatter.component';
 
 let component: any;
 

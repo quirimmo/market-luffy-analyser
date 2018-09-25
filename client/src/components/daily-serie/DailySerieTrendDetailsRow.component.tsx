@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PercentageFormatter from '../shared/PercentageFormatter';
+import PercentageFormatter from '../shared/PercentageFormatter.component';
 
 interface IDailySerieTrendDetailsRow {
 	label: string;

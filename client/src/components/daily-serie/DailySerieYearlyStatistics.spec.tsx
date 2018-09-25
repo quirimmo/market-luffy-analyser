@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import PercentageFormatter from '../shared/PercentageFormatter';
+import PercentageFormatter from '../shared/PercentageFormatter.component';
 import DailySerieYearlyStatistics from './DailySerieYearlyStatistics';
 import DailySerie from './../../models/DailySerie';
 import YearsDropdownSelector from '../shared/YearsDropdownSelector.component';
