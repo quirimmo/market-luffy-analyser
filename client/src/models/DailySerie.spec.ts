@@ -22,7 +22,7 @@ const prices: any = [
 		decimalsPrecision: 1
 	},
 	{
-		time: '2013-08-02',
+		time: '2012-08-02',
 		open: 0,
 		high: 1,
 		low: 2,
@@ -31,7 +31,7 @@ const prices: any = [
 		decimalsPrecision: 1
 	},
 	{
-		time: '2013-08-01',
+		time: '2012-08-01',
 		open: 0,
 		high: 1,
 		low: 2,
@@ -42,9 +42,10 @@ const prices: any = [
 ];
 const dailyTime1: DailyTime = new DailyTime('2013-08-04', 0, 1, 2, 3, 4, 1);
 const dailyTime2: DailyTime = new DailyTime('2013-08-03', 0, 1, 2, 1, 4, 1);
-const dailyTime3: DailyTime = new DailyTime('2013-08-02', 0, 1, 2, -5, 4, 1);
-const dailyTime4: DailyTime = new DailyTime('2013-08-01', 0, 1, 2, 8, 4, 1);
+const dailyTime3: DailyTime = new DailyTime('2012-08-02', 0, 1, 2, -5, 4, 1);
+const dailyTime4: DailyTime = new DailyTime('2012-08-01', 0, 1, 2, 8, 4, 1);
 const dailyTimes: DailyTime[] = [dailyTime1, dailyTime2, dailyTime3, dailyTime4];
+instance.dailyTimes = dailyTimes;
 
 describe('DailySerie', () => {
 	it('should be defined', () => {
@@ -55,13 +56,29 @@ describe('DailySerie', () => {
 		expect(instance instanceof DailySerie).toBeTruthy();
 	});
 
-	describe('constructor', () => {
-		it('should init the attributes', () => {
-			expect(instance.symbol).toEqual('Symbol 1');
-			expect(instance.lastMovement).toEqual(1);
-			expect(instance.priceChange).toEqual([3, 1, -5, 8]);
-			expect(instance.trend).toEqual(4);
-		});
+	it('should init the attributes', () => {
+		expect(instance.symbol).toEqual('Symbol 1');
+		expect(instance.lastMovement).toEqual(1);
+		expect(instance.priceChange).toEqual([3, 1, -5, 8]);
+		expect(instance.trend).toEqual(4);
+	});
+
+	it('should expose the public methods', () => {
+		expect(typeof instance.buildDailyTimes).toEqual('function');
+		expect(typeof instance.calculateTrend).toEqual('function');
+		expect(typeof instance.getStartingDailyTime).toEqual('function');
+		expect(typeof instance.getLastDailyTime).toEqual('function');
+		expect(typeof instance.getLastHigherCloseDailyTime).toEqual('function');
+		expect(typeof instance.getLastLowerCloseDailyTime).toEqual('function');
+		expect(typeof instance.getHighestCloseDailyTime).toEqual('function');
+		expect(typeof instance.getLowestCloseDailyTime).toEqual('function');
+		expect(typeof instance.getMaxNumberOfNegativeDailyTimes).toEqual('function');
+		expect(typeof instance.getMaxNumberOfPositiveDailyTimes).toEqual('function');
+		expect(typeof instance.getMinNumberOfNegativeDailyTimes).toEqual('function');
+		expect(typeof instance.getMinNumberOfPositiveDailyTimes).toEqual('function');
+		expect(typeof instance.getNumberOfPositiveDailyTimes).toEqual('function');
+		expect(typeof instance.getNumberOfNegativeDailyTimes).toEqual('function');
+		expect(typeof instance.getYearMonthTrend).toEqual('function');
 	});
 
 	describe('buildDailyTimes', () => {
@@ -97,6 +114,30 @@ describe('DailySerie', () => {
 		});
 	});
 
+	describe('getStartingDailyTime', () => {
+		expect(instance.getStartingDailyTime()).toEqual(dailyTime4);
+	});
+
+	describe('getLastDailyTime', () => {
+		expect(instance.getLastDailyTime()).toEqual(dailyTime1);
+	});
+
+	describe('getLastHigherCloseDailyTime', () => {
+		expect(instance.getLastHigherCloseDailyTime()).toEqual(dailyTime4);
+	});
+
+	describe('getLastLowerCloseDailyTime', () => {
+		expect(instance.getLastLowerCloseDailyTime()).toEqual(dailyTime2);
+	});
+
+	describe('getHighestCloseDailyTime', () => {
+		expect(instance.getHighestCloseDailyTime()).toEqual(dailyTime4);
+	});
+
+	describe('getLowestCloseDailyTime', () => {
+		expect(instance.getLowestCloseDailyTime()).toEqual(dailyTime3);
+	});
+
 	describe('getMaxNumberOfNegativeDailyTimes', () => {
 		it('should return 1', () => {
 			expect(instance.getMaxNumberOfNegativeDailyTimes()).toEqual(1);
@@ -130,6 +171,16 @@ describe('DailySerie', () => {
 	describe('getNumberOfNegativeDailyTimes', () => {
 		it('should return 1', () => {
 			expect(instance.getNumberOfNegativeDailyTimes()).toEqual(1);
+		});
+	});
+
+	describe('getYearMonthTrend', () => {
+		it('should return the trend of August 2013', () => {
+			expect(instance.getYearMonthTrend(2013, 7)).toEqual(200);
+		});
+
+		it('should return the trend of August 2012', () => {
+			expect(instance.getYearMonthTrend(2012, 7)).toEqual(-162.5);
 		});
 	});
 });
