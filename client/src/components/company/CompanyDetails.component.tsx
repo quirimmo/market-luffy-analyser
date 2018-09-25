@@ -4,6 +4,7 @@ import DailySerie from './../../models/DailySerie';
 import DailySerieCardPriceChange from '../daily-serie/DailySerieCardPriceChange.component';
 import NumberFormatter from '../shared/NumberFormatter.component';
 import Utils from './../../utils/Utils';
+import DailySerieDetails from '../daily-serie/DailySerieDetails.component';
 
 interface ICompanyDetailsProps {
 	company: Company;
@@ -35,16 +36,16 @@ class CompanyDetails extends React.Component<ICompanyDetailsProps, any> {
 							<td scope="row">{this.props.company.sector}</td>
 							<td scope="row">{this.props.company.industry}</td>
 							<td scope="row" className={`${Utils.getBearishBullishClass(this.props.company.marketCap)}`}>
-								<NumberFormatter value={this.props.company.marketCap} />
+								<NumberFormatter value={this.props.company.marketCap} suffix="$" />
 							</td>
 							<td scope="row" className={`${Utils.getBearishBullishClass(this.props.company.lastSale)}`}>
-								<NumberFormatter value={this.props.company.lastSale} />
+								<NumberFormatter value={this.props.company.lastSale} suffix="$" />
 							</td>
 							<td scope="row" className={`${Utils.getBearishBullishClass(dailySerie.lastMovement)}`}>
-								{dailySerie.lastMovement}
+								<NumberFormatter value={dailySerie.lastMovement} suffix="%" />
 							</td>
 							<td scope="row" className={`${Utils.getBearishBullishClass(dailySerie.trend)}`}>
-								{dailySerie.trend}
+								<NumberFormatter value={dailySerie.trend} suffix="%" />
 							</td>
 						</tr>
 					</tbody>
@@ -62,25 +63,31 @@ class CompanyDetails extends React.Component<ICompanyDetailsProps, any> {
 					<div className="row col-xl-3 text-left">
 						<label className="col-4 font-weight-bold text-left">Capital</label>
 						<span className={`col-8 font-italic text-left ${Utils.getBearishBullishClass(this.props.company.marketCap)}`}>
-							<NumberFormatter value={this.props.company.marketCap} />
+							<NumberFormatter value={this.props.company.marketCap} suffix="$" />
 						</span>
 					</div>
 					<div className="row col-xl-3 text-left">
 						<label className="col-4 font-weight-bold text-left">Sale</label>
 						<span className={`col-8 font-italic text-left ${Utils.getBearishBullishClass(this.props.company.lastSale)}`}>
-							<NumberFormatter value={this.props.company.lastSale} />
+							<NumberFormatter value={this.props.company.lastSale} suffix="$" />
 						</span>
 					</div>
 					<div className="row col-xl-3 text-left">
 						<label className="col-4 font-weight-bold text-left">Movement</label>
-						<span className={`col-8 font-italic text-left ${Utils.getBearishBullishClass(dailySerie.lastMovement)}`}>{dailySerie.lastMovement}</span>
+						<span className={`col-8 font-italic text-left ${Utils.getBearishBullishClass(dailySerie.lastMovement)}`}>
+							<NumberFormatter value={dailySerie.lastMovement} suffix="%" />
+						</span>
 					</div>
 					<div className="row col-xl-3 text-left">
 						<label className="col-4 font-weight-bold text-left">Trend</label>
-						<span className={`col-8 font-italic text-left ${Utils.getBearishBullishClass(dailySerie.trend)}`}>{dailySerie.trend}</span>
+						<span className={`col-8 font-italic text-left ${Utils.getBearishBullishClass(dailySerie.trend)}`}>
+							<NumberFormatter value={dailySerie.trend} suffix="%" />
+						</span>
 					</div>
 				</div>
-				{/* daily serie prices change */}
+				<br />
+				<DailySerieDetails dailySerie={dailySerie} />
+				<br />
 				<DailySerieCardPriceChange priceClasses="col-xl-1 col-lg-1 col-md-2 col-sm-2 col-3 text-center" priceChange={dailySerie.priceChange} />
 			</div>
 		);

@@ -64,7 +64,8 @@ describe('company action', () => {
 							'Symbol 1': {
 								lastMovement: 1,
 								priceChange: [2],
-								trend: 3
+								trend: 3,
+								prices: []
 							}
 						}
 					}

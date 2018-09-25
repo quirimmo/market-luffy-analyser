@@ -66,10 +66,14 @@ describe('CompanyPage', () => {
 
 	describe('getCompanyContent', () => {
 		it('should return the CompanyDetails component', () => {
-			const companyContent = mount(component.instance().getCompanyContent());
-			const companyDetails = companyContent.find(CompanyDetails);
-			expect(companyDetails).toHaveLength(1);
-			expect(companyDetails.props().company).toEqual(company);
+			expect(component.instance().getCompanyContent()).toEqual(
+				<div>
+					<div className="row text-center justify-content-center text-uppercase font-weight-bold">Name</div>
+					<div className="row text-center justify-content-center text-uppercase font-italic">Symbol</div>
+					<br />
+					<CompanyDetails company={company} />
+				</div>
+			);
 		});
 	});
 

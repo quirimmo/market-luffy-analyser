@@ -27,6 +27,7 @@ describe('companies action', () => {
 	it('should define the action types', () => {
 		expect(companiesActions.FETCH_COMPANIES).toEqual('FETCH_COMPANIES');
 		expect(companiesActions.FETCH_COMPANIES_FULFILLED).toEqual('FETCH_COMPANIES_FULFILLED');
+		expect(companiesActions.TOGGLE_COMPANY_VISIBILITY).toEqual('TOGGLE_COMPANY_VISIBILITY');
 	});
 
 	it('should define the actions', () => {

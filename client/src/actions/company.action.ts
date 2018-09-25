@@ -1,7 +1,7 @@
 import Company from './../models/Company';
 import { Observable, Observer, of } from 'rxjs';
 import WebServiceProxy from './../services/WebServiceProxy';
-import { map } from 'rxjs/operators';
+import { map, delay } from 'rxjs/operators';
 import DailySerie from './../models/DailySerie';
 
 export const SELECT_COMPANY: string = 'SELECT_COMPANY';
@@ -31,6 +31,7 @@ export const fetchCompanyThunk = (companySymbol: string) => {
 			resp.response.data[companySymbol].priceChange,
 			resp.response.data[companySymbol].trend
 		);
+		company.dailySerie.buildDailyTimes(resp.response.data[companySymbol].prices);
 		return company;
 	}
 

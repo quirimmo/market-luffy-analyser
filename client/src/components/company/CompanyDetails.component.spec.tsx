@@ -4,6 +4,7 @@ import CompanyDetails from './CompanyDetails.component';
 import Company from './../../models/Company';
 import DailySerie from './../../models/DailySerie';
 import DailySerieCardPriceChange from '../daily-serie/DailySerieCardPriceChange.component';
+import DailySerieDetails from '../daily-serie/DailySerieDetails.component';
 
 const company: Company = new Company('Symbol', 'Name', 0, 1, 'Sector', 'Industry');
 company.dailySerie = new DailySerie('Symbol', 1, [2, 3], 4);
@@ -35,6 +36,12 @@ describe('CompanyDetails', () => {
 			const divContainer = component.find(DailySerieCardPriceChange);
 			expect(divContainer).toHaveLength(1);
 			expect(divContainer.props().priceChange).toEqual([2, 3]);
+		});
+
+		it('should display the DailySerieDetails component', () => {
+			const dailySerieDetails = component.find(DailySerieDetails);
+			expect(dailySerieDetails).toHaveLength(1);
+			expect(dailySerieDetails.props().dailySerie).toEqual(company.dailySerie);
 		});
 	});
 });

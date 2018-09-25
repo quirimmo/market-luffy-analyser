@@ -61,16 +61,16 @@ describe('Home Container Component', () => {
 			jest.useFakeTimers();
 			const spy = jest.fn();
 			component.props().fetchDailySeries(undefined, spy);
-			mockSubject.next({});
+			mockSubject.next({ isLast: true });
 			jest.runAllTimers();
 			expect(spy).toHaveBeenCalled();
 		});
 
 		it('should dispatch the FETCH_ALL_DAILY_SERIES action', () => {
-			const expectedAction = { type: FETCH_ALL_DAILY_SERIES, dailySerie: 'daily-serie' };
+			const expectedAction = { type: FETCH_ALL_DAILY_SERIES, dailySerie: 'daily-series' };
 			jest.useFakeTimers();
 			component.props().fetchDailySeries();
-			mockSubject.next('daily-serie');
+			mockSubject.next({ dailySerie: 'daily-series' });
 			jest.runAllTimers();
 			expect(store.getActions()).toContainEqual(expectedAction);
 		});
