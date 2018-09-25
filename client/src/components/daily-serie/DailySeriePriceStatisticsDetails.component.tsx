@@ -1,14 +1,13 @@
 import * as React from 'react';
 import DailySerie from './../../models/DailySerie';
-import NumberFormatter from '../shared/NumberFormatter.component';
 import DailySeriePriceStatisticsDetailsRow from './DailySeriePriceStatisticsDetailsRow.component';
 
-interface IDailySeriePriceStatisticsDetails {
+interface IDailySeriePriceStatisticsDetailsProps {
 	dailySerie: DailySerie;
 }
 
-class DailySeriePriceStatisticsDetails extends React.Component<IDailySeriePriceStatisticsDetails, any> {
-	constructor(props: IDailySeriePriceStatisticsDetails) {
+class DailySeriePriceStatisticsDetails extends React.Component<IDailySeriePriceStatisticsDetailsProps, any> {
+	constructor(props: IDailySeriePriceStatisticsDetailsProps) {
 		super(props);
 	}
 

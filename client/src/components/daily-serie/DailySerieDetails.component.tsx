@@ -1,21 +1,16 @@
 import * as React from 'react';
 import DailySerie from './../../models/DailySerie';
-import NumberFormatter from '../shared/NumberFormatter.component';
-import PercentageFormatter from '../shared/PercentageFormatter';
-import { Moment } from 'moment';
-import * as moment from 'moment';
-import DailyTime from './../../models/DailyTime';
 import DailySerieTrendDetails from './DailySerieTrendDetails.component';
 import DailySeriePriceStatisticsDetails from './DailySeriePriceStatisticsDetails.component';
 import DailySerieDaysDetails from './DailySerieDaysDetails.component';
 import DailySerieYearlyStatistics from './DailySerieYearlyStatistics';
 
-interface IDailySerieDetails {
+interface IDailySerieDetailsProps {
 	dailySerie: DailySerie;
 }
 
-class DailySerieDetails extends React.Component<IDailySerieDetails, any> {
-	constructor(props: IDailySerieDetails) {
+class DailySerieDetails extends React.Component<IDailySerieDetailsProps, any> {
+	constructor(props: IDailySerieDetailsProps) {
 		super(props);
 	}
 
