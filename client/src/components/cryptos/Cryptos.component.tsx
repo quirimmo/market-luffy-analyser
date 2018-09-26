@@ -5,6 +5,8 @@ import LoadingGears from '../shared/LoadingGears.component';
 
 import './style.scss';
 import CryptoCard from '../crypto/CryptoCard.component';
+import SortCryptos from './SortCryptos.component';
+import FilterCryptosPage from './FilterCryptos.container';
 
 interface ICryptosProps {
 	cryptos: Crypto[];
@@ -22,6 +24,7 @@ class Cryptos extends React.Component<ICryptosProps, ICryptosState> {
 			isLoading: true
 		};
 		this.onMapCrypto = this.onMapCrypto.bind(this);
+		this.sortCryptos = this.sortCryptos.bind(this);
 	}
 
 	public render() {
@@ -35,6 +38,9 @@ class Cryptos extends React.Component<ICryptosProps, ICryptosState> {
 			} else {
 				mainContent = (
 					<div className="cryptos-section-wrapper">
+						<FilterCryptosPage />
+						<SortCryptos sortCryptos={this.sortCryptos} />
+						<br />
 						<div className="row text-center">{this.props.cryptos.filter((crypto: Crypto) => crypto.isVisible).map(this.onMapCrypto)}</div>
 					</div>
 				);
@@ -55,7 +61,23 @@ class Cryptos extends React.Component<ICryptosProps, ICryptosState> {
 	}
 
 	public componentDidMount() {
+		this.sortCryptos('NAME');
 		this.setState({ isLoading: false });
+	}
+
+	public sortCryptos(activeSort: string): void {
+		switch (activeSort) {
+			case 'NAME':
+				this.props.cryptos.sort((a: Crypto, b: Crypto): number => a.name.toUpperCase().localeCompare(b.name.toUpperCase()));
+				break;
+			case 'SYMBOL':
+				this.props.cryptos.sort((a: Crypto, b: Crypto): number => a.symbol.toUpperCase().localeCompare(b.symbol.toUpperCase()));
+				break;
+			default:
+				this.props.cryptos.sort((a: Crypto, b: Crypto): number => a.name.toUpperCase().localeCompare(b.name.toUpperCase()));
+				break;
+		}
+		this.forceUpdate();
 	}
 }
 
