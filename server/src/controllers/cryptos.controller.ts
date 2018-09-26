@@ -3,15 +3,21 @@ import { sendSuccessfulResponse, getCryptos, getRequestParameters, RequestParame
 import { Observable } from 'rxjs';
 import DailyTimeSeries from '../entities/DailyTimeSeries';
 
+const CRYPTOS_LIST = ['ETH', 'BTC', 'XLM', 'BCH', 'XRP', 'XLM', 'DASH', 'LTC', 'ETC', 'ADA', 'MIOTA', 'EOS', 'NEO'];
+
 const router: Router = Router();
-router.get('/:symbols/:size?/', onGetCryptos);
+router.get('/:symbols?/', onGetCryptos);
 
 export function onGetCryptos(req: Request, res: Response) {
   req.params.symbols = req.params.symbols || '';
   const { isPercentage, symbols, size }: RequestParameters = getRequestParameters(req);
 
-  const results: Observable<DailyTimeSeries[]> = getCryptos(symbols);
-  results.subscribe(onSubscribe);
+  if (req.params.symbols.length === 0) {
+    sendSuccessfulResponse(res, { data: CRYPTOS_LIST });
+  } else {
+    const results: Observable<DailyTimeSeries[]> = getCryptos(symbols);
+    results.subscribe(onSubscribe);
+  }
 
   function onSubscribe(resp: DailyTimeSeries[]): void {
     let ret: any = {
