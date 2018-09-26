@@ -1,20 +1,22 @@
 import * as React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Container, Alert } from 'reactstrap';
+import { Observable, forkJoin } from 'rxjs';
+import Crypto from './../../models/Crypto';
+import Company from './../../models/Company';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import './../../../assets/styles/main.scss';
 import AppTitle from '../app-title/AppTitle.component';
 import AppNavigation from '../app-navigation/AppNavigation.component';
 import AppMainContent from '../app-main-content/AppMainContent.component';
-import { Observable, forkJoin } from 'rxjs';
-import Company from './../../models/Company';
 import LoadingGears from '../shared/LoadingGears.component';
 
 interface IAppProps {
 	connectToSocket: () => Observable<any>;
 	disconnectFromSocket: () => Observable<any>;
 	fetchCompanies: () => Observable<Company[]>;
+	fetchCryptos: () => Observable<Crypto[]>;
 }
 
 interface IAppState {
@@ -60,7 +62,7 @@ class App extends React.Component<IAppProps, IAppState> {
 
 	public componentDidMount() {
 		this.setState({ isError: false, isLoading: true });
-		forkJoin(this.props.connectToSocket(), this.props.fetchCompanies()).subscribe(
+		forkJoin(this.props.connectToSocket(), this.props.fetchCompanies(), this.props.fetchCryptos()).subscribe(
 			(data: any) => {
 				this.setState({ isLoading: false });
 			},

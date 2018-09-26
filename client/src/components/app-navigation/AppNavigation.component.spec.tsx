@@ -40,7 +40,7 @@ describe('App Navigation Presentational Component', () => {
 
 	describe('NavLink', () => {
 		it('should define the NavLink components', () => {
-			expect(component.find(NavLink)).toHaveLength(2);
+			expect(component.find(NavLink)).toHaveLength(3);
 		});
 
 		it('should define the Home NavLink component', () => {
@@ -53,6 +53,12 @@ describe('App Navigation Presentational Component', () => {
 			const companiesNavLink: ShallowWrapper = component.find(NavLink).at(1);
 			expect(companiesNavLink.prop('to')).toEqual('/companies');
 			expect(companiesNavLink.children().text()).toEqual('Companies');
+		});
+
+		it('should define the Cryptos NavLink component', () => {
+			const companiesNavLink: ShallowWrapper = component.find(NavLink).at(2);
+			expect(companiesNavLink.prop('to')).toEqual('/cryptos');
+			expect(companiesNavLink.children().text()).toEqual('Cryptos');
 		});
 	});
 });

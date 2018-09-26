@@ -18,8 +18,9 @@ jest.mock('rxjs/ajax', () => ({
 
 import WebServiceProxy from './WebServiceProxy';
 import { of } from 'rxjs';
-import { COMPANIES_RESOURCE_URL } from './../constants/constants';
+import { COMPANIES_RESOURCE_URL, CRYPTOS_RESOURCE_URL } from './../constants/constants';
 import Company from './../models/Company';
+import Crypto from './../models/Crypto';
 
 const instance: WebServiceProxy = new WebServiceProxy();
 
@@ -52,6 +53,21 @@ describe('WebServiceProxy', () => {
 			jest.useFakeTimers();
 			WebServiceProxy.getCompanies().subscribe((data: any) => {
 				expect(data).toEqual([new Company('Symbol', 'Name', 1, 2, 'Sector', 'Industry')]);
+			});
+			jest.runOnlyPendingTimers();
+		});
+	});
+
+	describe('getCryptos', () => {
+		it('should call the ajax method of rxjs with the right parameter', () => {
+			WebServiceProxy.getCryptos();
+			expect(mockAjax).toHaveBeenCalledWith(CRYPTOS_RESOURCE_URL);
+		});
+
+		it('should receive the Crypto instance', () => {
+			jest.useFakeTimers();
+			WebServiceProxy.getCryptos().subscribe((data: any) => {
+				expect(data).toEqual([new Crypto('Symbol', 'Name')]);
 			});
 			jest.runOnlyPendingTimers();
 		});

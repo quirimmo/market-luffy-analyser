@@ -19,6 +19,7 @@ class AppNavigation extends React.Component<any, IAppNavigationState> {
 				<Menu isOpen={this.state.isMenuOpen}>
 					<NavLink to="/home">Home</NavLink>
 					<NavLink to="/companies">Companies</NavLink>
+					<NavLink to="/cryptos">Cryptos</NavLink>
 				</Menu>
 			</nav>
 		);

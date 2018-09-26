@@ -63,6 +63,7 @@ jest.mock('./utils.controller', () => ({
 }));
 import { getCryptos, getRequestParameters, sendSuccessfulResponse } from './utils.controller';
 import { CryptosController, onGetCryptos } from './cryptos.controller';
+import CryptosProcessor from '../entities/CryptosProcessor';
 
 describe('CryptosController', () => {
   beforeEach(() => {
@@ -112,6 +113,20 @@ describe('CryptosController', () => {
           }
         }
       });
+    });
+
+    it('should call the getAllCryptos method of CryptosProcessor', () => {
+      const spy = spyOn(CryptosProcessor, 'getAllCryptos').and.returnValue([{ symbol: 'CPT1', name: 'crypto1'}]);
+      request.params.symbols = '';
+      onGetCryptos(request, response);
+      expect(spy).toHaveBeenCalled();
+    });
+
+    it('should call the sendSuccessfulResponse method of utils for sending the data', () => {
+      const spy = spyOn(CryptosProcessor, 'getAllCryptos').and.returnValue([{ symbol: 'CPT1', name: 'crypto1'}]);
+      request.params.symbols = '';
+      onGetCryptos(request, response);
+      expect(mockSendSuccessfulResponse).toHaveBeenCalledWith(response, [{ symbol: 'CPT1', name: 'crypto1'}]);
     });
   });
 });
