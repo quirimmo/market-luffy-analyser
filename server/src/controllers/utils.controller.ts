@@ -26,8 +26,12 @@ export function sendSuccessfulResponse(response: Response, data: any) {
   response.status(200).send(data);
 }
 
-export function getPrices(symbols: string[], size: string = 'compact'): Observable<any> {
+export function getPrices(symbols: string[], size: string = 'compact'): Observable<DailyTimeSeries[]> {
   const alphaVantageProxy: AlphaVantageProxy = new AlphaVantageProxy();
-  const results: Observable<DailyTimeSeries[]> = alphaVantageProxy.getDailyPricesBySymbols(symbols, size);
-  return results;
+  return alphaVantageProxy.getDailyPricesBySymbols(symbols, size);
+}
+
+export function getCryptos(symbols: string[]): Observable<DailyTimeSeries[]> {
+  const alphaVantageProxy: AlphaVantageProxy = new AlphaVantageProxy();
+  return alphaVantageProxy.getCryptoDailyPricesBySymbols(symbols);
 }

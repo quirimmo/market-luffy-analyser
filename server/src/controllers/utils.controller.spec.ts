@@ -1,13 +1,16 @@
 import * as httpMocks from 'node-mocks-http';
 
-let mockGetDailyPricesBySymbols = jest.fn();
+const mockGetDailyPricesBySymbols = jest.fn();
+const mockGetCryptoDailyPricesBySymbols = jest.fn();
+
 jest.mock('./../entities/AlphaVantageProxy', () =>
   jest.fn().mockImplementation(() => ({
-    getDailyPricesBySymbols: mockGetDailyPricesBySymbols
+    getDailyPricesBySymbols: mockGetDailyPricesBySymbols,
+    getCryptoDailyPricesBySymbols: mockGetCryptoDailyPricesBySymbols
   }))
 );
 
-import { getRequestParameters, getPrices, sendSuccessfulResponse } from './utils.controller';
+import { getRequestParameters, getPrices, sendSuccessfulResponse, getCryptos } from './utils.controller';
 
 describe('utils.controller', () => {
   beforeEach(() => {
@@ -17,6 +20,7 @@ describe('utils.controller', () => {
   it('should define the exposed functions', () => {
     expect(typeof getRequestParameters).toEqual('function');
     expect(typeof getPrices).toEqual('function');
+    expect(typeof getCryptos).toEqual('function');
     expect(typeof sendSuccessfulResponse).toEqual('function');
   });
 
@@ -24,6 +28,13 @@ describe('utils.controller', () => {
     it('should call the alpha vantage proxy getDailyPricesBySymbols method with the right parameters', () => {
       getPrices(['FB', 'GOOG'], 'compact');
       expect(mockGetDailyPricesBySymbols).toHaveBeenCalledWith(['FB', 'GOOG'], 'compact');
+    });
+  });
+
+  describe('getCryptos', () => {
+    it('should call the alpha vantage proxy getCryptoDailyPricesBySymbols method with the right parameters', () => {
+      getCryptos(['ETH', 'BTC']);
+      expect(mockGetCryptoDailyPricesBySymbols).toHaveBeenCalledWith(['ETH', 'BTC']);
     });
   });
 

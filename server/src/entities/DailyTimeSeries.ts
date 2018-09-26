@@ -1,7 +1,9 @@
 import DailyTime from './DailyTime';
+import { AbstractDailyTime } from './AbstractDailyTime';
+import CryptoDailyTime from './CryptoDailyTime';
 
 export default class DailyTimeSeries {
-  constructor(public symbol: string = '', public dailyTimes: DailyTime[] = []) {}
+  constructor(public symbol: string = '', public dailyTimes: AbstractDailyTime[] = []) {}
 
   getLastMovement(isPercentage: boolean = true): number {
     const priceChange = this.getPriceChangeByPeriod(isPercentage);
@@ -39,12 +41,13 @@ export default class DailyTimeSeries {
     return priceChange.reduce((acc: number, val: number) => acc + val, 0);
   }
 
-  static buildFromData(symbol: string, data: any): DailyTimeSeries {
+  static buildFromData(symbol: string, data: any, isCrypto: boolean = false): DailyTimeSeries {
     if (!data) {
       return new DailyTimeSeries(symbol);
     }
     const keys: Array<string> = Object.keys(data);
-    const values: DailyTime[] = keys.map(key => new DailyTime(key, data[key]));
+    let values: AbstractDailyTime[] = isCrypto ? keys.map(key => new CryptoDailyTime(key, data[key])) : keys.map(key => new DailyTime(key, data[key]));
     return new DailyTimeSeries(symbol, values);
   }
+
 }
