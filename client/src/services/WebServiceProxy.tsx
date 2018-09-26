@@ -22,6 +22,10 @@ class WebServiceProxy {
 	public static getCryptos(): Observable<Crypto[]> {
 		return ajax(CRYPTOS_RESOURCE_URL).pipe(map((data: any) => data.response.map((value: any) => new Crypto(value.symbol, value.name))));
 	}
+
+	public static getCryptoPricesInfo(symbol: string) {
+		return ajax(`${CRYPTOS_RESOURCE_URL}${symbol}`);
+	}
 }
 
 export default WebServiceProxy;

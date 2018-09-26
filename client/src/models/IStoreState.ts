@@ -7,6 +7,7 @@ interface IStoreState {
 	dailySeries: DailySerie[];
 	selectedCompany?: Company;
 	cryptos: Crypto[];
+	selectedCrypto?: Crypto;
 }
 
 export default IStoreState;

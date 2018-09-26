@@ -7,6 +7,7 @@ import CompaniesPage from '../companies/Companies.container';
 import HomePage from '../home/Home.container';
 import CompanyPageContainer from '../company/CompanyPage.container';
 import CryptosPage from '../cryptos/Cryptos.container';
+import CryptoPageContainer from '../crypto/CryptoPage.container';
 
 class AppMainContent extends React.Component<{}> {
 	constructor(props: {}) {
@@ -16,10 +17,7 @@ class AppMainContent extends React.Component<{}> {
 		this.getHomePageRoute = this.getHomePageRoute.bind(this);
 		this.getCompanyPageRoute = this.getCompanyPageRoute.bind(this);
 		this.getCryptosPageRoute = this.getCryptosPageRoute.bind(this);
-	}
-
-	public getCryptosPageRoute(routeProps: any) {
-		return <CryptosPage />;
+		this.getCryptoPageRoute = this.getCryptoPageRoute.bind(this);
 	}
 
 	public getCompaniesPageRoute(routeProps: any) {
@@ -34,6 +32,14 @@ class AppMainContent extends React.Component<{}> {
 		return <CompanyPageContainer companySymbol={routeProps.match.params.symbol} />;
 	}
 
+	public getCryptosPageRoute(routeProps: any) {
+		return <CryptosPage />;
+	}
+
+	public getCryptoPageRoute(routeProps: any) {
+		return <CryptoPageContainer cryptoSymbol={routeProps.match.params.symbol} />;
+	}
+
 	public render() {
 		return (
 			<section className="main-content-section">
@@ -44,6 +50,7 @@ class AppMainContent extends React.Component<{}> {
 							<Route path="/companies" render={this.getCompaniesPageRoute} />
 							<Route path="/company/:symbol" render={this.getCompanyPageRoute} />
 							<Route path="/cryptos" render={this.getCryptosPageRoute} />
+							<Route path="/crypto/:symbol" render={this.getCryptoPageRoute} />
 							<Redirect from="/" to="/home" />
 						</Switch>
 					</Col>
