@@ -43,11 +43,11 @@ class FilterCryptos extends React.Component<IFilterCryptosProps, IFilterCryptosS
 			(prevState: IFilterCryptosState) => ({
 				selectedName
 			}),
-			this.dispatchToggleCompanyVisibility
+			this.dispatchToggleCryptoVisibility
 		);
 	}
 
-	public dispatchToggleCompanyVisibility(): void {
+	public dispatchToggleCryptoVisibility(): void {
 		this.props.toggleCryptoVisibility(this.state.selectedName);
 	}
 }

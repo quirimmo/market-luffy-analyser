@@ -48,6 +48,7 @@ class CompanyPage extends React.Component<ICryptoPageProps, ICryptoPageState> {
 			<div>
 				<div className="row text-center justify-content-center text-uppercase font-weight-bold">{this.props.crypto.name}</div>
 				<div className="row text-center justify-content-center text-uppercase font-italic">{this.props.crypto.symbol}</div>
+				<br />
 				<CryptoDetails crypto={this.props.crypto} />
 			</div>
 		);

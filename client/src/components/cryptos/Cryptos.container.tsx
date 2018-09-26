@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
 import IStoreState from './../../models/IStoreState';
 import Cryptos from './Cryptos.component';
+import { selectCrypto } from './../../actions/crypto.action';
+import Crypto from './../../models/Crypto';
 
 const mapStateToProps = (state: IStoreState, ownProps: any) => {
 	return {
@@ -10,7 +12,7 @@ const mapStateToProps = (state: IStoreState, ownProps: any) => {
 
 const mapDispatchToProps: any = (dispatch: any, ownProps: any) => ({
 	selectCrypto: (crypto: Crypto): void => {
-		// dispatch(selectCompany(company));
+		dispatch(selectCrypto(crypto));
 	}
 });
 

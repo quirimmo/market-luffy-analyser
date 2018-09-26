@@ -49,7 +49,7 @@ describe('AppMainContent Presentational Component', () => {
 
 	describe('Route', () => {
 		it('should define the Route components', () => {
-			expect(component.find(Route)).toHaveLength(4);
+			expect(component.find(Route)).toHaveLength(5);
 		});
 
 		describe('home Route', () => {
@@ -110,6 +110,21 @@ describe('AppMainContent Presentational Component', () => {
 			it('should define the render prop', () => {
 				expect(cryptosRoute.prop('render')).toEqual(component.instance().getCryptosPageRoute);
 			});
+		});
+	});
+
+	describe('crypto page Route', () => {
+		let cryptoPageRoute: any;
+		beforeEach(() => {
+			cryptoPageRoute = component.find(Route).at(4);
+		});
+
+		it('should define the path prop', () => {
+			expect(cryptoPageRoute.prop('path')).toEqual('/crypto/:symbol');
+		});
+
+		it('should define the render prop', () => {
+			expect(cryptoPageRoute.prop('render')).toEqual(component.instance().getCryptoPageRoute);
 		});
 	});
 
