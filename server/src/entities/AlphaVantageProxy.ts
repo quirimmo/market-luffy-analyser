@@ -7,29 +7,19 @@ import DailyTimeSeries from './DailyTimeSeries';
 
 const BASE_URL: string = 'https://www.alphavantage.co/query';
 const DAILY_PRICES_FUNCTION: string = 'TIME_SERIES_DAILY';
+const CRYPTOS_DAILY_PRICES_FUNCTION: string = 'DIGITAL_CURRENCY_DAILY';
 const API_KEY: string = 'X71A1MTU6F1C1B4G';
 const DAILY_TIME_SERIES_KEY = 'Time Series (Daily)';
+const CRYPTO_DAILY_TIME_SERIES_KEY = 'Time Series (Digital Currency Daily)';
+const CRYPTOS_MARKET = 'USD';
 export default class AlphaVantageProxy {
   public httpRequester: HTTPRequester;
   constructor() {
     this.httpRequester = new HTTPRequester();
   }
 
-  getDailyPricesBySymbol(symbol: string, size: string = 'compact'): Observable<DailyTimeSeries> {
-    const REQUEST_URL: string = this.getRequestURL(DAILY_PRICES_FUNCTION, symbol, size);
-    return this.httpRequester
-      .get(REQUEST_URL)
-      .pipe(this.pluckResponseData(DAILY_TIME_SERIES_KEY))
-      .pipe(map(onMap));
-
-    function onMap(data: any) {
-      return DailyTimeSeries.buildFromData(symbol, data);
-    }
-  }
-
   getDailyPricesBySymbols(symbols: string[], size: string = 'compact'): Observable<DailyTimeSeries[]> {
     const REQUEST_URLS: string[] = symbols.map(symbol => this.getRequestURL(DAILY_PRICES_FUNCTION, symbol, size));
-
     return this.httpRequester.getAll(REQUEST_URLS).pipe(map(onMap));
 
     function onMap(el: any) {
@@ -37,8 +27,23 @@ export default class AlphaVantageProxy {
     }
   }
 
+  getCryptoDailyPricesBySymbols(symbols: string[]): Observable<DailyTimeSeries[]> {
+    const REQUEST_URLS: string[] = symbols.map(symbol => this.getCryptoRequestURL(CRYPTOS_DAILY_PRICES_FUNCTION, symbol));
+    return this.httpRequester.getAll(REQUEST_URLS).pipe(map(onMap));
+
+    function onMap(el: any) {
+      return el.map((item: any, index: number) =>
+        DailyTimeSeries.buildFromData(symbols[index], item.data[CRYPTO_DAILY_TIME_SERIES_KEY], true)
+      );
+    }
+  }
+
   getRequestURL(alphavantageMethod: string, symbol: string, size: string = 'compact'): string {
     return `${BASE_URL}?function=${alphavantageMethod}&symbol=${symbol}&apikey=${API_KEY}&outputsize=${size}`;
+  }
+
+  getCryptoRequestURL(alphavantageMethod: string, symbol: string): string {
+    return `${BASE_URL}?function=${alphavantageMethod}&symbol=${symbol}&apikey=${API_KEY}&market=${CRYPTOS_MARKET}`;
   }
 
   pluckResponseData(valuesKey: string): OperatorFunction<{}, {}> {

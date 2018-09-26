@@ -13,11 +13,18 @@ let component: any;
 const mockConnectToSocket = jest.fn(() => of(null));
 const mockDisconnectFromSocket = jest.fn(() => of(null));
 const mockFetchCompanies = jest.fn(() => of(null));
+const mockFetchCryptos = jest.fn(() => of(null));
+
 
 describe('App Presentational Component', () => {
 	beforeEach(() => {
 		component = shallow(
-			<App fetchCompanies={mockFetchCompanies} connectToSocket={mockConnectToSocket} disconnectFromSocket={mockDisconnectFromSocket} />
+			<App
+				fetchCompanies={mockFetchCompanies}
+				connectToSocket={mockConnectToSocket}
+				disconnectFromSocket={mockDisconnectFromSocket}
+				fetchCryptos={mockFetchCryptos}
+			/>
 		);
 	});
 	afterEach(() => {

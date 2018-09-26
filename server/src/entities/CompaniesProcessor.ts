@@ -3,6 +3,7 @@ import { RawCompany, Company } from './Company';
 
 const FOLDER_PATH: string = 'src/data/';
 const COMPOSED_COMPANIES_FILE: string = 'all-companies.json';
+const COMPOSED_CRYPTOS_FILE: string = 'all-cryptos.json';
 
 class CompaniesProcessor {
   constructor() {}
@@ -20,7 +21,7 @@ class CompaniesProcessor {
     return allFiles.filter(onFilterCompaniesFiles);
 
     function onFilterCompaniesFiles(file: string) {
-      return file.endsWith('.json') && file !== COMPOSED_COMPANIES_FILE;
+      return file.endsWith('.json') && file !== COMPOSED_COMPANIES_FILE && file !== COMPOSED_CRYPTOS_FILE;
     }
   }
 

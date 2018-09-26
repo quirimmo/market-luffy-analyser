@@ -1,0 +1,82 @@
+[
+  {
+		"symbol": "BTC",
+		"name": "Bitcoin"
+	},
+	{
+		"symbol": "ETH",
+		"name": "Ethereum"
+  },
+	{
+		"symbol": "XRP",
+		"name": "Ripple"
+  },
+	{
+		"symbol": "BCH",
+		"name": "Bitcoin Cash"
+  },
+	{
+		"symbol": "EOS",
+		"name": "EOS"
+  },
+	{
+		"symbol": "XLM",
+		"name": "Stellar Lumens"
+  },
+	{
+		"symbol": "LTC",
+		"name": "Litecoin"
+  },
+	{
+		"symbol": "USDT",
+		"name": "Tether"
+  },
+	{
+		"symbol": "ADA",
+		"name": "Cardano"
+  },
+	{
+		"symbol": "XMR",
+		"name": "Monero"
+  },
+	{
+		"symbol": "DASH",
+		"name": "DigitalCash"
+  },
+	{
+		"symbol": "IOTA",
+		"name": "IOTA"
+  },
+	{
+		"symbol": "TRX",
+		"name": "Tronix"
+  },
+	{
+		"symbol": "NEO",
+		"name": "Neo"
+  },
+	{
+		"symbol": "ETC",
+		"name": "Ethereum Classic"
+  },
+	{
+		"symbol": "BNB",
+		"name": "Binance Coin"
+  },
+	{
+		"symbol": "XTZ",
+		"name": "Tezos"
+  },
+	{
+		"symbol": "XEM",
+		"name": "NEM"
+  },
+	{
+		"symbol": "DOGE",
+		"name": "DogeCoin"
+  },
+	{
+		"symbol": "ZRX",
+		"name": "0x"
+  }
+]

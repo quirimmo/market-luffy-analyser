@@ -18,8 +18,9 @@ jest.mock('rxjs/ajax', () => ({
 
 import WebServiceProxy from './WebServiceProxy';
 import { of } from 'rxjs';
-import { COMPANIES_RESOURCE_URL } from './../constants/constants';
+import { COMPANIES_RESOURCE_URL, CRYPTOS_RESOURCE_URL } from './../constants/constants';
 import Company from './../models/Company';
+import Crypto from './../models/Crypto';
 
 const instance: WebServiceProxy = new WebServiceProxy();
 
@@ -40,6 +41,8 @@ describe('WebServiceProxy', () => {
 	it('should define the exposed methdos', () => {
 		expect(typeof WebServiceProxy.getCompanies).toEqual('function');
 		expect(typeof WebServiceProxy.getCompanyPricesInfo).toEqual('function');
+		expect(typeof WebServiceProxy.getCryptos).toEqual('function');
+		expect(typeof WebServiceProxy.getCryptoPricesInfo).toEqual('function');
 	});
 
 	describe('getCompanies', () => {
@@ -57,6 +60,21 @@ describe('WebServiceProxy', () => {
 		});
 	});
 
+	describe('getCryptos', () => {
+		it('should call the ajax method of rxjs with the right parameter', () => {
+			WebServiceProxy.getCryptos();
+			expect(mockAjax).toHaveBeenCalledWith(CRYPTOS_RESOURCE_URL);
+		});
+
+		it('should receive the Crypto instance', () => {
+			jest.useFakeTimers();
+			WebServiceProxy.getCryptos().subscribe((data: any) => {
+				expect(data).toEqual([new Crypto('Symbol', 'Name')]);
+			});
+			jest.runOnlyPendingTimers();
+		});
+	});
+
 	describe('getCompanyPricesInfo', () => {
 		it('should call the ajax method of rxjs with the compact size parameter', () => {
 			WebServiceProxy.getCompanyPricesInfo('symbol');
@@ -66,6 +84,13 @@ describe('WebServiceProxy', () => {
 		it('should call the ajax method of rxjs with the full size parameter', () => {
 			WebServiceProxy.getCompanyPricesInfo('symbol', false);
 			expect(mockAjax).toHaveBeenCalledWith(`http://localhost:3000/prices/symbol/full`);
+		});
+	});
+
+	describe('getCryptoPricesInfo', () => {
+		it('should call the ajax method of rxjs', () => {
+			WebServiceProxy.getCryptoPricesInfo('symbol');
+			expect(mockAjax).toHaveBeenCalledWith(`http://localhost:3000/cryptos/symbol`);
 		});
 	});
 });
