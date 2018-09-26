@@ -14,7 +14,7 @@ const store = mockStore({
 });
 let component: ShallowWrapper<any, any>;
 
-describe('Companies Page Container Component', () => {
+describe('Company Page Container Component', () => {
 	beforeEach(() => {
 		component = shallow(<CompanyPageContainer store={store} companySymbol="Symbol" />);
 	});

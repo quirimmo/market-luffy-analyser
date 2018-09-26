@@ -75,3 +75,19 @@
 .bm-overlay {
   background: rgba(0, 0, 0, 0.3);
 }
+
+.menu-nav-item {
+  transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  border-bottom: none;
+  text-decoration: none !important;
+  border-bottom: 1px solid #c3c3c3;
+  padding: 5px 0px;
+  font-size: 0.9em;
+}
+
+.menu-nav-item:hover {
+  border-bottom: 3px solid #fff;
+  color: #fff;
+  padding-left: 10px;
+}

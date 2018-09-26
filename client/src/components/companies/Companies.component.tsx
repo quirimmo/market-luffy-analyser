@@ -7,6 +7,7 @@ import { Alert } from 'reactstrap';
 import LoadingGears from '../shared/LoadingGears.component';
 
 import './style.scss';
+
 interface ICompaniesProps {
 	companies: Company[];
 	companySectors: string[];
@@ -19,7 +20,7 @@ interface ICompaniesState {
 }
 
 class Companies extends React.Component<ICompaniesProps, ICompaniesState> {
-	constructor(props: any) {
+	constructor(props: ICompaniesProps) {
 		super(props);
 		this.state = {
 			sectors: [],

@@ -1,4 +1,5 @@
 import DailyTime from './DailyTime';
+import { AbstractDailyTime } from './AbstractDailyTime';
 
 const instance = new DailyTime('2018-09-01', {
   '1. open': '10.00',
@@ -15,6 +16,10 @@ describe('Daily Time', () => {
 
 	it('should be an instance of the class', () => {
 		expect(instance instanceof DailyTime).toBeTruthy();
+	});
+
+	it('should be an instance of the parent class', () => {
+		expect(instance instanceof AbstractDailyTime).toBeTruthy();
 	});
 
 	it('should define the number of digits', () => {
