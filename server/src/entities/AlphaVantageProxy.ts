@@ -32,6 +32,7 @@ export default class AlphaVantageProxy {
     return this.httpRequester.getAll(REQUEST_URLS).pipe(map(onMap));
 
     function onMap(el: any) {
+      console.log('ELEMENT', el);
       return el.map((item: any, index: number) =>
         DailyTimeSeries.buildFromData(symbols[index], item.data[CRYPTO_DAILY_TIME_SERIES_KEY], true)
       );

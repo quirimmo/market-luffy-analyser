@@ -50,66 +50,42 @@ describe('CompaniesController', () => {
     expect(typeof filterBySector).toEqual('function');
   });
 
-  // describe('getSector', () => {
-  //   it('should return the right value of the enum', () => {
-  //     expect(getSector('TECHNOLOGY')).toEqual('Technology');
-  //     expect(getSector('CAPITAL')).toEqual('Capital Goods');
-  //   });
-  // });
+  describe('filterBySector', () => {
+    it('should return true if the company sector is included in the provided sectors', () => {
+      expect(filterBySector(['Technology'], companyOne)).toBeTruthy();
+    });
 
-  // describe('filterBySymbol', () => {
-  //   it('should return true if the company name is included in the provided symbols', () => {
-  //     expect(filterBySymbol(['FB'], companyOne)).toBeTruthy();
-  //   });
+    it('should return false if the company sector is not included in the provided sectors', () => {
+      expect(filterBySector(['SADASDSAD'], companyOne)).toBeFalsy();
+    });
+  });
 
-  //   it('should return false if the company name is not included in the provided symbols', () => {
-  //     expect(filterBySymbol(['SADASDSAD'], companyOne)).toBeFalsy();
-  //   });
-  // });
+  describe('onGetCompanies', () => {
+    const request = httpMocks.createRequest({
+      method: 'GET',
+      url: '/companies/',
+      params: {},
+      query: {}
+    });
+    const response = httpMocks.createResponse({ eventEmitter: EventEmitter });
 
-  // describe('filterBySector', () => {
-  //   it('should return true if the company sector is included in the provided sectors', () => {
-  //     expect(filterBySector(['Technology'], companyOne)).toBeTruthy();
-  //   });
+    it('should call the getAllCompanies method of CompaniesProcessor with the right parameters', () => {
+      onGetCompanies(request, response);
+      expect(mockGetAllCompanies).toHaveBeenCalled();
+    });
 
-  //   it('should return false if the company sector is not included in the provided sectors', () => {
-  //     expect(filterBySector(['SADASDSAD'], companyOne)).toBeFalsy();
-  //   });
-  // });
+    describe('response', () => {
+      it('should return the list of all the companies', () => {
+        onGetCompanies(request, response);
+        expect(mockSendSuccessfulResponse).toHaveBeenCalledWith(response, companies);
+      });
 
-  // describe('onGetCompanies', () => {
-  //   const request = httpMocks.createRequest({
-  //     method: 'GET',
-  //     url: '/companies/',
-  //     params: {},
-  //     query: {}
-  //   });
-  //   const response = httpMocks.createResponse({ eventEmitter: EventEmitter });
-
-  //   it('should call the getAllCompanies method of CompaniesProcessor with the right parameters', () => {
-  //     onGetCompanies(request, response);
-  //     expect(mockGetAllCompanies).toHaveBeenCalled();
-  //   });
-
-  //   describe('response', () => {
-  //     it('should return the list of all the companies', () => {
-  //       onGetCompanies(request, response);
-  //       expect(mockSendSuccessfulResponse).toHaveBeenCalledWith(response, companies);
-  //     });
-
-  //     it('should return the list of all the companies with the given symbols', () => {
-  //       request.params.symbols = 'FB';
-  //       onGetCompanies(request, response);
-  //       expect(mockSendSuccessfulResponse).toHaveBeenCalledWith(response, [companyOne]);
-  //       delete request.params.symbols;
-  //     });
-
-  //     it('should return the list of all the companies with the given sectors', () => {
-  //       request.query.sectors = ['services'];
-  //       onGetCompanies(request, response);
-  //       expect(mockSendSuccessfulResponse).toHaveBeenCalledWith(response, [companyTwo]);
-  //       delete request.query.sectors;
-  //     });
-  //   });
-  // });
+      it('should return the list of all the companies with the given sectors', () => {
+        request.query.sectors = ['services'];
+        onGetCompanies(request, response);
+        expect(mockSendSuccessfulResponse).toHaveBeenCalledWith(response, [companyTwo]);
+        delete request.query.sectors;
+      });
+    });
+  });
 });
