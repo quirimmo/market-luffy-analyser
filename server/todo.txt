@@ -1,5 +1,9 @@
 API KEY: X71A1MTU6F1C1B4G
 
-Refactor companies.controller tests in order to mock and test the CompaniesProcessor getAllCompanies method
+Refactor all controllers
+Manage errors of async in controllers
+Add coverage to unit tests
+Refactor all unit tests of controllers
 
+Refactor companies.controller tests in order to mock and test the CompaniesProcessor getAllCompanies method
 Refactor and add unit tests for utils.controller
