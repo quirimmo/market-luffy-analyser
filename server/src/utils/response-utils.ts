@@ -1,5 +1,5 @@
 import { Response } from 'express';
-import DailyTimeSeries from '../entities/DailyTimeSeries';
+import DailyTimeSeries from '../models/daily-time/DailyTimeSeries';
 
 export function sendSuccessfulResponse(response: Response, data: any) {
   response.header('Access-Control-Allow-Origin', '*');

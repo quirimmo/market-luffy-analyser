@@ -1,8 +1,8 @@
 import * as httpMocks from 'node-mocks-http';
 import { EventEmitter } from 'events';
 import { sendSuccessfulResponse, buildDailySerieResponse } from './response-utils';
-import DailyTimeSeries from '../entities/DailyTimeSeries';
-import DailyTime from '../entities/DailyTime';
+import DailyTimeSeries from '../models/daily-time/DailyTimeSeries';
+import DailyTime from '../models/daily-time/DailyTime';
 
 const stockDailyTime: DailyTime = new DailyTime('2018-08-16', {
   '1. open': '60.00',

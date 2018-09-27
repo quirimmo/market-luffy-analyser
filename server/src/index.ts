@@ -1,5 +1,5 @@
-import LuffyWebService from './entities/LuffyWebService';
-import LuffyServerSocket from './entities/LuffyServerSocket';
+import LuffyWebService from './models/web-service/LuffyWebService';
+import LuffyServerSocket from './models/socket/LuffyServerSocket';
 
 const webServiceInstance: LuffyWebService = new LuffyWebService();
 const webServiceSocket: LuffyServerSocket = new LuffyServerSocket(webServiceInstance);

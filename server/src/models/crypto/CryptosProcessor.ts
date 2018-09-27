@@ -1,5 +1,5 @@
 import { readFileSync } from 'fs';
-import { Company } from './Company';
+import { Company } from '../company/Company';
 import { Crypto } from './Crypto';
 
 const FOLDER_PATH: string = 'src/data/';

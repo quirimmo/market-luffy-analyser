@@ -1,7 +1,7 @@
 import HTTPRequester from './HTTPRequester';
 import { Observable, OperatorFunction } from 'rxjs';
 import { pluck, map } from 'rxjs/operators';
-import DailyTimeSeries from './DailyTimeSeries';
+import DailyTimeSeries from './../daily-time/DailyTimeSeries';
 
 // free volume of calls: 5 requests per minute
 

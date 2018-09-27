@@ -1,9 +1,9 @@
-import DailyTime from './../entities/DailyTime';
-import DailyTimeSeries from './../entities/DailyTimeSeries';
+import DailyTime from './../models/daily-time/DailyTime';
+import DailyTimeSeries from '../models/daily-time/DailyTimeSeries';
 import { of } from 'rxjs';
 import * as httpMocks from 'node-mocks-http';
 import { EventEmitter } from 'events';
-import CryptoDailyTime from '../entities/CryptoDailyTime';
+import CryptoDailyTime from '../models/daily-time/CryptoDailyTime';
 
 const firstCryptoFirstDailyTime: CryptoDailyTime = new CryptoDailyTime('2018-08-16', {
   '1a. open (USD)': '60.00',
@@ -62,7 +62,7 @@ jest.mock('../utils/response-utils', () => ({
 jest.mock('../utils/request-utils', () => ({
   getRequestParameters: mockGetRequestParameters
 }));
-jest.mock('./../entities/AlphaVantageProxy', () =>
+jest.mock('./../models/AlphaVantageProxy', () =>
   jest.fn().mockImplementation(() => ({
     getCryptoDailyPricesBySymbols: mockGetCryptoDailyPricesBySymbols
   }))

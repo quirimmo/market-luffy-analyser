@@ -1,7 +1,7 @@
 import { LuffySocketRequest } from './LuffySocketUtils';
 import { readFileSync } from 'fs';
-import { Company } from './Company';
-import CompaniesProcessor from './CompaniesProcessor';
+import { Company } from '../company/Company';
+import CompaniesProcessor from '../company/CompaniesProcessor';
 
 const ALL_COMPANIES_FILE: string = 'src/data/all-companies.json';
 

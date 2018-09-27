@@ -1,5 +1,5 @@
-import DailyTime from './../entities/DailyTime';
-import DailyTimeSeries from './../entities/DailyTimeSeries';
+import DailyTime from './../models/DailyTime';
+import DailyTimeSeries from '../models/daily-time/DailyTimeSeries';
 import { of } from 'rxjs';
 import * as httpMocks from 'node-mocks-http';
 import { EventEmitter } from 'events';
@@ -57,7 +57,7 @@ jest.mock('../utils/response-utils', () => ({
 jest.mock('../utils/request-utils', () => ({
   getRequestParameters: mockGetRequestParameters
 }));
-jest.mock('./../entities/AlphaVantageProxy', () =>
+jest.mock('./../models/AlphaVantageProxy', () =>
   jest.fn().mockImplementation(() => ({
     getDailyPricesBySymbols: mockGetDailyPricesBySymbols
   }))

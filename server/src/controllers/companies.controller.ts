@@ -1,6 +1,6 @@
 import { Router, Request, Response } from 'express';
-import { Company } from '../entities/Company';
-import CompaniesProcessor from '../entities/CompaniesProcessor';
+import { Company } from '../models/company/Company';
+import CompaniesProcessor from '../models/company/CompaniesProcessor';
 import { DEFAULT_SECTORS } from '../utils/default-sectors';
 import { sendSuccessfulResponse } from '../utils/response-utils';
 

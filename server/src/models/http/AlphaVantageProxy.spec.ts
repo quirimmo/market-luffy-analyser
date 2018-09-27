@@ -1,4 +1,4 @@
-import AlphaVantageProxy from './AlphaVantageProxy';
+import AlphaVantageProxy from './../http/AlphaVantageProxy';
 
 jest.mock('./HTTPRequester');
 

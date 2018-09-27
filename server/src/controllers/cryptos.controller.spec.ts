@@ -1,6 +1,6 @@
 import * as httpMocks from 'node-mocks-http';
 import { EventEmitter } from 'events';
-import { Crypto } from './../entities/Crypto';
+import { Crypto } from '../models/crypto/Crypto';
 
 const crypto1: Crypto = { symbol: 'CRT1', name: 'Crypto1' };
 const crypto2: Crypto = { symbol: 'CRT2', name: 'Crypto2' };
@@ -9,7 +9,7 @@ const cryptos: Crypto[] = [crypto1, crypto2];
 const mockGetAllCryptos = jest.fn(() => cryptos);
 const mockSendSuccessfulResponse = jest.fn();
 
-jest.mock('../entities/CryptosProcessor', () => {
+jest.mock('../models/CryptosProcessor', () => {
   return {
     getAllCryptos: mockGetAllCryptos
   };

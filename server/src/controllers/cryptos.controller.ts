@@ -1,7 +1,7 @@
 import { Router, Request, Response } from 'express';
-import { Crypto } from '../entities/Crypto';
+import { Crypto } from '../models/crypto/Crypto';
 import { sendSuccessfulResponse } from '../utils/response-utils';
-import CryptosProcessor from '../entities/CryptosProcessor';
+import CryptosProcessor from '../models/crypto/CryptosProcessor';
 // define the route
 const router: Router = Router();
 router.get('/', onGetCryptos);

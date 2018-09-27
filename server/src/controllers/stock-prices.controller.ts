@@ -1,8 +1,8 @@
 import { Router, Request, Response } from 'express';
 import { Observable } from 'rxjs';
-import DailyTimeSeries from '../entities/DailyTimeSeries';
+import DailyTimeSeries from '../models/daily-time/DailyTimeSeries';
 import { IRequestParameters } from '../utils/RequestParameters';
-import AlphaVantageProxy from '../entities/AlphaVantageProxy';
+import AlphaVantageProxy from '../models/AlphaVantageProxy';
 import { sendSuccessfulResponse, buildDailySerieResponse } from '../utils/response-utils';
 import { getRequestParameters } from '../utils/request-utils';
 

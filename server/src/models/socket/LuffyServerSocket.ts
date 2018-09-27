@@ -1,8 +1,8 @@
 import ApplicationServerSocket from './ApplicationServerSocket';
-import LuffyWebService from './LuffyWebService';
+import LuffyWebService from '../web-service/LuffyWebService';
 import { Subject, Subscription } from 'rxjs';
-import DailyTimeSeries from './DailyTimeSeries';
-import AlphaVantageProxy from './AlphaVantageProxy';
+import DailyTimeSeries from '../daily-time/DailyTimeSeries';
+import AlphaVantageProxy from '../AlphaVantageProxy';
 import PausableInterval from './PausableInterval';
 import LuffyRequestParser from './LuffyRequestParser';
 import { LuffySocketRequest, LuffySocketResponse } from './LuffySocketUtils';

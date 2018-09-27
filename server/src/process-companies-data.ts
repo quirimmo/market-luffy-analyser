@@ -1,4 +1,4 @@
-import CompaniesProcessor from "./entities/CompaniesProcessor";
+import CompaniesProcessor from "./models/company/CompaniesProcessor";
 
 const instance: CompaniesProcessor = new CompaniesProcessor();
 instance.process();
