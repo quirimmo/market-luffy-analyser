@@ -1,6 +1,6 @@
 import HTTPRequester from './HTTPRequester';
-import { Observable, OperatorFunction } from 'rxjs';
-import { pluck, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import DailyTimeSeries from './../daily-time/DailyTimeSeries';
 
 // free volume of calls: 5 requests per minute
@@ -12,6 +12,7 @@ const API_KEY: string = 'X71A1MTU6F1C1B4G';
 const DAILY_TIME_SERIES_KEY = 'Time Series (Daily)';
 const CRYPTO_DAILY_TIME_SERIES_KEY = 'Time Series (Digital Currency Daily)';
 const CRYPTOS_MARKET = 'USD';
+
 export default class AlphaVantageProxy {
   public httpRequester: HTTPRequester;
   constructor() {
@@ -32,7 +33,6 @@ export default class AlphaVantageProxy {
     return this.httpRequester.getAll(REQUEST_URLS).pipe(map(onMap));
 
     function onMap(el: any) {
-      console.log('ELEMENT', el);
       return el.map((item: any, index: number) =>
         DailyTimeSeries.buildFromData(symbols[index], item.data[CRYPTO_DAILY_TIME_SERIES_KEY], true)
       );
@@ -45,9 +45,5 @@ export default class AlphaVantageProxy {
 
   getCryptoRequestURL(alphavantageMethod: string, symbol: string): string {
     return `${BASE_URL}?function=${alphavantageMethod}&symbol=${symbol}&apikey=${API_KEY}&market=${CRYPTOS_MARKET}`;
-  }
-
-  pluckResponseData(valuesKey: string): OperatorFunction<{}, {}> {
-    return pluck('data', valuesKey);
   }
 }

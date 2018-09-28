@@ -5,6 +5,7 @@ todo.txt
 server/node_modules
 server/dist
 server/npm-debug.log
+server/coverage
 
 #CLIENT GIT IGNORED
 client/node_modules

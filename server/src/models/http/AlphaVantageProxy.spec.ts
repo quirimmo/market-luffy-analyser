@@ -1,14 +1,31 @@
-import AlphaVantageProxy from './../http/AlphaVantageProxy';
+import { of } from 'rxjs';
 
-jest.mock('./HTTPRequester');
-
-jest.mock('rxjs/operators/', () => {
-  return {
-    pluck: jest.fn(),
-    map: jest.fn()
-  };
+const mockGet = jest.fn();
+const mockGetAll = jest.fn(() => {
+  return of([
+    {
+      data: {
+        'Time Series (Daily)': 'facebook',
+        'Time Series (Digital Currency Daily)': 'bitcoin'
+      }
+    },
+    {
+      data: {
+        'Time Series (Daily)': 'twitter',
+        'Time Series (Digital Currency Daily)': 'ripple'
+      }
+    }
+  ]);
 });
-import { pluck, map } from 'rxjs/operators';
+jest.mock('./HTTPRequester', () =>
+  jest.fn().mockImplementation(() => ({
+    get: mockGet,
+    getAll: mockGetAll
+  }))
+);
+
+import DailyTimeSeries from '../daily-time/DailyTimeSeries';
+import AlphaVantageProxy from './../http/AlphaVantageProxy';
 
 const instance = new AlphaVantageProxy();
 
@@ -30,56 +47,57 @@ describe('AlphaVantageProxy', () => {
     expect(typeof instance.getCryptoDailyPricesBySymbols).toEqual('function');
     expect(typeof instance.getRequestURL).toEqual('function');
     expect(typeof instance.getCryptoRequestURL).toEqual('function');
-    expect(typeof instance.pluckResponseData).toEqual('function');
   });
 
   describe('getDailyPricesBySymbols', () => {
-    it('should call the getRequestURL method 2 times with the right parameters', () => {
-      const spy = jest.spyOn(instance, 'getRequestURL');
+    it('should call the getRequestURL method twice', () => {
+      const spy = spyOn(instance, 'getRequestURL');
       instance.getDailyPricesBySymbols(['FB', 'TWITTER']);
       expect(spy).toHaveBeenCalledTimes(2);
       expect(spy).toHaveBeenNthCalledWith(1, 'TIME_SERIES_DAILY', 'FB', 'compact');
       expect(spy).toHaveBeenNthCalledWith(2, 'TIME_SERIES_DAILY', 'TWITTER', 'compact');
     });
 
-    it('should call the getAll method of httprequester twice with the right parameters', () => {
-      const spy = jest.spyOn(instance.httpRequester, 'getAll');
+    it('should call the HTTPRequester getAll method', () => {
+      spyOn(instance, 'getRequestURL').and.returnValue('request-value');
       instance.getDailyPricesBySymbols(['FB', 'TWITTER']);
-      expect(spy).toHaveBeenCalledTimes(1);
-      expect(spy).toHaveBeenCalledWith([
-        'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=FB&apikey=X71A1MTU6F1C1B4G&outputsize=compact',
-        'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=TWITTER&apikey=X71A1MTU6F1C1B4G&outputsize=compact'
-      ]);
+      expect(mockGetAll).toHaveBeenCalledTimes(1);
+      expect(mockGetAll).toHaveBeenCalledWith(['request-value', 'request-value']);
     });
 
-    it('should call the map rxjs method', () => {
-      instance.getDailyPricesBySymbols(['FB', 'TWITTER']);
-      expect(map).toHaveBeenCalledTimes(1);
+    it('should call the DailyTimeSeries buildFromData method', () => {
+      spyOn(instance, 'getRequestURL').and.returnValue(['request-url-fb', 'request-url-twitter']);
+      const spy = spyOn(DailyTimeSeries, 'buildFromData');
+      instance.getDailyPricesBySymbols(['FB', 'TWITTER']).subscribe();
+      expect(spy).toHaveBeenCalledTimes(2);
+      expect(spy).toHaveBeenCalledWith('FB', 'facebook');
+      expect(spy).toHaveBeenCalledWith('TWITTER', 'twitter');
     });
   });
 
   describe('getCryptoDailyPricesBySymbols', () => {
-    it('should call the getRequestURL method 2 times with the right parameters', () => {
-      const spy = jest.spyOn(instance, 'getCryptoRequestURL');
-      instance.getCryptoDailyPricesBySymbols(['BTC', 'ETH']);
+    it('should call the getCryptoRequestURL method twice', () => {
+      const spy = spyOn(instance, 'getCryptoRequestURL');
+      instance.getCryptoDailyPricesBySymbols(['BTC', 'XRP']);
       expect(spy).toHaveBeenCalledTimes(2);
       expect(spy).toHaveBeenNthCalledWith(1, 'DIGITAL_CURRENCY_DAILY', 'BTC');
-      expect(spy).toHaveBeenNthCalledWith(2, 'DIGITAL_CURRENCY_DAILY', 'ETH');
+      expect(spy).toHaveBeenNthCalledWith(2, 'DIGITAL_CURRENCY_DAILY', 'XRP');
     });
 
-    it('should call the getAll method of httprequester twice with the right parameters', () => {
-      const spy = jest.spyOn(instance.httpRequester, 'getAll');
-      instance.getCryptoDailyPricesBySymbols(['BTC', 'ETH']);
-      expect(spy).toHaveBeenCalledTimes(1);
-      expect(spy).toHaveBeenCalledWith([
-        'https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY&symbol=BTC&apikey=X71A1MTU6F1C1B4G&market=USD',
-        'https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY&symbol=ETH&apikey=X71A1MTU6F1C1B4G&market=USD'
-      ]);
+    it('should call the HTTPRequester getAll method', () => {
+      spyOn(instance, 'getCryptoRequestURL').and.returnValue('request-value');
+      instance.getCryptoDailyPricesBySymbols(['BTC', 'XRP']);
+      expect(mockGetAll).toHaveBeenCalledTimes(1);
+      expect(mockGetAll).toHaveBeenCalledWith(['request-value', 'request-value']);
     });
 
-    it('should call the map rxjs method', () => {
-      instance.getCryptoDailyPricesBySymbols(['BTC', 'ETH']);
-      expect(map).toHaveBeenCalledTimes(1);
+    it('should call the DailyTimeSeries buildFromData method', () => {
+      spyOn(instance, 'getCryptoRequestURL').and.returnValue(['request-url-btc', 'request-url-xrp']);
+      const spy = spyOn(DailyTimeSeries, 'buildFromData');
+      instance.getCryptoDailyPricesBySymbols(['BTC', 'XRP']).subscribe();
+      expect(spy).toHaveBeenCalledTimes(2);
+      expect(spy).toHaveBeenCalledWith('BTC', 'bitcoin', true);
+      expect(spy).toHaveBeenCalledWith('XRP', 'ripple', true);
     });
   });
 
@@ -96,14 +114,6 @@ describe('AlphaVantageProxy', () => {
       expect(instance.getCryptoRequestURL('method', 'symbol')).toEqual(
         'https://www.alphavantage.co/query?function=method&symbol=symbol&apikey=X71A1MTU6F1C1B4G&market=USD'
       );
-    });
-  });
-
-  describe('pluckResponseData', () => {
-    it('should call the rxjs pluck method with the right parameters', () => {
-      instance.pluckResponseData('values key');
-      expect(pluck).toHaveBeenCalledTimes(1);
-      expect(pluck).toHaveBeenCalledWith('data', 'values key');
     });
   });
 });

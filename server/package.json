@@ -13,8 +13,8 @@
     "build-ts": "tsc",
     "watch-ts": "tsc -w",
     "tslint": "./node_modules/.bin/tslint --project .",
-    "test": "jest",
-    "watch-test": "jest --watch",
+    "test": "jest --colors --coverage",
+    "watch-test": "jest --watch --colors",
     "process-companies": "node_modules/.bin/ts-node src/process-companies-data.ts",
     "start-socket-client": "node_modules/.bin/ts-node src/client.ts"
   },
