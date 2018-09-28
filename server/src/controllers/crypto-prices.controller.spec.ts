@@ -62,7 +62,7 @@ jest.mock('../utils/response-utils', () => ({
 jest.mock('../utils/request-utils', () => ({
   getRequestParameters: mockGetRequestParameters
 }));
-jest.mock('./../models/AlphaVantageProxy', () =>
+jest.mock('./../models/http/AlphaVantageProxy', () =>
   jest.fn().mockImplementation(() => ({
     getCryptoDailyPricesBySymbols: mockGetCryptoDailyPricesBySymbols
   }))

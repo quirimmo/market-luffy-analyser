@@ -9,7 +9,7 @@ const cryptos: Crypto[] = [crypto1, crypto2];
 const mockGetAllCryptos = jest.fn(() => cryptos);
 const mockSendSuccessfulResponse = jest.fn();
 
-jest.mock('../models/CryptosProcessor', () => {
+jest.mock('../models/crypto/CryptosProcessor', () => {
   return {
     getAllCryptos: mockGetAllCryptos
   };

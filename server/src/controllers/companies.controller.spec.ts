@@ -30,7 +30,7 @@ const mockGetAllCompanies = jest.fn(() => [
     sector: 'Consumer Services'
   }
 ]);
-jest.mock('../models/CompaniesProcessor', () => ({
+jest.mock('../models/company/CompaniesProcessor', () => ({
   getAllCompanies: mockGetAllCompanies
 }));
 
