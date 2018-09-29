@@ -16,7 +16,6 @@ export function onGetCryptoPrices(req: Request, res: Response) {
   // get the parameters
   const { symbols }: IRequestParameters = getRequestParameters(req);
   // get cryptos by symbols
-  // const alphaVantageProxy: AlphaVantageProxy = new AlphaVantageProxy();
   const results: Observable<DailyTimeSeries[]> = alphaVantageProxy.getCryptoDailyPricesBySymbols(symbols);
   results.subscribe(onSubscribe, onError);
 

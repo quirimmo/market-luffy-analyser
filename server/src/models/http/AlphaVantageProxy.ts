@@ -24,7 +24,12 @@ export default class AlphaVantageProxy {
     const REQUEST_URLS: string[] = symbols.map(symbol => this.getRequestURL(DAILY_PRICES_FUNCTION, symbol, size));
     return this.httpRequester.getAll(REQUEST_URLS).pipe(map(onMap));
 
-    function onMap(el: any) {
+    function onMap(el: any, index: number) {
+      // if the output stream has an error
+      const error = findErrorInResponses(el);
+      if (typeof error !== 'undefined') {
+        throw new Error(`Error with the following request: ${REQUEST_URLS[index]}. ${error}`);
+      }
       return el.map((item: any, index: number) => DailyTimeSeries.buildFromData(symbols[index], item.data[DAILY_TIME_SERIES_KEY]));
     }
   }

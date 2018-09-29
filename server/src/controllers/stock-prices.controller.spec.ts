@@ -1,6 +1,6 @@
 import DailyTime from './../models/daily-time/DailyTime';
 import DailyTimeSeries from '../models/daily-time/DailyTimeSeries';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import * as httpMocks from 'node-mocks-http';
 import { EventEmitter } from 'events';
 
@@ -46,12 +46,14 @@ const mockGetRequestParameters = jest.fn((req: any) => ({
   symbols: req.params.symbols
 }));
 const mockSendSuccessfulResponse = jest.fn((resp: Response, data: any) => {});
+const mockSendErrorResponse = jest.fn();
 const mockBuildDailySerieResponse = jest.fn((serie: DailyTimeSeries, ret: any) => ({
   data: 'response'
 }));
 
 jest.mock('../utils/response-utils', () => ({
   sendSuccessfulResponse: mockSendSuccessfulResponse,
+  sendErrorResponse: mockSendErrorResponse,
   buildDailySerieResponse: mockBuildDailySerieResponse
 }));
 jest.mock('../utils/request-utils', () => ({
@@ -63,7 +65,7 @@ jest.mock('./../models/http/AlphaVantageProxy', () =>
   }))
 );
 
-import { StockPricesController, onGetStockPrices } from './stock-prices.controller';
+import { StockPricesController, onGetStockPrices, alphaVantageProxy } from './stock-prices.controller';
 
 describe('StockPricesController', () => {
   beforeEach(() => {
@@ -98,6 +100,12 @@ describe('StockPricesController', () => {
     it('should call the sendSuccessfulResponse method of utils for sending the data', () => {
       onGetStockPrices(request, response);
       expect(mockSendSuccessfulResponse).toHaveBeenCalledWith(response, { data: 'response' });
+    });
+
+    it('should call the sendErrorResponse method of utils for sending the error', () => {
+      spyOn(alphaVantageProxy, 'getDailyPricesBySymbols').and.returnValue(throwError('SUPER ERROR'));
+      onGetStockPrices(request, response);
+      expect(mockSendErrorResponse).toHaveBeenCalledWith(response, 'Error retrieving the crypto daily prices: SUPER ERROR');
     });
   });
 });

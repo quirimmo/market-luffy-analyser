@@ -1,6 +1,6 @@
 import DailyTime from './../models/daily-time/DailyTime';
 import DailyTimeSeries from '../models/daily-time/DailyTimeSeries';
-import { of, Observable, throwError } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import * as httpMocks from 'node-mocks-http';
 import { EventEmitter } from 'events';
 import CryptoDailyTime from '../models/daily-time/CryptoDailyTime';

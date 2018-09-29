@@ -75,6 +75,28 @@ describe('AlphaVantageProxy', () => {
       expect(spy).toHaveBeenCalledWith('FB', 'facebook');
       expect(spy).toHaveBeenCalledWith('TWITTER', 'twitter');
     });
+
+    it('should call the findErrorInResponses method of response-utils', (done: any) => {
+      const spy = spyOn(responseUtils, 'findErrorInResponses');
+      spyOn(instance, 'getRequestURL').and.returnValue('request-value');
+      spyOn(DailyTimeSeries, 'buildFromData').and.callFake(() => {});
+      instance.getDailyPricesBySymbols(['FB', 'TWITTER']).subscribe(() => {
+        done();
+      });
+      expect(spy).toHaveBeenCalled();
+    });
+
+    it('should call the findErrorInResponses method of response-utils', (done: any) => {
+      spyOn(responseUtils, 'findErrorInResponses').and.returnValue(true);
+      spyOn(instance, 'getRequestURL').and.returnValue('request-value');
+      instance.getDailyPricesBySymbols(['FB', 'TWITTER']).subscribe(
+        () => {},
+        (err: any) => {
+          expect(err).toBeDefined();
+          done();
+        }
+      );
+    });
   });
 
   describe('getCryptoDailyPricesBySymbols', () => {
