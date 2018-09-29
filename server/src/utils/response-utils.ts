@@ -27,6 +27,7 @@ export function findErrorInResponse(response: any) {
 export function buildDailySerieResponse(serie: DailyTimeSeries) {
   // if there are prices for the current symbol
   if (serie.dailyTimes.length) {
+    console.log(serie);
     // assign to the symbol the last movement, the price change, the trend and the prices
     return {
       [serie.symbol]: {
