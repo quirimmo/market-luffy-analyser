@@ -1,6 +1,6 @@
 import { of, Subject } from 'rxjs';
-import DailyTimeSeries from './DailyTimeSeries';
-import DailyTime from './DailyTime';
+import DailyTimeSeries from './../daily-time/DailyTimeSeries';
+import DailyTime from './../daily-time/DailyTime';
 
 const input: DailyTime[] = [
   new DailyTime('2018-08-16', {
@@ -24,12 +24,12 @@ const mockGetDailyPricesBySymbols = jest.fn((symbols: string[]) => {
   return of(results);
 });
 
-jest.mock('./AlphaVantageProxy', () => () => ({
+jest.mock('./../http/AlphaVantageProxy', () => () => ({
   getDailyPricesBySymbols: mockGetDailyPricesBySymbols
 }));
 
 import LuffyServerSocket from './LuffyServerSocket';
-import LuffyWebService from './LuffyWebService';
+import LuffyWebService from './../web-service/LuffyWebService';
 import PausableInterval from './PausableInterval';
 
 const webService: LuffyWebService = new LuffyWebService();

@@ -14,7 +14,7 @@ const companyTwo: any = {
 const companies: any[] = [companyOne, companyTwo];
 
 const mockSendSuccessfulResponse = jest.fn();
-jest.mock('./utils.controller', () => ({
+jest.mock('../utils/response-utils', () => ({
   sendSuccessfulResponse: mockSendSuccessfulResponse
 }));
 
@@ -30,11 +30,11 @@ const mockGetAllCompanies = jest.fn(() => [
     sector: 'Consumer Services'
   }
 ]);
-jest.mock('../entities/CompaniesProcessor', () => ({
+jest.mock('../models/company/CompaniesProcessor', () => ({
   getAllCompanies: mockGetAllCompanies
 }));
 
-import { CompaniesController, onGetCompanies, filterBySymbol, filterBySector, getSector } from './companies.controller';
+import { CompaniesController, onGetCompanies, filterBySector } from './companies.controller';
 
 describe('CompaniesController', () => {
   afterEach(() => {
@@ -47,26 +47,7 @@ describe('CompaniesController', () => {
 
   it('should define the exposed methods', () => {
     expect(typeof onGetCompanies).toEqual('function');
-    expect(typeof filterBySymbol).toEqual('function');
     expect(typeof filterBySector).toEqual('function');
-    expect(typeof getSector).toEqual('function');
-  });
-
-  describe('getSector', () => {
-    it('should return the right value of the enum', () => {
-      expect(getSector('TECHNOLOGY')).toEqual('Technology');
-      expect(getSector('CAPITAL')).toEqual('Capital Goods');
-    });
-  });
-
-  describe('filterBySymbol', () => {
-    it('should return true if the company name is included in the provided symbols', () => {
-      expect(filterBySymbol(['FB'], companyOne)).toBeTruthy();
-    });
-
-    it('should return false if the company name is not included in the provided symbols', () => {
-      expect(filterBySymbol(['SADASDSAD'], companyOne)).toBeFalsy();
-    });
   });
 
   describe('filterBySector', () => {
@@ -97,13 +78,6 @@ describe('CompaniesController', () => {
       it('should return the list of all the companies', () => {
         onGetCompanies(request, response);
         expect(mockSendSuccessfulResponse).toHaveBeenCalledWith(response, companies);
-      });
-
-      it('should return the list of all the companies with the given symbols', () => {
-        request.params.symbols = 'FB';
-        onGetCompanies(request, response);
-        expect(mockSendSuccessfulResponse).toHaveBeenCalledWith(response, [companyOne]);
-        delete request.params.symbols;
       });
 
       it('should return the list of all the companies with the given sectors', () => {

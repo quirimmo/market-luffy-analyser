@@ -1,8 +1,8 @@
 import ApplicationServerSocket from './ApplicationServerSocket';
-import LuffyWebService from './LuffyWebService';
+import LuffyWebService from '../web-service/LuffyWebService';
 import { Subject, Subscription } from 'rxjs';
-import DailyTimeSeries from './DailyTimeSeries';
-import AlphaVantageProxy from './AlphaVantageProxy';
+import DailyTimeSeries from '../daily-time/DailyTimeSeries';
+import AlphaVantageProxy from './../http/AlphaVantageProxy';
 import PausableInterval from './PausableInterval';
 import LuffyRequestParser from './LuffyRequestParser';
 import { LuffySocketRequest, LuffySocketResponse } from './LuffySocketUtils';
@@ -21,7 +21,11 @@ class LuffyServerSocket extends ApplicationServerSocket {
 
   start() {
     this.createSocketFromServer(this.webService.server);
-    this.onConnect().subscribe(this.onClientSocketConnected.bind(this));
+    this.onConnect().subscribe(this.onClientSocketConnected.bind(this), onError);
+
+    function onError(err: any) {
+      throw new Error(`Error on connecting to the server socket ${err}`);
+    }
   }
 
   onClientSocketConnected(socketInstance: SocketIO.Socket) {
@@ -59,7 +63,7 @@ class LuffyServerSocket extends ApplicationServerSocket {
     let subscription: Subscription | undefined;
     if (symbolsToRequest.length > NUMBER_OF_REQUEST_PER_MINUTE) {
       const pausableInterval: PausableInterval = new PausableInterval(1000 * 60, 10000, socketInstance);
-      subscription = pausableInterval.observable.subscribe(onSubscribe.bind(this, pausableInterval.pauser));
+      subscription = pausableInterval.observable.subscribe(onSubscribe.bind(this, pausableInterval.pauser), onError);
       pausableInterval.pauser.next(false);
     }
 
@@ -85,12 +89,16 @@ class LuffyServerSocket extends ApplicationServerSocket {
         }
       }
     }
+
+    function onError(err: any) {
+      throw new Error(`Error on the pausable interval ${err}`);
+    }
   }
 
   getAndSendData(socketInstance: SocketIO.Socket, symbols: string[], finished: boolean = false, pauser?: Subject<boolean>): void {
     const instance: any = this;
     const alphaVantageProxy: AlphaVantageProxy = new AlphaVantageProxy();
-    alphaVantageProxy.getDailyPricesBySymbols(symbols).subscribe(onSubscribe);
+    alphaVantageProxy.getDailyPricesBySymbols(symbols).subscribe(onSubscribe, onError);
 
     function onSubscribe(results: DailyTimeSeries[]) {
       results.forEach(onEachDailyTimeSerie);
@@ -112,6 +120,10 @@ class LuffyServerSocket extends ApplicationServerSocket {
           trend: dailyTimeSerie.getTrendByPeriod()
         }
       });
+    }
+
+    function onError(err: any) {
+      throw new Error(`Error on getting the daily prices by symbols ${err}`);
     }
   }
 

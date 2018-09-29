@@ -2,7 +2,7 @@ import LuffyRequestParser from './LuffyRequestParser';
 
 const instance: LuffyRequestParser = new LuffyRequestParser();
 
-jest.mock('./CompaniesProcessor', () => {
+jest.mock('./../company/CompaniesProcessor', () => {
   return {
     getAllCompanies: () => [
       {
