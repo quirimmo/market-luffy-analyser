@@ -1,6 +1,6 @@
 import * as httpMocks from 'node-mocks-http';
 import { EventEmitter } from 'events';
-import { sendSuccessfulResponse, buildDailySerieResponse } from './response-utils';
+import { sendSuccessfulResponse, buildDailySerieResponse, sendErrorResponse, findErrorInResponse, findErrorInResponses } from './response-utils';
 import DailyTimeSeries from '../models/daily-time/DailyTimeSeries';
 import DailyTime from '../models/daily-time/DailyTime';
 
@@ -28,6 +28,9 @@ describe('response utils', () => {
   it('should define the methods', () => {
     expect(typeof sendSuccessfulResponse).toEqual('function');
     expect(typeof buildDailySerieResponse).toEqual('function');
+    expect(typeof sendErrorResponse).toEqual('function');
+    expect(typeof findErrorInResponse).toEqual('function');
+    expect(typeof findErrorInResponses).toEqual('function');
   });
 
   describe('sendSuccessfulResponse', () => {
@@ -46,6 +49,30 @@ describe('response utils', () => {
     it('should call the send method of the response', () => {
       sendSuccessfulResponse(response, 'data');
       expect(mockSend).toHaveBeenCalledWith('data');
+    });
+  });
+
+  describe('sendErrorResponse', () => {
+    it('should call the header method of the response', () => {
+      sendErrorResponse(response, 'error message');
+      expect(mockHeader).toHaveBeenCalledTimes(2);
+      expect(mockHeader).toHaveBeenNthCalledWith(1, 'Access-Control-Allow-Origin', '*');
+      expect(mockHeader).toHaveBeenNthCalledWith(2, 'Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    });
+
+    it('should call the status method of the response with the default status code', () => {
+      sendErrorResponse(response, 'error message');
+      expect(mockStatus).toHaveBeenCalledWith(400);
+    });
+
+    it('should call the status method of the response with the provided status code', () => {
+      sendErrorResponse(response, 'error message', 1);
+      expect(mockStatus).toHaveBeenCalledWith(1);
+    });
+
+    it('should call the send method of the response', () => {
+      sendErrorResponse(response, 'error message');
+      expect(mockSend).toHaveBeenCalledWith({ error: 'error message' });
     });
   });
 
@@ -68,6 +95,26 @@ describe('response utils', () => {
           prices: [stockDailyTime]
         }
       });
+    });
+  });
+
+  describe('findErrorInResponse', () => {
+    it('should return true', () => {
+      expect(findErrorInResponse({ data: { 'Error Message': '' } })).toBeDefined();
+    });
+
+    it('should return false', () => {
+      expect(findErrorInResponse({ data: { 'Value': '' } })).toBeFalsy();
+    });
+  });
+
+  describe('findErrorInResponses', () => {
+    it('should return the error', () => {
+      expect(findErrorInResponse({ data: { 'Error Message': 'ERROR' } })).toEqual('ERROR');
+    });
+
+    it('should return undefined', () => {
+      expect(findErrorInResponse({ data: { 'Value': '' } })).toBeUndefined();
     });
   });
 });

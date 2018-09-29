@@ -1,6 +1,6 @@
 import DailyTime from './../models/daily-time/DailyTime';
 import DailyTimeSeries from '../models/daily-time/DailyTimeSeries';
-import { of } from 'rxjs';
+import { of, Observable, throwError } from 'rxjs';
 import * as httpMocks from 'node-mocks-http';
 import { EventEmitter } from 'events';
 import CryptoDailyTime from '../models/daily-time/CryptoDailyTime';
@@ -51,12 +51,14 @@ const mockGetRequestParameters = jest.fn((req: any) => ({
   symbols: req.params.symbols
 }));
 const mockSendSuccessfulResponse = jest.fn((resp: Response, data: any) => {});
+const mockSendErrorResponse = jest.fn();
 const mockBuildDailySerieResponse = jest.fn((serie: DailyTimeSeries, ret: any) => ({
   data: 'response'
 }));
 
 jest.mock('../utils/response-utils', () => ({
   sendSuccessfulResponse: mockSendSuccessfulResponse,
+  sendErrorResponse: mockSendErrorResponse,
   buildDailySerieResponse: mockBuildDailySerieResponse
 }));
 jest.mock('../utils/request-utils', () => ({
@@ -68,7 +70,8 @@ jest.mock('./../models/http/AlphaVantageProxy', () =>
   }))
 );
 
-import { CryptoPricesController, onGetCryptoPrices } from './crypto-prices.controller';
+import { CryptoPricesController, onGetCryptoPrices, alphaVantageProxy } from './crypto-prices.controller';
+import AlphaVantageProxy from '../models/http/AlphaVantageProxy';
 
 describe('CryptoPricesController', () => {
   beforeEach(() => {
@@ -103,6 +106,12 @@ describe('CryptoPricesController', () => {
     it('should call the sendSuccessfulResponse method of utils for sending the data', () => {
       onGetCryptoPrices(request, response);
       expect(mockSendSuccessfulResponse).toHaveBeenCalledWith(response, { data: 'response' });
+    });
+
+    it('should call the sendErrorResponse method of utils for sending the error', () => {
+      spyOn(alphaVantageProxy, 'getCryptoDailyPricesBySymbols').and.returnValue(throwError('SUPER ERROR'));
+      onGetCryptoPrices(request, response);
+      expect(mockSendErrorResponse).toHaveBeenCalledWith(response, 'Error retrieving the crypto daily prices: SUPER ERROR');
     });
   });
 });

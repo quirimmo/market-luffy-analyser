@@ -1,7 +1,8 @@
 import HTTPRequester from './HTTPRequester';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, throwError, of } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import DailyTimeSeries from './../daily-time/DailyTimeSeries';
+import { findErrorInResponses } from '../../utils/response-utils';
 
 // free volume of calls: 5 requests per minute
 
@@ -32,7 +33,12 @@ export default class AlphaVantageProxy {
     const REQUEST_URLS: string[] = symbols.map(symbol => this.getCryptoRequestURL(CRYPTOS_DAILY_PRICES_FUNCTION, symbol));
     return this.httpRequester.getAll(REQUEST_URLS).pipe(map(onMap));
 
-    function onMap(el: any) {
+    function onMap(el: any, index: number) {
+      // if the output stream has an error
+      const error = findErrorInResponses(el);
+      if (typeof error !== 'undefined') {
+        throw new Error(`Error with the following request: ${REQUEST_URLS[index]}. ${error}`);
+      }
       return el.map((item: any, index: number) =>
         DailyTimeSeries.buildFromData(symbols[index], item.data[CRYPTO_DAILY_TIME_SERIES_KEY], true)
       );

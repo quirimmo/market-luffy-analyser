@@ -1,5 +1,6 @@
 import axios, { AxiosStatic, AxiosResponse } from 'axios';
-import { from, Observable, forkJoin } from 'rxjs';
+import { from, Observable, forkJoin, of, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 export default class HTTPRequester {
   public axios: AxiosStatic = axios;

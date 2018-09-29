@@ -26,12 +26,14 @@ jest.mock('./HTTPRequester', () =>
 
 import DailyTimeSeries from '../daily-time/DailyTimeSeries';
 import AlphaVantageProxy from './../http/AlphaVantageProxy';
+import * as responseUtils from './../../utils/response-utils';
 
 const instance = new AlphaVantageProxy();
 
 describe('AlphaVantageProxy', () => {
   afterEach(() => {
     jest.clearAllMocks();
+    jest.clearAllTimers();
   });
 
   it('should be defined', () => {
@@ -98,6 +100,28 @@ describe('AlphaVantageProxy', () => {
       expect(spy).toHaveBeenCalledTimes(2);
       expect(spy).toHaveBeenCalledWith('BTC', 'bitcoin', true);
       expect(spy).toHaveBeenCalledWith('XRP', 'ripple', true);
+    });
+
+    it('should call the findErrorInResponses method of response-utils', (done: any) => {
+      const spy = spyOn(responseUtils, 'findErrorInResponses');
+      spyOn(instance, 'getCryptoRequestURL').and.returnValue('request-value');
+      spyOn(DailyTimeSeries, 'buildFromData').and.callFake(() => {});
+      instance.getCryptoDailyPricesBySymbols(['BTC', 'XRP']).subscribe(() => {
+        done();
+      });
+      expect(spy).toHaveBeenCalled();
+    });
+
+    it('should call the findErrorInResponses method of response-utils', (done: any) => {
+      spyOn(responseUtils, 'findErrorInResponses').and.returnValue(true);
+      spyOn(instance, 'getCryptoRequestURL').and.returnValue('request-value');
+      instance.getCryptoDailyPricesBySymbols(['BTC', 'XRP']).subscribe(
+        () => {},
+        (err: any) => {
+          expect(err).toBeDefined();
+          done();
+        }
+      );
     });
   });
 
