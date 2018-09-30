@@ -4,6 +4,7 @@ import { Alert } from 'reactstrap';
 import { Observable } from 'rxjs';
 import LoadingGears from '../shared/LoadingGears.component';
 import CompanyDetails from './CompanyDetails.component';
+import ExampleD3 from '../shared/ExampleD3.component';
 
 interface ICompanyPageProps {
 	company: Company;
@@ -50,6 +51,8 @@ class CompanyPage extends React.Component<ICompanyPageProps, ICompanyPageState> 
 				<div className="row text-center justify-content-center text-uppercase font-italic">{this.props.company.symbol}</div>
 				<br />
 				<CompanyDetails company={this.props.company} />
+				<br />
+				<ExampleD3 />
 			</div>
 		);
 	}

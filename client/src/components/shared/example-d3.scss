@@ -1,0 +1,54 @@
+.line {
+  fill: none;
+  stroke: #ffab00;
+  stroke-width: 3;
+}
+
+svg rect {
+  fill: gray;
+}
+
+.arc text {
+  fill: black;
+	font-size: 0.35em;
+}
+
+.arc path {
+  stroke: #fff;
+}
+
+.title {
+  fill: green;
+  font-weight: italic;
+}
+
+
+
+
+
+.svg-container {
+	display: inline-block;
+	position: relative;
+	width: 100%;
+	padding-bottom: 100%; /* aspect ratio */
+	vertical-align: top;
+	overflow: hidden;
+}
+.svg-content-responsive {
+	display: inline-block;
+	position: absolute;
+	top: 10px;
+	left: 0;
+}
+
+
+path.slice{
+	stroke-width: 0.1px;
+}
+
+polyline{
+	stroke: black;
+	stroke-width: 1px;
+	fill: none;
+}
+
