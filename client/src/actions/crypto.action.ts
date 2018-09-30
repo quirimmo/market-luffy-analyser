@@ -28,11 +28,11 @@ export const fetchCryptoThunk = (cryptoSymbol: string) => {
 	function onMap(crypto: Crypto, resp: any) {
 		crypto.dailySerie = new DailySerie(
 			crypto.symbol,
-			resp.response.data[cryptoSymbol].lastMovement,
-			resp.response.data[cryptoSymbol].priceChange,
-			resp.response.data[cryptoSymbol].trend
+			resp.response[cryptoSymbol].lastMovement,
+			resp.response[cryptoSymbol].priceChange,
+			resp.response[cryptoSymbol].trend
 		);
-		crypto.dailySerie.buildDailyTimes(resp.response.data[cryptoSymbol].prices);
+		crypto.dailySerie.buildDailyTimes(resp.response[cryptoSymbol].prices);
 		return crypto;
 	}
 

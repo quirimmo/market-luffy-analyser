@@ -27,11 +27,11 @@ export const fetchCompanyThunk = (companySymbol: string) => {
 	function onMap(company: Company, resp: any) {
 		company.dailySerie = new DailySerie(
 			company.symbol,
-			resp.response.data[companySymbol].lastMovement,
-			resp.response.data[companySymbol].priceChange,
-			resp.response.data[companySymbol].trend
+			resp.response[companySymbol].lastMovement,
+			resp.response[companySymbol].priceChange,
+			resp.response[companySymbol].trend
 		);
-		company.dailySerie.buildDailyTimes(resp.response.data[companySymbol].prices);
+		company.dailySerie.buildDailyTimes(resp.response[companySymbol].prices);
 		return company;
 	}
 
