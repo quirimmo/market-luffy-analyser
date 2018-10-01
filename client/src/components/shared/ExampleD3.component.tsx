@@ -34,14 +34,19 @@ class ExampleD3 extends React.Component {
 
 	constructor(props: any) {
 		super(props);
+		this.onPieChartClick = this.onPieChartClick.bind(this);
 	}
 
 	public render() {
 		return (
 			<div>
-				<D3PieChart id="pie-chart-example" data={this.pieChartData} />
+				<D3PieChart id="pie-chart-example" data={this.pieChartData} onPieChartClick={this.onPieChartClick} />
 			</div>
 		);
+	}
+
+	public onPieChartClick(d: any, element: any): void {
+		console.log('I am a click from outside!', d, element);
 	}
 }
 

@@ -1,24 +1,29 @@
 .g-pie-chart-container {
-  transform: translate(50%, 50%);
+	transform: translate(50%, 50%);
 }
 
 .g-pie-chart-container .pie-chart-slice {
-  stroke: #fff;
-  stroke-width: 0.5px;
+	stroke: #fff;
+	stroke-width: 0.5px;
+	opacity: 0.85;
+}
+
+.g-pie-chart-container .pie-chart-slice:hover {
+	opacity: 1;
 }
 
 .g-pie-chart-container .pie-chart-label-line {
-  stroke: black;
-  stroke-width: 1px;
-  fill: none;
+	stroke: black;
+	stroke-width: 1px;
+	fill: none;
 }
 
 .g-pie-chart-container .pie-chart-label {
-  fill: black;
-  font-size: 1em;
+	fill: black;
+	font-size: 1em;
 }
 
 .g-pie-chart-container .pie-chart-inner-text {
-  text-anchor: middle;
-  font-size: 0.7em;
+	text-anchor: middle;
+	font-size: 0.7em;
 }
