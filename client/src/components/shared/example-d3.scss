@@ -1,54 +1,24 @@
-.line {
-  fill: none;
-  stroke: #ffab00;
-  stroke-width: 3;
+.g-pie-chart-container {
+  transform: translate(50%, 50%);
 }
 
-svg rect {
-  fill: gray;
-}
-
-.arc text {
-  fill: black;
-	font-size: 0.35em;
-}
-
-.arc path {
+.g-pie-chart-container .pie-chart-slice {
   stroke: #fff;
+  stroke-width: 0.5px;
 }
 
-.title {
-  fill: green;
-  font-weight: italic;
+.g-pie-chart-container .pie-chart-label-line {
+  stroke: black;
+  stroke-width: 1px;
+  fill: none;
 }
 
-
-
-
-
-.svg-container {
-	display: inline-block;
-	position: relative;
-	width: 100%;
-	padding-bottom: 100%; /* aspect ratio */
-	vertical-align: top;
-	overflow: hidden;
-}
-.svg-content-responsive {
-	display: inline-block;
-	position: absolute;
-	top: 10px;
-	left: 0;
+.g-pie-chart-container .pie-chart-label {
+  fill: black;
+  font-size: 1em;
 }
 
-
-path.slice{
-	stroke-width: 0.1px;
+.g-pie-chart-container .pie-chart-inner-text {
+  text-anchor: middle;
+  font-size: 0.7em;
 }
-
-polyline{
-	stroke: black;
-	stroke-width: 1px;
-	fill: none;
-}
-
