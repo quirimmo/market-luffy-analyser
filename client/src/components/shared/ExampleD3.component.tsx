@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import './example-d3.scss';
 import D3PieChart, { ID3PieChartData } from './D3PieChart.component';
+import D3DonutChart from './D3DonutChart.component';
 
 class ExampleD3 extends React.Component {
 	public pieChartData: ID3PieChartData[] = [
@@ -40,7 +41,10 @@ class ExampleD3 extends React.Component {
 	public render() {
 		return (
 			<div>
-				<D3PieChart id="pie-chart-example" data={this.pieChartData} onPieChartClick={this.onPieChartClick} />
+				<D3DonutChart id="donut-chart-example" outerRadius={100} innerRadius={50} data={this.pieChartData} />
+				{/* 
+				<D3PieChart radius={200} id="pie-chart-example" data={this.pieChartData} onPieChartClick={this.onPieChartClick} />
+				*/}
 			</div>
 		);
 	}

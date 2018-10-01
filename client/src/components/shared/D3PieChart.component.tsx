@@ -1,6 +1,8 @@
 import * as React from 'react';
 import * as d3 from 'd3';
 
+import './d3-pie-chart.scss';
+
 export interface ID3PieChartData {
 	label: string;
 	value: number;
@@ -10,6 +12,7 @@ export interface ID3PieChartData {
 export interface ID3PieChartProps {
 	data: ID3PieChartData[];
 	id: string;
+	radius: number;
 	colors?: string[]; // defualt: 10 random colors of d3
 	displayLabelLines?: boolean; // default: true
 	onPieChartClick?: (d: any, element: any) => void;
@@ -23,8 +26,9 @@ class D3PieChart extends React.Component<ID3PieChartProps, any> {
 	}
 
 	public render() {
+		const viewportSize = this.props.radius * 4;
 		return (
-			<svg id={this.props.id} viewBox="0 0 600 600" preserveAspectRatio="xMinYMin meet" className="svg-pie-chart">
+			<svg id={this.props.id} viewBox={`0 0 ${viewportSize} ${viewportSize}`} preserveAspectRatio="xMinYMin meet" className="svg-pie-chart">
 				<g className="g-pie-chart-container" />
 			</svg>
 		);
@@ -38,12 +42,10 @@ class D3PieChart extends React.Component<ID3PieChartProps, any> {
 		const data: ID3PieChartData[] = this.props.data;
 		// get visibility of label lines
 		const displayLabelLines = typeof this.props.displayLabelLines === 'boolean' ? this.props.displayLabelLines : true;
-		// define the radius of the pie chart
-		const radius: number = 200;
 		// select the group main container from HTML
-		const mainGroupContainer: d3.Selection<any, any, any, any> = d3.select('g.g-pie-chart-container');
+		const mainGroupContainer: d3.Selection<any, any, any, any> = d3.select(`#${this.props.id} g.g-pie-chart-container`);
 		// create the pie chart Arc path specifying an inner radius(which is 0 for circles and !== 0 for donuts ) and outer radius
-		const pieChartArcPath = this.createPieChartArc(radius);
+		const pieChartArcPath = this.createPieChartArc(this.props.radius);
 		// draw the pie chart and add a g for each slice
 		const pieChart = this.displayPieChart(mainGroupContainer, data);
 		// draw the paths of the slices and fill them with the colors
@@ -51,14 +53,14 @@ class D3PieChart extends React.Component<ID3PieChartProps, any> {
 		// if label lines enabled by props or by default
 		if (displayLabelLines) {
 			// display the polylines representing the label lines of the pie slice descriptions
-			this.displayLabelLine(pieChart, radius);
+			this.displayLabelLine(pieChart, this.props.radius);
 		}
 		// display the labels outside the slice arcs
-		this.displayLabel(pieChart, radius);
+		this.displayLabel(pieChart, this.props.radius);
 		// if at least one label line has been provided
 		if (data.some((el: ID3PieChartData) => !!el.innerText)) {
 			// display the inner text inside the slices
-			this.displayInnerText(pieChart, radius);
+			this.displayInnerText(pieChart, this.props.radius);
 		}
 	}
 

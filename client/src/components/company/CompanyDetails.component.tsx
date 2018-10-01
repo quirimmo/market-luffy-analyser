@@ -5,6 +5,8 @@ import DailySerieCardPriceChange from '../daily-serie/DailySerieCardPriceChange.
 import NumberFormatter from '../shared/NumberFormatter.component';
 import Utils from './../../utils/Utils';
 import DailySerieDetails from '../daily-serie/DailySerieDetails.component';
+import D3PieChart, { ID3PieChartData } from '../shared/D3PieChart.component';
+import D3DonutChart from '../shared/D3DonutChart.component';
 
 interface ICompanyDetailsProps {
 	company: Company;
@@ -17,6 +19,9 @@ class CompanyDetails extends React.Component<ICompanyDetailsProps, any> {
 
 	public render() {
 		const dailySerie: DailySerie = this.props.company.dailySerie ? this.props.company.dailySerie : new DailySerie('0', 0, [0], 0);
+		const pieChartTotalNumbersData = this.getPieChartTotalNumbersData(dailySerie);
+		const pieChartTotalNumbersColors = ['red', 'green'];
+		const pieChartTotalNumbersRadius = 100;
 		return (
 			<div>
 				{/* large screens */}
@@ -88,9 +93,51 @@ class CompanyDetails extends React.Component<ICompanyDetailsProps, any> {
 				<br />
 				<DailySerieDetails dailySerie={dailySerie} />
 				<br />
+				<div className="row">
+					<div className="col-md-6 col-sm-12">
+						<D3PieChart
+							colors={pieChartTotalNumbersColors}
+							radius={pieChartTotalNumbersRadius}
+							id="pie-chart-total-numbers"
+							data={pieChartTotalNumbersData}
+						/>
+					</div>
+					<div className="col-md-6 col-sm-12">
+						<D3DonutChart
+							colors={pieChartTotalNumbersColors}
+							outerRadius={100}
+							innerRadius={50}
+							id="donut-chart-total-numbers"
+							data={pieChartTotalNumbersData}
+						/>
+					</div>
+				</div>
+				<br />
 				<DailySerieCardPriceChange priceClasses="col-xl-1 col-lg-1 col-md-2 col-sm-2 col-3 text-center" priceChange={dailySerie.priceChange} />
 			</div>
 		);
+	}
+
+	public getPieChartTotalNumbersData(dailySerie: DailySerie): ID3PieChartData[] {
+		const negativeDays = dailySerie.getNumberOfNegativeDailyTimes();
+		const positiveDays = dailySerie.getNumberOfPositiveDailyTimes();
+		const allDays = negativeDays + positiveDays;
+		const negativeDaysPercentage = Math.round(100 / (allDays / negativeDays));
+		const positiveDaysPercentage = Math.round(100 / (allDays / positiveDays));
+		console.log('negative days percentage', negativeDaysPercentage);
+		console.log('positive days percentage', positiveDaysPercentage);
+		return [
+			{
+				label: `Negatives: ${negativeDays}`,
+				value: negativeDaysPercentage,
+				innerText: `${negativeDaysPercentage}%`
+			},
+			{
+				label: `Positives: ${positiveDays}`,
+				value: positiveDaysPercentage,
+				innerText: `${positiveDaysPercentage}%`
+			}
+		];
 	}
 }
 
