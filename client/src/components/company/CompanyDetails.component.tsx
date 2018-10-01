@@ -7,6 +7,7 @@ import Utils from './../../utils/Utils';
 import DailySerieDetails from '../daily-serie/DailySerieDetails.component';
 import D3PieChart, { ID3PieChartData } from '../shared/D3PieChart.component';
 import D3DonutChart from '../shared/D3DonutChart.component';
+import D3PieDonutChart from '../shared/D3PieDonutChart.component';
 
 interface ICompanyDetailsProps {
 	company: Company;
@@ -95,17 +96,17 @@ class CompanyDetails extends React.Component<ICompanyDetailsProps, any> {
 				<br />
 				<div className="row">
 					<div className="col-md-6 col-sm-12">
-						<D3PieChart
+						<D3PieDonutChart
 							colors={pieChartTotalNumbersColors}
-							radius={pieChartTotalNumbersRadius}
+							outerRadius={pieChartTotalNumbersRadius}
 							id="pie-chart-total-numbers"
 							data={pieChartTotalNumbersData}
 						/>
 					</div>
 					<div className="col-md-6 col-sm-12">
-						<D3DonutChart
+						<D3PieDonutChart
 							colors={pieChartTotalNumbersColors}
-							outerRadius={100}
+							outerRadius={pieChartTotalNumbersRadius}
 							innerRadius={50}
 							id="donut-chart-total-numbers"
 							data={pieChartTotalNumbersData}

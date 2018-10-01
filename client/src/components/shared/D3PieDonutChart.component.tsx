@@ -1,71 +1,73 @@
 import * as React from 'react';
 import * as d3 from 'd3';
 
-import './d3-donut-chart.scss';
+import './d3-pie-donut-chart.scss';
 
-export interface ID3DonutChartData {
+export interface ID3PieDonutChartData {
 	label: string;
 	value: number;
 	innerText?: string;
 }
 
-interface ID3DonutChartProps {
-	data: ID3DonutChartData[];
+export interface ID3PieDonutChartProps {
 	id: string;
+	data: ID3PieDonutChartData[];
 	outerRadius: number;
-	innerRadius: number;
+	innerRadius?: number; // default 0
 	colors?: string[]; // defualt: 10 random colors of d3
 	displayLabelLines?: boolean; // default: true
-	onDonutChartClick?: (d: any, element: any) => void;
-	onDonutChartEnter?: (d: any, element: any) => void;
-	onDonutChartLeave?: (d: any, element: any) => void;
+	onSliceClick?: (d: any, element: any) => void;
+	onSliceEnter?: (d: any, element: any) => void;
+	onSliceLeave?: (d: any, element: any) => void;
 }
 
-class D3DonutChart extends React.Component<ID3DonutChartProps, any> {
-	constructor(props: ID3DonutChartProps) {
+class D3PieDonutChart extends React.Component<ID3PieDonutChartProps, any> {
+	constructor(props: ID3PieDonutChartProps) {
 		super(props);
 	}
 
 	public render() {
 		const viewportSize = this.props.outerRadius * 4;
 		return (
-			<svg id={this.props.id} viewBox={`0 0 ${viewportSize} ${viewportSize}`} preserveAspectRatio="xMinYMin meet" className="svg-donut-chart">
-				<g className="g-donut-chart-container" />
+			<svg id={this.props.id} viewBox={`0 0 ${viewportSize} ${viewportSize}`} preserveAspectRatio="xMinYMin meet" className="svg-pie-donut-chart">
+				<g className="g-pie-donut-chart-container" />
 			</svg>
 		);
 	}
 
 	public componentDidMount() {
+		// get the inner radius
+		const innerRadius = this.props.innerRadius || 0;
 		// get the colors to be used as random ones or custom ones
 		const color: d3.ScaleOrdinal<string, string> =
 			this.props.colors && this.props.colors.length ? d3.scaleOrdinal(this.props.colors) : d3.scaleOrdinal(d3.schemeCategory10);
 		// get the given data
-		const data: ID3DonutChartData[] = this.props.data;
+		const data: ID3PieDonutChartData[] = this.props.data;
 		// get visibility of label lines
 		const displayLabelLines = typeof this.props.displayLabelLines === 'boolean' ? this.props.displayLabelLines : true;
 		// select the group main container from HTML
-		const mainGroupContainer: d3.Selection<any, any, any, any> = d3.select(`#${this.props.id} g.g-donut-chart-container`);
-		// create the donut chart arc path specifying an inner radius and outer radius
-		const donutChartArcPath = this.createDonutChartArc(this.props.outerRadius, this.props.innerRadius);
-		// draw the donut chart and add a g for each slice
-		const donutChart = this.displayDonutChart(mainGroupContainer, data);
+		const mainGroupContainer: d3.Selection<any, any, any, any> = d3.select(`#${this.props.id} g.g-pie-donut-chart-container`);
+		// create the pie donut chart arc path specifying an inner radius and outer radius
+		const pieDonutChartArcPath = this.createPieDonutChartArc(this.props.outerRadius, innerRadius);
+		// draw the pie donut chart and add a g for each slice
+		const pieDonutChart = this.displayPieDonutChart(mainGroupContainer, data);
 		// draw the paths of the slices and fill them with the colors
-		this.displaySlice(donutChart, donutChartArcPath, color);
+		this.displaySlice(pieDonutChart, pieDonutChartArcPath, color);
 		// if label lines enabled by props or by default
 		if (displayLabelLines) {
 			// display the polylines representing the label lines of the donut slice descriptions
-			this.displayLabelLine(donutChart, this.props.outerRadius);
+			this.displayLabelLine(pieDonutChart, this.props.outerRadius);
 		}
 		// display the labels outside the slice arcs
-		this.displayLabel(donutChart, this.props.outerRadius);
+		this.displayLabel(pieDonutChart, this.props.outerRadius);
 		// if at least one label line has been provided
-		if (data.some((el: ID3DonutChartData) => !!el.innerText)) {
+		if (data.some((el: ID3PieDonutChartData) => !!el.innerText)) {
 			// display the inner text inside the slices
-			this.displayInnerText(donutChart, this.props.outerRadius, this.props.innerRadius);
+			this.displayInnerText(pieDonutChart, this.props.outerRadius, innerRadius);
 		}
 	}
 
-	public createDonutChartArc(outerRadius: number, innerRadius: number): d3.Arc<any, any> {
+	public createPieDonutChartArc(outerRadius: number, innerRadius: number): d3.Arc<any, any> {
 		// create the donut chart using the given outer and inner radius
 		return d3
 			.arc()
@@ -73,9 +75,9 @@ class D3DonutChart extends React.Component<ID3DonutChartProps, any> {
 			.innerRadius(innerRadius);
 	}
 
-	public displayDonutChart(parent: d3.Selection<any, any, any, any>, data: any): d3.Selection<any, any, any, any> {
+	public displayPieDonutChart(parent: d3.Selection<any, any, any, any>, data: any): d3.Selection<any, any, any, any> {
 		// define the pie function specifying where to get the number values from (the d3 pie method set up a pie which uses value as numbers)
-		const instance: D3DonutChart = this;
+		const instance: D3PieDonutChart = this;
 		const pie: d3.Pie<any, any> = d3.pie().value((d: any) => d.value);
 		return parent
 			.selectAll('.arc')
@@ -83,32 +85,32 @@ class D3DonutChart extends React.Component<ID3DonutChartProps, any> {
 			.enter()
 			.append('g')
 			.on('click', function(d: any) {
-				instance.onDonutChartClick(d, this);
+				instance.onSliceClick(d, this);
 			})
 			.on('mouseenter', function(d: any) {
-				instance.onDonutChartEnter(d, this);
+				instance.onSliceEnter(d, this);
 			})
 			.on('mouseleave', function(d: any) {
-				instance.onDonutChartLeave(d, this);
+				instance.onSliceLeave(d, this);
 			})
 			.classed('donut-chart', true);
 	}
 
-	public displaySlice(donutChart: d3.Selection<any, any, any, any>, arcPath: d3.Arc<any, any>, color: d3.ScaleOrdinal<string, string>): void {
+	public displaySlice(pieDonutChart: d3.Selection<any, any, any, any>, arcPath: d3.Arc<any, any>, color: d3.ScaleOrdinal<string, string>): void {
 		// display the slice picking a color from the given list
-		donutChart
+		pieDonutChart
 			.append('path')
 			.attr('d', arcPath)
 			.attr('fill', (d: any) => color(d.data.label))
-			.classed('donut-chart-slice', true);
+			.classed('pie-donut-chart-slice', true);
 	}
 
-	public displayLabelLine(donutChart: d3.Selection<any, any, any, any>, outerRadius: number): void {
+	public displayLabelLine(pieDonutChart: d3.Selection<any, any, any, any>, outerRadius: number): void {
 		// display the line connecting the slice to the outer label, starting it at outerRadius * 0.9 and ending it at outerRadius/15 far from the circle
-		donutChart
+		pieDonutChart
 			.append('polyline')
 			.attr('points', (d: any) => this.getPolylinePointsOnCircle(d, outerRadius * 0.9, outerRadius + outerRadius / 15))
-			.classed('donut-chart-label-line', true);
+			.classed('pie-donut-chart-label-line', true);
 	}
 
 	public getPolylinePointsOnCircle(d: any, startRadius: number, endRadius: number): string {
@@ -135,15 +137,15 @@ class D3DonutChart extends React.Component<ID3DonutChartProps, any> {
 		return `${startPoint} ${endPoint}`;
 	}
 
-	public displayLabel(donutChart: d3.Selection<any, any, any, any>, outerRadius: number): void {
+	public displayLabel(pieDonutChart: d3.Selection<any, any, any, any>, outerRadius: number): void {
 		// display the outer label of a slice positioning it radius/10 far away from the circle
-		donutChart
+		pieDonutChart
 			.append('text')
 			.attr('transform', (d: any) => this.getTranslation(d, outerRadius + outerRadius / 10))
 			.attr('text-anchor', (d: any) => (this.getMiddleAngle(d) > Math.PI ? 'end' : 'start'))
 			.attr('alignment-baseline', 'hanging')
 			.text((d: any) => d.data.label)
-			.classed('donut-chart-label', true);
+			.classed('pie-donut-chart-label', true);
 	}
 
 	public getTranslation(d: any, radius: number): string {
@@ -152,33 +154,34 @@ class D3DonutChart extends React.Component<ID3DonutChartProps, any> {
 		return `translate(${point})`;
 	}
 
-	public displayInnerText(donutChart: d3.Selection<any, any, any, any>, outerRadius: number, innerRadius: number): void {
+	public displayInnerText(pieDonutChart: d3.Selection<any, any, any, any>, outerRadius: number, innerRadius: number): void {
+		const radius = innerRadius === 0 ? outerRadius / 2 : innerRadius + (outerRadius - innerRadius) / 2;
 		// display the inner text of a slice positioning the text in the middle of the arc
-		donutChart
+		pieDonutChart
 			.append('text')
-			.attr('transform', (d: any) => this.getTranslation(d, innerRadius + (outerRadius - innerRadius) / 2))
+			.attr('transform', (d: any) => this.getTranslation(d, radius))
 			.attr('alignment-baseline', 'center')
 			.text((d: any) => d.data.innerText)
-			.classed('donut-chart-inner-text', true);
+			.classed('pie-donut-chart-inner-text', true);
 	}
 
-	public onDonutChartClick(d: any, element: any): void {
-		if (this.props.onDonutChartClick && typeof this.props.onDonutChartClick === 'function') {
-			this.props.onDonutChartClick(d, element);
+	public onSliceClick(d: any, element: any): void {
+		if (this.props.onSliceClick && typeof this.props.onSliceClick === 'function') {
+			this.props.onSliceClick(d, element);
 		}
 	}
 
-	public onDonutChartEnter(d: any, element: any): void {
-		if (this.props.onDonutChartEnter && typeof this.props.onDonutChartEnter === 'function') {
-			this.props.onDonutChartEnter(d, element);
+	public onSliceEnter(d: any, element: any): void {
+		if (this.props.onSliceEnter && typeof this.props.onSliceEnter === 'function') {
+			this.props.onSliceEnter(d, element);
 		}
 	}
 
-	public onDonutChartLeave(d: any, element: any): void {
-		if (this.props.onDonutChartLeave && typeof this.props.onDonutChartLeave === 'function') {
-			this.props.onDonutChartLeave(d, element);
+	public onSliceLeave(d: any, element: any): void {
+		if (this.props.onSliceLeave && typeof this.props.onSliceLeave === 'function') {
+			this.props.onSliceLeave(d, element);
 		}
 	}
 }
 
-export default D3DonutChart;
+export default D3PieDonutChart;
