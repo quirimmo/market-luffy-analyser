@@ -27,16 +27,15 @@ class D3GraphChart extends React.Component {
 
 	public render() {
 		return (
-			<svg viewBox={`0 0 600 400`} preserveAspectRatio="xMinYMin meet" className="svg-graph-chart">
+			<svg viewBox={`0 0 600 600`} preserveAspectRatio="xMinYMin meet" className="svg-graph-chart">
 				<g />
 			</svg>
 		);
 	}
 
 	public componentDidMount() {
-		const margin = { top: 20, right: 20, bottom: 30, left: 50 };
-		const width = 960 - margin.left - margin.right;
-		const height = 500 - margin.top - margin.bottom;
+		const width = 300;
+		const height = 300;
 
 		const x = d3.scaleTime().range([0, width]);
 		const y = d3.scaleLinear().range([height, 0]);
@@ -72,9 +71,9 @@ class D3GraphChart extends React.Component {
 			.attr('class', 'line')
 			.attr('d', valueline);
 
-		g.append('g').call(d3.axisBottom.call(this, xDomain));
+		// g.append('g').call(d3.axisBottom.call(this, xDomain));
 
-		g.append('g').call(d3.axisLeft.call(this, yDomain));
+		// g.append('g').call(d3.axisLeft.call(this, yDomain));
 
 		const xscale = d3
 			.scaleLinear()
@@ -87,8 +86,10 @@ class D3GraphChart extends React.Component {
 			.range([height / 2, 0]);
 
 		const xAxis = d3.axisBottom(xscale);
+		const yAxis = d3.axisLeft(yscale);
 
 		g.append('g').call(d3.axisBottom.call(this, xscale));
+		g.append('g').call(d3.axisLeft.call(this, yscale));
 
 		// const xAxis = d3.axisBottom(xDomain).scale(x);
 		// g.append('g').call(xAxis);
