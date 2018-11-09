@@ -1,0 +1,36 @@
+.svg-pie-donut-chart {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+}
+
+.g-pie-donut-chart-container {
+  transform: translate(50%, 50%);
+}
+
+.g-pie-donut-chart-container .pie-donut-chart-slice {
+  stroke: #fff;
+  stroke-width: 0.5px;
+  opacity: 0.85;
+}
+
+.g-pie-donut-chart-container .pie-donut-chart-slice:hover {
+  opacity: 1;
+}
+
+.g-pie-donut-chart-container .pie-donut-chart-label-line {
+  stroke: black;
+  stroke-width: 1px;
+  fill: none;
+}
+
+.g-pie-donut-chart-container .pie-donut-chart-label {
+  fill: black;
+  font-size: 0.75em;
+}
+
+.g-pie-donut-chart-container .pie-donut-chart-inner-text {
+  text-anchor: middle;
+  font-size: 0.7em;
+}

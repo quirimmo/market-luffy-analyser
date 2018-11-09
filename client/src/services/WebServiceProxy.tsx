@@ -1,7 +1,7 @@
 import Company from './../models/Company';
 import { Observable } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
-import { COMPANIES_RESOURCE_URL, PRICES_RESOURCE_URL, CRYPTOS_RESOURCE_URL } from './../constants/constants';
+import { COMPANIES_RESOURCE_URL, STOCK_PRICES_RESOURCE_URL, CRYPTOS_RESOURCE_URL, CRYPTO_RESOURCE_URL } from './../constants/constants';
 import { map } from 'rxjs/operators';
 import Crypto from './../models/Crypto';
 
@@ -16,7 +16,7 @@ class WebServiceProxy {
 
 	public static getCompanyPricesInfo(symbol: string, isCompact: boolean = true) {
 		const size: string = isCompact ? 'compact' : 'full';
-		return ajax(`${PRICES_RESOURCE_URL}${symbol}/${size}`);
+		return ajax(`${STOCK_PRICES_RESOURCE_URL}${symbol}/${size}`);
 	}
 
 	public static getCryptos(): Observable<Crypto[]> {
@@ -24,7 +24,7 @@ class WebServiceProxy {
 	}
 
 	public static getCryptoPricesInfo(symbol: string) {
-		return ajax(`${CRYPTOS_RESOURCE_URL}${symbol}`);
+		return ajax(`${CRYPTO_RESOURCE_URL}${symbol}`);
 	}
 }
 
