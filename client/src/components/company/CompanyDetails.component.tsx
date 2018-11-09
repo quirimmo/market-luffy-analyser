@@ -5,9 +5,7 @@ import DailySerieCardPriceChange from '../daily-serie/DailySerieCardPriceChange.
 import NumberFormatter from '../shared/NumberFormatter.component';
 import Utils from './../../utils/Utils';
 import DailySerieDetails from '../daily-serie/DailySerieDetails.component';
-import D3PieChart, { ID3PieChartData } from '../shared/D3PieChart.component';
-import D3DonutChart from '../shared/D3DonutChart.component';
-import D3PieDonutChart from '../shared/D3PieDonutChart.component';
+import D3PieDonutChart, { ID3PieDonutChartData } from '../shared/D3PieDonutChart.component';
 
 interface ICompanyDetailsProps {
 	company: Company;
@@ -119,7 +117,7 @@ class CompanyDetails extends React.Component<ICompanyDetailsProps, any> {
 		);
 	}
 
-	public getPieChartTotalNumbersData(dailySerie: DailySerie): ID3PieChartData[] {
+	public getPieChartTotalNumbersData(dailySerie: DailySerie): ID3PieDonutChartData[] {
 		const negativeDays = dailySerie.getNumberOfNegativeDailyTimes();
 		const positiveDays = dailySerie.getNumberOfPositiveDailyTimes();
 		const allDays = negativeDays + positiveDays;
